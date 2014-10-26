@@ -177,7 +177,7 @@ void init_TIM7() {
 	TIM_TimeBase_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBase_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_TimeBase_InitStructure.TIM_Period = 850;
-	TIM_TimeBase_InitStructure.TIM_Prescaler = 320;
+	TIM_TimeBase_InitStructure.TIM_Prescaler = 300;
 	TIM_TimeBaseInit(TIM7, &TIM_TimeBase_InitStructure);
 	TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE);
 
@@ -192,24 +192,39 @@ void init_TIM7() {
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
 	NVIC_Init(&NVIC_InitStructure);
 }
-int pwm_c = 0;
-char s = 0;
+int pwm_c[4] = { 0, 33, 66, -28 };
+char s[4] = { 0,0,0,1 };
 void TIM7_IRQHandler() {
 	TIM_ClearITPendingBit(TIM7, TIM_IT_Update);
 	//TIM_OCStruct.TIM_Pulse = ((8399 + 1) * log_100_prozent_table[pwm_c]) / 100 - 1;
-	TIM_OCStruct.TIM_Pulse = log_precalc_table[pwm_c];
+	TIM_OCStruct.TIM_Pulse = log_precalc_table[pwm_c[0]];
+	TIM_OC1Init(TIM4, &TIM_OCStruct);
+	TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
 
+	TIM_OCStruct.TIM_Pulse = log_precalc_table[pwm_c[1]];
+	TIM_OC2Init(TIM4, &TIM_OCStruct);
+	TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable);
+
+	TIM_OCStruct.TIM_Pulse = log_precalc_table[pwm_c[2]];
 	TIM_OC3Init(TIM4, &TIM_OCStruct);
 	TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);
-	if (s == 0)
-		pwm_c++;
-	else
-		pwm_c--;
-	if (pwm_c >= 101)
-		s = 1;
-	else if (pwm_c <= 0) {
-		s = 0;
-		pwm_c = 0;
+
+	TIM_OCStruct.TIM_Pulse = log_precalc_table[pwm_c[3]];
+	TIM_OC4Init(TIM4, &TIM_OCStruct);
+	TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable);
+
+	int laeufer;
+	for (laeufer = 0; laeufer < 4; laeufer++) {
+		if (s[laeufer] == 0)
+			pwm_c[laeufer]++;
+		else
+			pwm_c[laeufer]--;
+		if (pwm_c[laeufer] >= 100)
+			s[laeufer] = 1;
+		else if (pwm_c[laeufer] <= 0) {
+			s[laeufer] = 0;
+			//pwm_c[laeufer] = 0;
+		}
 	}
 }
 
