@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -ID:\git\arm-projekt\examples\uart -ID:\git\arm-projekt\examples\uart\cmsis_lib -ID:\git\arm-projekt\examples\uart\cmsis -ID:\git\arm-projekt\examples -ID:\git\arm-projekt\examples\uart\STM32F4-Discovery -ID:\git\arm-projekt\examples\uart\cmsis_lib\include -ID:\git\arm-projekt\examples\uart\cmsis_boot">
+      <target file="HyperTerminal.o" lastModified="1496325d666">
+         <source file="..\..\..\example\HyperTerminal.c" lastModified="14963242bf8"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="14963213a6b">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="149631af9db"/>
+      </target>
+      <target file="misc.o" lastModified="14963213aa3">
+         <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="149631afa42"/>
+      </target>
+      <target file="Printf.o" lastModified="1496325d699">
+         <source file="..\..\..\example\Printf.c" lastModified="14963232903"/>
+      </target>
+      <target file="stm32f4_discovery.o" lastModified="14963213a12">
+         <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery.c" lastModified="149631af99e"/>
+      </target>
+      <target file="main.o" lastModified="14963213a34">
+         <source file="..\..\..\main.c" lastModified="1496319e308"/>
+      </target>
+      <target file="stm32f4xx_usart.o" lastModified="149632139a8">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="149631c2b7d"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="149632139d3">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="149631af9cf"/>
+      </target>
+   </processor>
+</history>

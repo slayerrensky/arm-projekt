@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=uart.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\uart -TC:\CooCox\CoIDE\configuration\ProgramData\uart/arm-gcc-link.ld -g -L..\..\..\STM32F4-Discovery -lpdmfilter_gcc">
+      <target file="uart.elf" lastModified="14963213cf2">
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="149632139a8"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="149632139d3"/>
+         <source file="..\obj\stm32f4_discovery.o" lastModified="14963213a12"/>
+         <source file="..\obj\main.o" lastModified="14963213a34"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="14963213a6b"/>
+         <source file="..\obj\misc.o" lastModified="14963213aa3"/>
+      </target>
+   </processor>
+</history>

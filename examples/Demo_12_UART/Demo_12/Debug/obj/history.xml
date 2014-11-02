@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -IF:\Data_Temp_Ordner\stm32f4\prj_ub\Demo_Prj\Demo_12_UART\ub_lib -IF:\Data_Temp_Ordner\stm32f4\prj_ub\Demo_Prj\Demo_12_UART\cmsis_lib -IF:\Data_Temp_Ordner\stm32f4\prj_ub\Demo_Prj\Demo_12_UART\cmsis_boot -IF:\Data_Temp_Ordner\stm32f4\prj_ub\Demo_Prj\Demo_12_UART -IF:\Data_Temp_Ordner\stm32f4\prj_ub\Demo_Prj\Demo_12_UART\cmsis_lib\include -IF:\Data_Temp_Ordner\stm32f4\prj_ub\Demo_Prj\Demo_12_UART\cmsis -IF:\Data_Temp_Ordner\stm32f4\prj_ub\Demo_Prj">
+      <target file="stm32f4xx_rcc.o" lastModified="1486041f0e4">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="13d0bd75086"/>
+      </target>
+      <target file="misc.o" lastModified="1486041f22e">
+         <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="13d0bd8e9fd"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="1486041f1e8">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="13d0bd75072"/>
+      </target>
+      <target file="stm32_ub_uart.o" lastModified="1486041f152">
+         <source file="..\..\..\ub_lib\stm32_ub_uart.c" lastModified="1485ece4710"/>
+      </target>
+      <target file="stm32f4xx_gpio.o" lastModified="1486041f1a2">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="13d0bd7505e"/>
+      </target>
+      <target file="main.o" lastModified="1486041f076">
+         <source file="..\..\..\main.c" lastModified="13d0bddbfaf"/>
+      </target>
+      <target file="stm32f4xx_usart.o" lastModified="1486041effe">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="13d0bd8e487"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="1486041f030">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="13d0bd75068"/>
+      </target>
+   </processor>
+</history>

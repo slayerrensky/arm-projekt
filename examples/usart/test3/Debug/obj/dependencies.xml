@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dependencies>
+   <includePath signature="/ID:\git\arm-projekt\lib\STM32F4xx_StdPeriph_Driver /ID:\git\arm-projekt\examples\usart\cmsis /ID:\git\arm-projekt\examples\usart\src /ID:\git\arm-projekt\examples /ID:\git\arm-projekt\lib /ID:\git\arm-projekt\examples\usart /ID:\git\arm-projekt\lib\STM32F4xx_StdPeriph_Driver\inc /ID:\git\arm-projekt\examples\usart\cmsis_boot">
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h" lastModified="14961571c6a">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.c" lastModified="14961571cce">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.c" lastModified="14961571c97">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h" lastModified="14961571c68">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c" lastModified="14961571cd6">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c" lastModified="14961571cb9">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h" lastModified="14961571c85">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.c" lastModified="14961571ccc">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.c" lastModified="14961571cd8">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h" lastModified="14961571c81">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h" lastModified="14961571c6f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h" lastModified="14961571c80">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h" lastModified="14961571c7c">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h" lastModified="14961571c66">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h" lastModified="14961571c75">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h" lastModified="14961571c62">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h" lastModified="14961571c7a">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h" lastModified="14961571c7d">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.c" lastModified="14961571cac">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.c" lastModified="14961571cb6">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h" lastModified="14961571c60">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.c" lastModified="14961571ca4">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="149615724da">
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\misc.c" lastModified="14961571c8e">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\misc.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cm4_simd.h" lastModified="149615724d8">
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h" lastModified="14961571c71">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h" lastModified="14961571c6c">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.c" lastModified="14961571c9f">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.c" lastModified="14961571cc9">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\src\uart.h" lastModified="14971cd4f60">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\stm32f4xx.h" lastModified="14971a4727f">
+         <include file="..\..\..\cmsis\core_cm4.h"/>
+         <include file="..\..\..\cmsis_boot\system_stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_boot\stm32f4xx_conf.h"/>
+      </source>
+      <source file="..\..\..\src\uart.c" lastModified="14972bae718">
+         <include file="..\..\..\src\uart.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h"/>
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\misc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h" lastModified="14961571c63">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.c" lastModified="14961571cb3">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\misc.h" lastModified="14961571c5e">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h" lastModified="14961571c65">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c" lastModified="14961571cd3">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h" lastModified="14961571c77">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\syscalls\syscalls.c" lastModified="14961572ce3">
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h" lastModified="14961571c83">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\stm32f4xx_conf.h" lastModified="14961571d22">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\misc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.c" lastModified="14961571cb4">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="149615724db">
+      </source>
+      <source file="..\..\..\main.c" lastModified="14972b0525c">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\misc.h"/>
+         <include file="..\..\..\src\uart.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.c" lastModified="14961571cae">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h" lastModified="14961571c78">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h" lastModified="14961571c6d">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h" lastModified="14961571c73">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.c" lastModified="14961571cc7">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c" lastModified="14961571cc1">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.c" lastModified="14961571c95">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.c" lastModified="14961571ca1">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.c" lastModified="14961571c9a">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.c" lastModified="14961571cbd">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.c" lastModified="14961571c9c">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.c" lastModified="14961571cc3">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.c" lastModified="14961571c91">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h" lastModified="14961571c8b">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cm4.h" lastModified="149615720ee">
+         <include file="..\..\..\cmsis\core_cmInstr.h"/>
+         <include file="..\..\..\cmsis\core_cmFunc.h"/>
+         <include file="..\..\..\cmsis\core_cm4_simd.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.c" lastModified="14961571cbb">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.c" lastModified="14961571ca9">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="14961571d25">
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c" lastModified="14961571cb1">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.c" lastModified="14961571ca7">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h"/>
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h" lastModified="14961571c88">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="14961571d0e">
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.c" lastModified="14961571c9d">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="14961571d24">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h" lastModified="14961571c8a">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.c" lastModified="14961571ca2">
+         <include file="..\..\..\..\..\lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h"/>
+      </source>
+   </includePath>
+</dependencies>
