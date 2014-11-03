@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : main.c
-  * Date               : 30/10/2014 22:44:33
+  * Date               : 03/11/2014 22:31:35
   * Description        : Main program body
   ******************************************************************************
   *
@@ -36,12 +36,15 @@
 #include "stm32f4xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
-USART_HandleTypeDef husart2;
-USART_HandleTypeDef husart3;
+TIM_HandleTypeDef htim6;
+
+UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 
@@ -50,8 +53,10 @@ USART_HandleTypeDef husart3;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_USART2_Init(void);
-static void MX_USART3_Init(void);
+static void MX_DMA_Init(void);
+static void MX_TIM6_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART3_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 
@@ -78,13 +83,18 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_Init();
-  MX_USART3_Init();
+  MX_DMA_Init();
+  MX_TIM6_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
 
   /* USER CODE BEGIN 2 */
 
-  /* USER CODE END 2 */
+	
 
+  /* USER CODE END 2 */
+	const char string[100] = "Hello World!";
+	HAL_UART_Transmit(&huart3, (uint8_t)string , strlen(string), 1000);
   /* USER CODE BEGIN 3 */
   /* Infinite loop */
   while (1)
@@ -127,37 +137,67 @@ void SystemClock_Config(void)
 
 }
 
-/* USART2 init function */
-void MX_USART2_Init(void)
+/* TIM6 init function */
+void MX_TIM6_Init(void)
 {
 
-  husart2.Instance = USART2;
-  husart2.Init.BaudRate = 115200;
-  husart2.Init.WordLength = USART_WORDLENGTH_8B;
-  husart2.Init.StopBits = USART_STOPBITS_1;
-  husart2.Init.Parity = USART_PARITY_NONE;
-  husart2.Init.Mode = USART_MODE_TX_RX;
-  husart2.Init.CLKPolarity = USART_POLARITY_LOW;
-  husart2.Init.CLKPhase = USART_PHASE_1EDGE;
-  husart2.Init.CLKLastBit = USART_LASTBIT_DISABLE;
-  HAL_USART_Init(&husart2);
+  TIM_MasterConfigTypeDef sMasterConfig;
+
+  htim6.Instance = TIM6;
+  htim6.Init.Prescaler = 0;
+  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim6.Init.Period = 0;
+  HAL_TIM_Base_Init(&htim6);
+
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig);
+
+}
+
+/* USART2 init function */
+void MX_USART2_UART_Init(void)
+{
+
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  HAL_UART_Init(&huart2);
 
 }
 
 /* USART3 init function */
-void MX_USART3_Init(void)
+void MX_USART3_UART_Init(void)
 {
 
-  husart3.Instance = USART3;
-  husart3.Init.BaudRate = 115200;
-  husart3.Init.WordLength = USART_WORDLENGTH_8B;
-  husart3.Init.StopBits = USART_STOPBITS_1;
-  husart3.Init.Parity = USART_PARITY_NONE;
-  husart3.Init.Mode = USART_MODE_TX_RX;
-  husart3.Init.CLKPolarity = USART_POLARITY_LOW;
-  husart3.Init.CLKPhase = USART_PHASE_1EDGE;
-  husart3.Init.CLKLastBit = USART_LASTBIT_DISABLE;
-  HAL_USART_Init(&husart3);
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 115200;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_NONE;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  HAL_UART_Init(&huart3);
+
+}
+
+/** 
+  * Enable DMA controller clock
+  */
+void MX_DMA_Init(void) 
+{
+  /* DMA controller clock enable */
+  __DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 
 }
 
@@ -181,7 +221,6 @@ void MX_USART3_Init(void)
      PC10   ------> I2S3_CK
      PC12   ------> I2S3_SD
      PB6   ------> I2C1_SCL
-     PB9   ------> I2C1_SDA
 */
 void MX_GPIO_Init(void)
 {
@@ -291,12 +330,18 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB6 PB9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_9;
+  /*Configure GPIO pin : PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PE1 */
