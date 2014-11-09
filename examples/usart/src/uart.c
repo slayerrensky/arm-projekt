@@ -7,48 +7,37 @@
 #include "stm32f4xx_tim.h"
 #include "misc.h"
 
+int read;  // Zeit auf das Feld wo gelesen werden kann
+int write; // Zeigt auf das feld zum beschreiben
+char *buffer;
 
-void buffer_init(void)
+int BufferOut(char *pByte)
 {
-	head = 0;
-	tail = 0;
+  if (read == write)
+    return FAIL;
+  *pByte = buffer[read];
+
+  read = read + 1;
+  if (read >= BUFFERSIZE)
+	  read = 0;
+  return SUCCESS;
 }
 
-void setChar2toQueue(char c)
+
+int BufferIn(char byte)
 {
-	if (head == tail)
-	{
-			//Byte muss verworfen werden
-	}
-	else
-	{
-		if (head >= BUFFERSIZE-1)
-			head = 0;
-		else
-			head++;
+  //if (buffer.write >= BUFFER_SIZE)
+  //  buffer.write = 0; // erhöht sicherheit
 
-		uart3Buffer[head] = c;
-	}
-}
+  if (write + 1 == read || ( read == 0 && write + 1 == BUFFERSIZE))
+    return FAIL; // voll
 
-char getCharFromQueue()
-{
-	char backup;
-	backup = uart3Buffer[tail];
-	if (tail >= BUFFERSIZE-1)
-		tail = 0;
-	else
-		tail++;
+  buffer[write] = byte;
 
-	return backup;
-}
-
-int queueHasNext()
-{
-	if (tail != head )
-		return 0;
-	else
-		return 1;
+  write = write + 1;
+  if (write >= BUFFERSIZE)
+	  write = 0;
+  return SUCCESS;
 
 }
 
@@ -58,6 +47,9 @@ int queueHasNext()
  */
 void usart3Init(void)
 {
+	read = 0;
+	write = 0;
+	buffer = (char) malloc (BUFFERSIZE * sizeof(char));
   /* USARTx configured as follow:
         - BaudRate = 115200 baud
         - Word Length = 8 Bits
@@ -147,11 +139,12 @@ void uartSendString( char *ptr )
  *  UART3-Interrupt
  */
 void USART3_IRQHandler(void) {
-  uint16_t wert;
+	if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET) {
 
-  if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET) {
-    // wenn ein Byte im Empfangspuffer steht
-    wert=USART_ReceiveData(USART3);
-    // Byte speichern
+		char wert;
+		// wenn ein Byte im Empfangspuffer steht
+		wert=USART_ReceiveData(USART3);
+		// Byte speichern
+		BufferIn(wert);
   }
 }

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -DSUPPORT_CPLUSPLUS -ID:\git\arm-projekt\gewaechshaus\cmsis -ID:\git\arm-projekt\gewaechshaus\src -ID:\git\arm-projekt\gewaechshaus\cmsis_lib -ID:\git\arm-projekt\examples\usart\cmsis_lib -ID:\git\arm-projekt -ID:\git\arm-projekt\examples\usart\cmsis_lib\include -ID:\git\arm-projekt\gewaechshaus -ID:\git\arm-projekt\examples\usart -ID:\git\arm-projekt\gewaechshaus\cmsis_lib\include -ID:\git\arm-projekt\gewaechshaus\cmsis_boot">
+      <target file="syscalls.o" lastModified="149967f13f1">
+         <source file="..\..\..\syscalls\syscalls.c" lastModified="14961571d43"/>
+      </target>
+      <target file="stm32f4xx_gpio.o" lastModified="149967f1383">
+         <source file="..\..\..\..\examples\usart\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14961571d36"/>
+      </target>
+      <target file="uart.o" lastModified="14996831848">
+         <source file="..\..\..\src\uart.c" lastModified="14996812407"/>
+      </target>
+      <target file="led.o" lastModified="149968eb33f">
+         <source file="..\..\..\src\led.c" lastModified="149968eafca"/>
+      </target>
+      <target file="stm32f4xx_tim.o" lastModified="149967f151e">
+         <source file="..\..\..\..\examples\usart\cmsis_lib\source\stm32f4xx_tim.c" lastModified="14961571d3f"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="149967f13bd">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="14961571d24"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="149967f1293">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="149964dec28"/>
+      </target>
+      <target file="stm32f4xx_usart.o" lastModified="149967f11e8">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="149967ee5b6"/>
+      </target>
+      <target file="stm32f4xx_exti.o" lastModified="149967f1430">
+         <source file="..\..\..\..\examples\usart\cmsis_lib\source\stm32f4xx_exti.c" lastModified="14961571d34"/>
+      </target>
+      <target file="main.o" lastModified="149968b1031">
+         <source file="..\..\..\main.c" lastModified="149968b0489"/>
+      </target>
+      <target file="stm32f4xx_rcc.o" lastModified="149967f133a">
+         <source file="..\..\..\..\examples\usart\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="14961571d3a"/>
+      </target>
+      <target file="misc.o" lastModified="149967f146f">
+         <source file="..\..\..\..\examples\usart\cmsis_lib\source\misc.c" lastModified="14961571d32"/>
+      </target>
+   </processor>
+</history>

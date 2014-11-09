@@ -13,7 +13,7 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_tim.h"
 #include "misc.h"
-#include "src/uart.h"
+#include "uart.h"
 
 
 
@@ -247,7 +247,7 @@ int main(void) {
 	TM_PWM_Init();
 	init_TIM7();
 
-	usart3_init();
+	usart3Init();
 	uartSendString("Hello Word!\r\n");
 
 	while (1) {
