@@ -7,10 +7,56 @@
 #include "stm32f4xx_tim.h"
 #include "misc.h"
 
+
+void buffer_init(void)
+{
+	head = 0;
+	tail = 0;
+}
+
+void setChar2toQueue(char c)
+{
+	if (head == tail)
+	{
+			//Byte muss verworfen werden
+	}
+	else
+	{
+		if (head >= BUFFERSIZE-1)
+			head = 0;
+		else
+			head++;
+
+		uart3Buffer[head] = c;
+	}
+}
+
+char getCharFromQueue()
+{
+	char backup;
+	backup = uart3Buffer[tail];
+	if (tail >= BUFFERSIZE-1)
+		tail = 0;
+	else
+		tail++;
+
+	return backup;
+}
+
+int queueHasNext()
+{
+	if (tail != head )
+		return 0;
+	else
+		return 1;
+
+}
+
+
 /*
  * Uart 3 initialisieren
  */
-void usart3_init(void)
+void usart3Init(void)
 {
   /* USARTx configured as follow:
         - BaudRate = 115200 baud
@@ -93,6 +139,8 @@ void uartSendString( char *ptr )
 	  ptr++;
   }
 }
+
+
 
 
 /*
