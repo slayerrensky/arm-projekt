@@ -9,6 +9,8 @@
 
   <project>
     <PathAndName>..\..\Demonstration\MDK-ARM\STM32F4-Discovery_Demo.uvproj</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
   <project>
@@ -29,6 +31,7 @@
 
   <project>
     <PathAndName>..\..\Peripheral_Examples\EXTI\MDK-ARM\Exti.uvproj</PathAndName>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
   <project>
@@ -93,7 +96,6 @@
 
   <project>
     <PathAndName>..\..\Audio_playback_and_record\MDK-ARM\Audio_playback_and_record.uvproj</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>
