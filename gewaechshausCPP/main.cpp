@@ -32,5 +32,7 @@ int main(void)
 		com1.uartSendString("LED OFF\r\n");
 		// Delay
 		Delay(TIME_DELAY);
+
+
     }
 }

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -ID:\git\arm-projekt\examples\Demo_31_USB_CDC\cmsis -ID:\git\arm-projekt\examples\Demo_31_USB_CDC\cmsis_lib -ID:\git\arm-projekt\examples -ID:\git\arm-projekt\examples\Demo_31_USB_CDC\ub_lib\usb_cdc_lolevel -ID:\git\arm-projekt\examples\Demo_31_USB_CDC\ub_lib -ID:\git\arm-projekt\examples\Demo_31_USB_CDC\cmsis_boot -ID:\git\arm-projekt\examples\Demo_31_USB_CDC -ID:\git\arm-projekt\examples\Demo_31_USB_CDC\cmsis_lib\include">
+      <target file="stm32f4xx_gpio.o" lastModified="1499af63398">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="13dead432c0"/>
+      </target>
+      <target file="stm32_ub_usb_cdc.o" lastModified="1499af631bc">
+         <source file="..\..\..\ub_lib\stm32_ub_usb_cdc.c" lastModified="13f70f21a10"/>
+      </target>
+      <target file="usbd_core.o" lastModified="1499af6326e">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_core.c" lastModified="13deac2b630"/>
+      </target>
+      <target file="usbd_desc.o" lastModified="1499af6334a">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_desc.c" lastModified="13de49fb280"/>
+      </target>
+      <target file="usbd_cdc_core.o" lastModified="1499af6356e">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_cdc_core.c" lastModified="13deaa7ac50"/>
+      </target>
+      <target file="usbd_cdc_vcp.o" lastModified="1499af633dd">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_cdc_vcp.c" lastModified="13ec27d1750"/>
+      </target>
+      <target file="usbd_ioreq.o" lastModified="1499af63642">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_ioreq.c" lastModified="13de4a00870"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="1499af63222">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="13de4b77870"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="1499af63415">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="13de4b77870"/>
+      </target>
+      <target file="usb_bsp.o" lastModified="1499af6345b">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_bsp.c" lastModified="13deaafab30"/>
+      </target>
+      <target file="misc.o" lastModified="1499af635a9">
+         <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="13dead45200"/>
+      </target>
+      <target file="usbd_req.o" lastModified="1499af634b8">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_req.c" lastModified="13de4a0ac80"/>
+      </target>
+      <target file="usb_dcd.o" lastModified="1499af635fe">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_dcd.c" lastModified="13de4a8f980"/>
+      </target>
+      <target file="usb_dcd_int.o" lastModified="1499af63524">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_dcd_int.c" lastModified="13f70f21240"/>
+      </target>
+      <target file="stm32f4xx_rcc.o" lastModified="1499af63305">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="13dead432c0"/>
+      </target>
+      <target file="usb_core.o" lastModified="1499af6317a">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_core.c" lastModified="13deabf4360"/>
+      </target>
+      <target file="usbd_usr.o" lastModified="1499af631f8">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_usr.c" lastModified="13dead12d50"/>
+      </target>
+      <target file="main.o" lastModified="1499af632a7">
+         <source file="..\..\..\main.c" lastModified="13f70f4a280"/>
+      </target>
+   </processor>
+</history>

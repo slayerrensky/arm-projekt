@@ -2,7 +2,10 @@
 <workbench version="2.0">
 <workbenchAdvisor/>
 <window>
-<fastViewData fastViewLocation="1024"/>
+<fastViewData fastViewLocation="1024">
+<orientation position="512" view="org.coocox.codebugger.trace.ui.traceview"/>
+<orientation position="512" view="org.eclipse.debug.ui.VariableView"/>
+</fastViewData>
 <perspectiveBar/>
 <page focus="true" label="Workspace - CooCox CoBuilder">
 <editors>
@@ -40,9 +43,10 @@
 <viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
 <expanded>
 <element path="/gewaechshaus"/>
+<element path="/gewaechshaus/src"/>
 </expanded>
 <selection>
-<element path="/gewaechshaus"/>
+<element path="/gewaechshaus/cmsis_lib"/>
 </selection>
 </viewState>
 </view>
@@ -124,7 +128,7 @@
 </presentation>
 </folder>
 </info>
-<info part="org.coocox.builder.ui.exampleView" ratio="0.22" ratioLeft="220" ratioRight="780" relationship="2" relative="org.eclipse.ui.internal.ViewStack@edc33d"/>
+<info part="org.coocox.builder.ui.exampleView" ratio="0.31995207" ratioLeft="534" ratioRight="1135" relationship="2" relative="org.eclipse.ui.internal.ViewStack@edc33d"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@4845a2" ratio="0.7192308" ratioLeft="561" ratioRight="219" relationship="2" relative="org.coocox.builder.ui.exampleView">
 <folder activePageID="org.coocox.component.ui.Help" appearance="2" expanded="2">
 <page content="org.coocox.component.ui.Help" label="Help"/>
@@ -408,34 +412,20 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor" name="" tooltip="">
-<persistable>
-<org.coocox.builder.ui.editors.ConfigEditor/>
-</persistable>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c">
-<persistable path="/Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx.h" tooltip="Gewaechshaus/cmsis_boot/stm32f4xx.h">
-<persistable path="/Gewaechshaus/cmsis_boot/stm32f4xx.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_conf.h" tooltip="Gewaechshaus/cmsis_boot/stm32f4xx_conf.h">
-<persistable path="/Gewaechshaus/cmsis_boot/stm32f4xx_conf.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_usb_cdc.h" tooltip="Demo_31/ub_lib/stm32_ub_usb_cdc.h">
+<persistable path="/Demo_31/ub_lib/stm32_ub_usb_cdc.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="test3/cmsis_boot/startup/startup_stm32f4xx.c">
 <persistable path="/test3/cmsis_boot/startup/startup_stm32f4xx.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="misc.c" tooltip="test3/cmsis_lib/source/misc.c">
-<persistable path="/test3/cmsis_lib/source/misc.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="test3/main.c">
-<persistable path="/test3/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart.h" tooltip="test3/src/uart.h">
+<persistable path="/test3/src/uart.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart.c" tooltip="test3/src/uart.c">
 <persistable path="/test3/src/uart.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart.h" tooltip="test3/src/uart.h">
-<persistable path="/test3/src/uart.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="test3/main.c">
+<persistable path="/test3/main.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart.hpp" tooltip="test3/src/uart.hpp">
 <persistable path="/test3/src/uart.hpp"/>
@@ -451,6 +441,15 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_usart.c" tooltip="test3/cmsis_lib/source/stm32f4xx_usart.c">
 <persistable path="/test3/cmsis_lib/source/stm32f4xx_usart.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usb_dcd_int.c" tooltip="Demo_31/ub_lib/usb_cdc_lolevel/usb_dcd_int.c">
+<persistable path="/Demo_31/ub_lib/usb_cdc_lolevel/usb_dcd_int.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usbd_hid_core.c" tooltip="Demo_48/ub_lib/usb_hid_lolevel/usbd_hid_core.c">
+<persistable path="/Demo_48/ub_lib/usb_hid_lolevel/usbd_hid_core.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="usb_core.h" tooltip="Demo_48/ub_lib/usb_hid_lolevel/usb_core.h">
+<persistable path="/Demo_48/ub_lib/usb_hid_lolevel/usb_core.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="test3/cmsis_boot/startup/startup_stm32f4xx.c">
 <persistable path="/test3/cmsis_boot/startup/startup_stm32f4xx.c"/>

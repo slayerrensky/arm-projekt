@@ -1,62 +1,100 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DSYSTEM_LIB -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -ID:\git\arm-projekt\gewaechshausCPP\cmsis_boot -ID:\git\arm-projekt -ID:\git\arm-projekt\gewaechshausCPP\cmsis_lib -ID:\git\arm-projekt\gewaechshausCPP\cmsis -ID:\git\arm-projekt\gewaechshausCPP\STM32F4-Discovery -ID:\git\arm-projekt\gewaechshausCPP\src -ID:\git\arm-projekt\gewaechshausCPP -ID:\git\arm-projekt\gewaechshausCPP\cmsis_lib\include">
-      <target file="stm32f4xx_exti.o" lastModified="14996b42f5e">
+      <target file="stm32f4xx_exti.o" lastModified="1499b9edfa5">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="149953dd77f"/>
       </target>
-      <target file="stm32f4xx_gpio.o" lastModified="14996b68ddf">
+      <target file="stm32f4xx_gpio.o" lastModified="1499b9ede12">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14996b42a25"/>
       </target>
-      <target file="stm32f4xx_syscfg.o" lastModified="14996b68ab7">
+      <target file="stm32f4xx_syscfg.o" lastModified="1499b9ed9cd">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="14996b429ff"/>
       </target>
-      <target file="startup_stm32f4xx.o" lastModified="14996b68c99">
+      <target file="startup_stm32f4xx.o" lastModified="1499b9edcaa">
          <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="14996b42a87"/>
       </target>
-      <target file="system_stm32f4xx.o" lastModified="14996b42dea">
+      <target file="system_stm32f4xx.o" lastModified="1499b9ede47">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="14996b42a4d"/>
       </target>
-      <target file="led.o" lastModified="14996b68bbd">
+      <target file="led.o" lastModified="1499b9edbd1">
          <source file="..\..\..\src\led.cpp" lastModified="1499520e40b"/>
       </target>
-      <target file="stm32f4_discovery.o" lastModified="14996b68cd8">
+      <target file="stm32f4_discovery.o" lastModified="1499b9edce4">
          <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery.c" lastModified="14996b4299f"/>
       </target>
-      <target file="misc.o" lastModified="14996b42f95">
+      <target file="misc.o" lastModified="1499b9edfdc">
          <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="14995114ab1"/>
       </target>
-      <target file="stm32f4_discovery_audio_codec.o" lastModified="14996b68b25">
-         <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery_audio_codec.c" lastModified="14996b429c3"/>
-      </target>
-      <target file="stm32f4xx_dma.o" lastModified="14996b42e3d">
+      <target file="stm32f4xx_dma.o" lastModified="1499b9ede92">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="14996b42a2d"/>
       </target>
-      <target file="stm32f4xx_spi.o" lastModified="14996b42eca">
+      <target file="stm32f4_discovery_audio_codec.o" lastModified="1499b9eda37">
+         <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery_audio_codec.c" lastModified="14996b429c3"/>
+      </target>
+      <target file="stm32f4xx_spi.o" lastModified="1499b9edf15">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="14996b42a09"/>
       </target>
-      <target file="stm32f4xx_rcc.o" lastModified="14996b68d96">
+      <target file="stm32f4xx_rcc.o" lastModified="1499b9eddcd">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="14996b42a13"/>
       </target>
-      <target file="stm32f4_discovery_callbacks.o" lastModified="14996b42e73">
+      <target file="stm32f4_discovery_callbacks.o" lastModified="1499b9edec4">
          <source file="..\..\..\stm32f4_discovery_callbacks.c" lastModified="14995114a63"/>
       </target>
-      <target file="uart.o" lastModified="14996b91ce7">
-         <source file="..\..\..\src\uart.cpp" lastModified="14996b91691"/>
-      </target>
-      <target file="stm32f4xx_dac.o" lastModified="14996b68c03">
+      <target file="stm32f4xx_dac.o" lastModified="1499b9edc1b">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="14996b42a34"/>
       </target>
-      <target file="stm32f4xx_i2c.o" lastModified="14996b42f24">
+      <target file="uart.o" lastModified="1499b9edc81">
+         <source file="..\..\..\src\uart.cpp" lastModified="14996b91691"/>
+      </target>
+      <target file="stm32f4xx_i2c.o" lastModified="1499b9edf6a">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="14996b42a1b"/>
       </target>
-      <target file="stm32f4_discovery_lis302dl.o" lastModified="14996b42fd8">
+      <target file="stm32f4_discovery_lis302dl.o" lastModified="1499b9ee021">
          <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery_lis302dl.c" lastModified="14996b429b0"/>
       </target>
-      <target file="stm32f4xx_usart.o" lastModified="14996b68b7e">
+      <target file="main.o" lastModified="1499b9f0c2e">
+         <source file="..\..\..\main.cpp" lastModified="1499b9f07c3"/>
+      </target>
+      <target file="stm32f4xx_usart.o" lastModified="1499b9eda8c">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="14996b429fb"/>
       </target>
-      <target file="main.o" lastModified="14996b88480">
-         <source file="..\..\..\main.cpp" lastModified="14996abcecb"/>
+   </processor>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DSYSTEM_LIB -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -ID:\git\arm-projekt\gewaechshausCPP\cmsis_boot -ID:\git\arm-projekt\gewaechshausCPP\ub_lib -ID:\git\arm-projekt -ID:\git\arm-projekt\gewaechshausCPP\cmsis_lib -ID:\git\arm-projekt\gewaechshausCPP\cmsis -ID:\git\arm-projekt\gewaechshausCPP\STM32F4-Discovery -ID:\git\arm-projekt\gewaechshausCPP\ub_lib\usb_cdc_lolevel -ID:\git\arm-projekt\gewaechshausCPP\src -ID:\git\arm-projekt\gewaechshausCPP -ID:\git\arm-projekt\gewaechshausCPP\cmsis_lib\include">
+      <target file="usbd_desc.o" lastModified="1499b380910">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_desc.c" lastModified="13de49fb280"/>
+      </target>
+      <target file="usbd_core.o" lastModified="1499b380840">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_core.c" lastModified="13deac2b630"/>
+      </target>
+      <target file="stm32_ub_usb_cdc.o" lastModified="1499b3a4f9c">
+         <source file="..\..\..\ub_lib\stm32_ub_usb_cdc.c" lastModified="13f70f21a10"/>
+      </target>
+      <target file="usbd_cdc_core.o" lastModified="1499b380b9b">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_cdc_core.c" lastModified="13deaa7ac50"/>
+      </target>
+      <target file="usbd_cdc_vcp.o" lastModified="1499b3a5068">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_cdc_vcp.c" lastModified="13ec27d1750"/>
+      </target>
+      <target file="usbd_ioreq.o" lastModified="1499b380da5">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_ioreq.c" lastModified="13de4a00870"/>
+      </target>
+      <target file="usb_bsp.o" lastModified="1499b418baf">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_bsp.c" lastModified="1499b4188ac"/>
+      </target>
+      <target file="usbd_req.o" lastModified="1499b380abc">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_req.c" lastModified="13de4a0ac80"/>
+      </target>
+      <target file="usb_dcd_int.o" lastModified="1499b380b20">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_dcd_int.c" lastModified="13f70f21240"/>
+      </target>
+      <target file="usb_dcd.o" lastModified="1499b380d1d">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_dcd.c" lastModified="13de4a8f980"/>
+      </target>
+      <target file="usb_core.o" lastModified="1499b380568">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usb_core.c" lastModified="13deabf4360"/>
+      </target>
+      <target file="usbd_usr.o" lastModified="1499b3a4fd7">
+         <source file="..\..\..\ub_lib\usb_cdc_lolevel\usbd_usr.c" lastModified="13dead12d50"/>
       </target>
    </processor>
 </history>
