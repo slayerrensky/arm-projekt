@@ -71,7 +71,7 @@ char* Usart::ReadBuffer(void)
 {
 	int count = 0;
 	char *out;
-	while(BufferOut(OutputString) == SUCCESS)
+	while(BufferOut(OutputString) == 0)
 	{
 		count++;
 	}
@@ -103,7 +103,7 @@ void Usart::usart3InitDMA()
 	DMA_InitStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
 	DMA_InitStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
 	DMA_InitStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-	DMA_Init(DMA1_Stream3, &DMA_InitStruct);
+
 }
 /*
  * DMA konfigurieren mit Startadresse der Daten und länge des Strings
@@ -115,6 +115,7 @@ void Usart::SendViaDma(char *startBuf, int sizeofBytes)
 	//while (DMA_GetCurrDataCounter(DMA1_Stream3) == 0);
 	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)startBuf;
 	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
+	DMA_Init(DMA1_Stream3, &DMA_InitStruct);
 	DMA_Cmd(DMA1_Stream3, ENABLE);
 }
 

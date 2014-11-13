@@ -25,7 +25,7 @@ int main(void)
 	//Usart com3(128);
 	char bytes;
 
-
+	com3.SendViaDma(buffer, strlen(buffer));
 	while(1)
     {
 		// Turn all four color led on
