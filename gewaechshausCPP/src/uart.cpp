@@ -5,8 +5,9 @@
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
 #include "misc.h"
-#include "stm32f4xx_dma.h"
+
 #include <stdlib.h>
+#include "string.h";
 
 
 Usart *Usart3Instance;
@@ -19,7 +20,9 @@ Usart::Usart(int buffersize){
 
 	this->bufferSize = buffersize;
 	this->buffer = (char*) malloc(sizeof(char)*this->bufferSize);
+	this->OutputString = (char*) malloc(sizeof(char)*this->bufferSize);
 	Usart3Instance = this;
+	this->usart3InitDMA();
 	this->usart3Init();
 }
 
@@ -60,19 +63,36 @@ int Usart::BufferOut(char *pByte)
 }
 
 /*
- * Init DMA
+ * Ließt den Input Buffer aus
+ * Note: Bitte den Speicher freigeben wenn der String nicht mehr benötigt wird.
+ * Return: Zeiger auf *char
  */
-void Usart::usart3InitDMA(char *startBuf, int sizeofBytes)
+char* Usart::ReadBuffer(void)
+{
+	int count = 0;
+	char *out;
+	while(BufferOut(OutputString) == SUCCESS)
+	{
+		count++;
+	}
+	OutputString[count+1] = '\0';
+	out = (char*) malloc(sizeof(char) * count+1);
+	strcpy(OutputString,out);
+	return out;
+}
+
+/*
+ * Init DMA Initialisieren
+ * DMA wird so initialisiert das er Daten über den Uart senden kann.
+ */
+void Usart::usart3InitDMA()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
-	DMA_InitTypeDef DMA_InitStruct;
 	DMA_StructInit(&DMA_InitStruct);
 	DMA_InitStruct.DMA_Channel = DMA_Channel_4;
 	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART3->DR);
-	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)&startBuf;
-	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral; //vom Mein zum Uart
-	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
+	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral;
 	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
@@ -84,6 +104,17 @@ void Usart::usart3InitDMA(char *startBuf, int sizeofBytes)
 	DMA_InitStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
 	DMA_InitStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
 	DMA_Init(DMA1_Stream3, &DMA_InitStruct);
+}
+/*
+ * DMA konfigurieren mit Startadresse der Daten und länge des Strings
+ * DMA sendet dann die Daten via Uart
+ */
+void Usart::SendViaDma(char *startBuf, int sizeofBytes)
+{
+	// ob das klappt
+	//while (DMA_GetCurrDataCounter(DMA1_Stream3) == 0);
+	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)startBuf;
+	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
 	DMA_Cmd(DMA1_Stream3, ENABLE);
 }
 

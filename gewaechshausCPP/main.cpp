@@ -2,10 +2,12 @@
 #include "uart.h"
 #include "stm32f4xx.h"
 #include "string.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define TIME_DELAY              5000000
 char buffer[129] = "Hello World, this is a DMA test.\n";
-
+char *OutputString;
 // Delay Function
 static void Delay(volatile int tick)
 {
@@ -23,7 +25,7 @@ int main(void)
 	//Usart com3(128);
 	char bytes;
 
-	com3.usart3InitDMA(buffer, 20);
+
 	while(1)
     {
 		// Turn all four color led on
@@ -37,10 +39,10 @@ int main(void)
 		//com3.uartSendString("LED OFF\r\n");
 		// Delay
 		//Delay(TIME_DELAY);
-		if (com3.BufferOut(&bytes)==0)
-		{
-			com3.uartPutChar(bytes);
-		}
+
+		OutputString = com3.ReadBuffer();
+		com3.SendViaDma(OutputString, strlen(OutputString));
+		free(OutputString);
 
     }
 }

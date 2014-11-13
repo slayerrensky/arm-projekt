@@ -75,15 +75,16 @@
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h" lastModified="14998650211">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
-      <source file="..\..\..\src\uart.h" lastModified="149a96ec758">
+      <source file="..\..\..\src\uart.h" lastModified="149ab17ca48">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
       </source>
       <source file="..\..\..\cmsis_boot\stm32f4xx.h" lastModified="149986505ee">
          <include file="..\..\..\cmsis\core_cm4.h"/>
          <include file="..\..\..\cmsis_boot\system_stm32f4xx.h"/>
          <include file="..\..\..\cmsis_boot\stm32f4xx_conf.h"/>
       </source>
-      <source file="..\..\..\main.cpp" lastModified="149a981b1d1">
+      <source file="..\..\..\main.cpp" lastModified="149ab19b145">
          <include file="..\..\..\src\led.h"/>
          <include file="..\..\..\src\uart.h"/>
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
@@ -144,15 +145,6 @@
          <include file="..\..\..\cmsis\core_cm4_simd.h"/>
       </source>
       <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="1499865020b">
-      </source>
-      <source file="..\..\..\src\uart.cpp" lastModified="149a9904d14">
-         <include file="..\..\..\src\uart.h"/>
-         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
-         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
-         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
-         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
-         <include file="..\..\..\cmsis_lib\include\misc.h"/>
-         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
       </source>
       <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="149986501f1">
       </source>
