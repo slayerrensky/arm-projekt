@@ -7,14 +7,18 @@
 #define FAIL -1;
 #define SUCSESS 0;
 
+
+
 class Usart {
 
 public:
 	Usart();
 	Usart(int buffersize);
 	void usart3Init(void);
+	void usart3InitDMA(char *startBuf, int sizeofBytes);
 	void uartPutChar(uint16_t char2send);
 	void uartSendString( char *ptr );
+	int BufferOut(char *pByte);
 	int BufferIn(char byte);
 
 protected:
@@ -24,8 +28,8 @@ protected:
 	int write; // Zeigt auf das feld zum beschreiben
 
 	void buffer_init(void);
-	int BufferOut(char *pByte);
+
 };
 
-extern Usart com3;
+extern Usart *Usart3Instance;
 

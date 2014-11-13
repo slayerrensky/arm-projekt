@@ -5,17 +5,21 @@
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
 #include "misc.h"
+#include "stm32f4xx_dma.h"
 #include <stdlib.h>
 
-Usart com3;
+
+Usart *Usart3Instance;
 
 Usart::Usart(void){
-	this->bufferSize = 128;
-	this->usart3Init();
+	Usart(128);
 }
 
 Usart::Usart(int buffersize){
+
 	this->bufferSize = buffersize;
+	this->buffer = (char*) malloc(sizeof(char)*this->bufferSize);
+	Usart3Instance = this;
 	this->usart3Init();
 }
 
@@ -31,7 +35,7 @@ int Usart::BufferIn(char byte)
   //if (this->buffer.this->write >= BUFFER_SIZE)
   //  this->buffer.this->write = 0; // erhöht sicherheit
 
-  if (this->write + 1 == this->read || this->read == 0 && this->write + 1 == bufferSize)
+  if (this->write + 1 == this->read || (this->read == 0 && this->write + 1 == bufferSize))
     return FAIL; // voll
 
   this->buffer[this->write] = byte;
@@ -46,15 +50,42 @@ int Usart::BufferIn(char byte)
 int Usart::BufferOut(char *pByte)
 {
   if (this->read == this->write)
-    return FAIL;
+    return 1;
   *pByte = this->buffer[this->read];
 
   this->read = this->read + 1;
   if (this->read >= bufferSize)
 	  this->read = 0;
-  return SUCCESS;
+  return 0;
 }
 
+/*
+ * Init DMA
+ */
+void Usart::usart3InitDMA(char *startBuf, int sizeofBytes)
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
+
+	DMA_InitTypeDef DMA_InitStruct;
+	DMA_StructInit(&DMA_InitStruct);
+	DMA_InitStruct.DMA_Channel = DMA_Channel_4;
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART3->DR);
+	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)&startBuf;
+	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral; //vom Mein zum Uart
+	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
+	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStruct.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStruct.DMA_Priority = DMA_Priority_Medium;
+	DMA_InitStruct.DMA_FIFOMode = DMA_FIFOMode_Disable;
+	DMA_InitStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
+	DMA_InitStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+	DMA_InitStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+	DMA_Init(DMA1_Stream3, &DMA_InitStruct);
+	DMA_Cmd(DMA1_Stream3, ENABLE);
+}
 
 /*
  * Uart 3 initialisieren
@@ -121,6 +152,8 @@ void Usart::usart3Init(void)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 
+  USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
+
 }
 /*
  * Ein einzelnes Zeichen senden
@@ -153,6 +186,6 @@ extern "C" { void USART3_IRQHandler(void) {
 		// wenn ein Byte im Empfangspuffer steht
 		wert=USART_ReceiveData(USART3);
 		// Byte speichern
-		com3.BufferIn(wert);
+		Usart3Instance->BufferIn(wert);
 	}
 }}

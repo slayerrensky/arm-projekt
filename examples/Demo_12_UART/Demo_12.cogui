@@ -24,21 +24,20 @@
 </info>
 </editorArea>
 <editor id="org.coocox.welcome.ui.WelcomePage" name="" partName="welcome" title="welcome" tooltip="" workbook="DefaultEditorWorkbook">
-<input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">
-<org.coocox.welcome.ui.WelcomePage/>
+<input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">&#x0A;<org.coocox.welcome.ui.WelcomePage/>
 </input>
 </editor>
 <editor id="org.coocox.builder.ui.editors.repository.RepositoryBrowser" name="Repository" partName="Repository" title="Repository" tooltip="Repository" workbook="DefaultEditorWorkbook">
 <input factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory">&#x0A;<subPage horizontalPosition="0" selectedItemId="986" subPageIndex="4" verticalPosition="0"/>
 </input>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="F:/Data_Temp_Ordner/stm32f4/prj_ub/Demo_Prj/Demo_12_UART/main.c" title="main.c" tooltip="F:/Data_Temp_Ordner/stm32f4/prj_ub/Demo_Prj/Demo_12_UART/main.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="D:/git/arm-projekt/examples/Demo_12_UART/main.c" title="main.c" tooltip="D:/git/arm-projekt/examples/Demo_12_UART/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Demo_12/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="859" selectionTopPixel="80"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="725" selectionTopPixel="305"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_uart.c" partName="stm32_ub_uart.c" path="F:/Data_Temp_Ordner/stm32f4/prj_ub/Demo_Prj/Demo_12_UART/ub_lib/stm32_ub_uart.c" title="stm32_ub_uart.c" tooltip="F:/Data_Temp_Ordner/stm32f4/prj_ub/Demo_Prj/Demo_12_UART/ub_lib/stm32_ub_uart.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_uart.c" partName="stm32_ub_uart.c" path="D:/git/arm-projekt/examples/Demo_12_UART/ub_lib/stm32_ub_uart.c" title="stm32_ub_uart.c" tooltip="D:/git/arm-projekt/examples/Demo_12_UART/ub_lib/stm32_ub_uart.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Demo_12/ub_lib/stm32_ub_uart.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="791" selectionTopPixel="270"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="791" selectionTopPixel="4145"/>
 </editor>
 </editors>
 <views>
@@ -57,9 +56,6 @@
 <viewState/>
 </view>
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console">
-<viewState/>
-</view>
-<view id="org.coocox.component.ui.Help" partName="Help">
 <viewState/>
 </view>
 </views>
@@ -98,7 +94,6 @@
 <hide_toolbar_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
 <view id="org.coocox.component.ui.ComponentView"/>
 <view id="org.coocox.builder.ui.views.ProjectView"/>
-<view id="org.coocox.component.ui.Help"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <fastViewBars/>
 <layout>
@@ -117,7 +112,7 @@
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1dcd8ce" ratio="0.69957536" ratioLeft="659" ratioRight="283" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1d1113e">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1dcd8ce" ratio="0.8210361" ratioLeft="523" ratioRight="114" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1d1113e">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
@@ -126,16 +121,14 @@
 </folder>
 </info>
 <info part="org.coocox.builder.ui.exampleView" ratio="0.21966527" ratioLeft="420" ratioRight="1492" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1d1113e"/>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@15e896b" ratio="0.71983916" ratioLeft="1074" ratioRight="418" relationship="2" relative="org.coocox.builder.ui.exampleView">
-<folder activePageID="org.coocox.component.ui.Help" appearance="2" expanded="2">
-<page content="org.coocox.component.ui.Help" label="Help"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@15e896b" ratio="0.7188841" ratioLeft="670" ratioRight="262" relationship="2" relative="org.coocox.builder.ui.exampleView">
+<folder appearance="2" expanded="2">
+<page content="org.coocox.component.ui.Help" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.coocox.coassistant.view.CoAssistantView" label="LabelNotFound"/>
 <page content="org.coocox.builder.ui.MoreExampleView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.4490446" ratioLeft="423" ratioRight="519" relationship="4" relative="org.coocox.builder.ui.exampleView"/>
@@ -173,13 +166,8 @@
 <org.coocox.welcome.ui.WelcomePage/>
 </editor>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Demo_12/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Demo_12/main.c"/>
 </editors>
-<item historyLabel="stm32_ub_uart.c" index="2">
-<position info="not_deleted" x="977" y="26"/>
-</item>
-<item historyLabel="main.c" index="1">
-<position info="not_deleted" x="622" y="0"/>
-</item>
 <item historyLabel="Repository" index="0"/>
 <item historyLabel="stm32_ub_uart.c" index="2">
 <position info="not_deleted" x="977" y="26"/>
@@ -311,6 +299,12 @@
 <item historyLabel="main.c" index="10">
 <position info="not_deleted" x="859" y="0"/>
 </item>
+<item historyLabel="stm32_ub_uart.c" index="8">
+<position info="not_deleted" x="791" y="0"/>
+</item>
+<item historyLabel="main.c" index="11">
+<position info="not_deleted" x="725" y="0"/>
+</item>
 <item active="true" historyLabel="stm32_ub_uart.c" index="8">
 <position info="not_deleted" x="791" y="0"/>
 </item>
@@ -321,49 +315,48 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_uart.c" tooltip="Demo_12/ub_lib/stm32_ub_uart.c">
-<persistable path="/Demo_12/ub_lib/stm32_ub_uart.c"/>
-</file>
-<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage" name="" tooltip="">
-<persistable>
-<org.coocox.welcome.ui.WelcomePage/>
+<file factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory" id="org.coocox.builder.ui.editors.repository.RepositoryBrowser" name="Repository" tooltip="Repository">
+<persistable>&#x0A;<subPage/>
 </persistable>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_player.h" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_player.h">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_player.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="test3/cmsis_boot/startup/startup_stm32f4xx.c">
+<persistable path="/test3/cmsis_boot/startup/startup_stm32f4xx.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_player.c" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_player.c">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_player.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_rcc.c" tooltip="test3/cmsis_lib/source/stm32f4xx_rcc.c">
+<persistable path="/test3/cmsis_lib/source/stm32f4xx_rcc.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_map.h" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_map.h">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_map.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_gpio.c" tooltip="test3/cmsis_lib/source/stm32f4xx_gpio.c">
+<persistable path="/test3/cmsis_lib/source/stm32f4xx_gpio.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_global.h" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_global.h">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_global.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx.h" tooltip="test3/cmsis_boot/stm32f4xx.h">
+<persistable path="/test3/cmsis_boot/stm32f4xx.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_obj.h" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_obj.h">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_obj.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_conf.h" tooltip="test3/cmsis_boot/stm32f4xx_conf.h">
+<persistable path="/test3/cmsis_boot/stm32f4xx_conf.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_obj.c" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_obj.c">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_obj.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_tim.h" tooltip="test3/cmsis_lib/include/stm32f4xx_tim.h">
+<persistable path="/test3/cmsis_lib/include/stm32f4xx_tim.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_parser.c" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_parser.c">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_parser.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_gpio.h" tooltip="test3/cmsis_lib/include/stm32f4xx_gpio.h">
+<persistable path="/test3/cmsis_lib/include/stm32f4xx_gpio.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_uart.h" tooltip="stm32f429/ub_lib/stm32_ub_uart.h">
-<persistable path="/stm32f429/ub_lib/stm32_ub_uart.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="semihosting.h" tooltip="test3/semihosting/semihosting.h">
+<persistable path="/test3/semihosting/semihosting.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_uart.c" tooltip="stm32f429/ub_lib/stm32_ub_uart.c">
-<persistable path="/stm32f429/ub_lib/stm32_ub_uart.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="LIS302DL.c" tooltip="test3/cmsis_lib/CoX_Driver/LIS302DL/LIS302DL.c">
+<persistable path="/test3/cmsis_lib/CoX_Driver/LIS302DL/LIS302DL.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_user.h" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_user.h">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_user.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_usb_vcp.h" tooltip="test3/TM/tm_stm32f4_usb_vcp.h">
+<persistable path="/test3/TM/tm_stm32f4_usb_vcp.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_user.c" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_user.c">
-<persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_user.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_usb_vcp.c" tooltip="test3/TM/tm_stm32f4_usb_vcp.c">
+<persistable path="/test3/TM/tm_stm32f4_usb_vcp.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled.c" tooltip="stm32f429/ub_lib/stm32_ub_tiled.c">
-<persistable path="/stm32f429/ub_lib/stm32_ub_tiled.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="test3/User/main.c">
+<persistable path="/test3/User/main.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="LIS302DL.h" tooltip="test4/CoX_Driver/LIS302DL/LIS302DL.h">
+<persistable path="/test4/CoX_Driver/LIS302DL/LIS302DL.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_tiled_map.c" tooltip="stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_map.c">
 <persistable path="/stm32f429/ub_lib/tiled_lolevel/stm32_ub_tiled_map.c"/>
