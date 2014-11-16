@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TIME_DELAY              5000000
-char buffer[129] = "Hello World, this is a DMA test.\n";
+#define TIME_DELAY              50000
+char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
 // Delay Function
 static void Delay(volatile int tick)
@@ -15,16 +15,18 @@ static void Delay(volatile int tick)
 }
 
 LED LPC1768_LED;
-Usart com3(128);
+
 
 // Main function entry
 int main(void)
 {
 	/* Initialize system */
-	//SystemInit();
-	//Usart com3(128);
+	SystemInit();
+	Usart com3(128);
+	com3.EnableSingelton(&com3);
 	char bytes;
 
+	com3.SendViaDma(buffer, strlen(buffer));
 	com3.SendViaDma(buffer, strlen(buffer));
 	while(1)
     {
@@ -40,9 +42,15 @@ int main(void)
 		// Delay
 		//Delay(TIME_DELAY);
 
+		//com3.SendViaDma(buffer, strlen(buffer));
+		//Delay
+		Delay(TIME_DELAY);
 		OutputString = com3.ReadBuffer();
-		com3.SendViaDma(OutputString, strlen(OutputString));
-		free(OutputString);
+		if (OutputString != NULL)
+		{
+			com3.SendViaDma(OutputString, strlen(OutputString));
+			free(OutputString);
+		}
 
     }
 }

@@ -19,18 +19,19 @@ Usart::Usart(void){
 Usart::Usart(int buffersize){
 
 	this->bufferSize = buffersize;
-	this->buffer = (char*) malloc(sizeof(char)*this->bufferSize);
+	buffer_init();
 	this->OutputString = (char*) malloc(sizeof(char)*this->bufferSize);
 	Usart3Instance = this;
 	this->usart3InitDMA();
 	this->usart3Init();
+
 }
 
 void Usart::buffer_init(void)
 {
 	this->read = 0;
 	this->write = 0;
-	this->buffer = (char*) malloc (bufferSize);
+	this->buffer = (char*) malloc(sizeof(char)*this->bufferSize);
 }
 
 int Usart::BufferIn(char byte)
@@ -53,7 +54,7 @@ int Usart::BufferIn(char byte)
 int Usart::BufferOut(char *pByte)
 {
   if (this->read == this->write)
-    return 1;
+    return -1;
   *pByte = this->buffer[this->read];
 
   this->read = this->read + 1;
@@ -71,13 +72,16 @@ char* Usart::ReadBuffer(void)
 {
 	int count = 0;
 	char *out;
-	while(BufferOut(OutputString) == 0)
+	while(BufferOut(OutputString + count) == 0)
 	{
+		char a = OutputString[count];
 		count++;
 	}
-	OutputString[count+1] = '\0';
+	if (count <= 0 )
+		return NULL;
+	OutputString[count] = 0;
 	out = (char*) malloc(sizeof(char) * count+1);
-	strcpy(OutputString,out);
+	strcpy(out, OutputString);
 	return out;
 }
 
@@ -89,7 +93,7 @@ void Usart::usart3InitDMA()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
-	DMA_StructInit(&DMA_InitStruct);
+	//DMA_DeInit(DMA1_Stream3);
 	DMA_InitStruct.DMA_Channel = DMA_Channel_4;
 	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART3->DR);
 	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral;
@@ -97,13 +101,28 @@ void Usart::usart3InitDMA()
 	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
 	DMA_InitStruct.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
-	DMA_InitStruct.DMA_Priority = DMA_Priority_Medium;
-	DMA_InitStruct.DMA_FIFOMode = DMA_FIFOMode_Disable;
-	DMA_InitStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
+	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal; //normal
+	DMA_InitStruct.DMA_Priority = DMA_Priority_High;
+	DMA_InitStruct.DMA_FIFOMode = DMA_FIFOMode_Disable; //DMA_FIFOMode_Disable;
+	DMA_InitStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull; //DMA_FIFOThreshold_HalfFull;
 	DMA_InitStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
 	DMA_InitStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
 
+	USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
+
+	/* Enable DMA Stream Transfer Complete interrupt */
+	DMA_ITConfig(DMA1_Stream3, DMA_IT_TC, ENABLE);
+	NVIC_InitTypeDef NVIC_InitStructure;
+
+	/* Configure the Priority Group to 2 bits */
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+
+	/* Enable the USART3 RX DMA Interrupt */
+	NVIC_InitStructure.NVIC_IRQChannel = DMA1_Stream3_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
 }
 /*
  * DMA konfigurieren mit Startadresse der Daten und länge des Strings
@@ -111,12 +130,31 @@ void Usart::usart3InitDMA()
  */
 void Usart::SendViaDma(char *startBuf, int sizeofBytes)
 {
-	// ob das klappt
-	//while (DMA_GetCurrDataCounter(DMA1_Stream3) == 0);
+	if (SendFirst)
+	{
+		SendFirst = 0;
+	}
+	else
+	{
+		int a = DMA_GetFlagStatus(DMA1_Stream3, DMA_FLAG_TCIF3) == RESET;
+		while (a)
+		{
+			a = DMA_GetFlagStatus(DMA1_Stream3, DMA_FLAG_TCIF3) == RESET;
+		}
+	}
+
+	DMA_DeInit(DMA1_Stream3);
+	USART_ClearFlag(USART3, USART_FLAG_TC);
+
 	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)startBuf;
 	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
+
 	DMA_Init(DMA1_Stream3, &DMA_InitStruct);
+
+	USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
+
 	DMA_Cmd(DMA1_Stream3, ENABLE);
+
 }
 
 /*
@@ -184,8 +222,6 @@ void Usart::usart3Init(void)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 
-  USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
-
 }
 /*
  * Ein einzelnes Zeichen senden
@@ -207,6 +243,23 @@ void Usart::uartSendString( char *ptr )
 	  ptr++;
   }
 }
+
+void Usart::EnableSingelton(Usart *usart)
+{
+
+	Usart3Instance = usart;
+	Usart3Instance = this;
+}
+
+extern "C" { void DMA1_Stream3_IRQHandler(void)
+{
+  /* Test on DMA Stream Transfer Complete interrupt */
+  if (DMA_GetITStatus(DMA1_Stream3, DMA_IT_TCIF3))
+  {
+    /* Clear DMA Stream Transfer Complete interrupt pending bit */
+    DMA_ClearITPendingBit(DMA1_Stream3, DMA_IT_TCIF3);
+  }
+}}
 
 /*
  *  UART3-Interrupt

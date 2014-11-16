@@ -14,6 +14,7 @@
 	void usart3Init(void);
 	void uartPutChar(uint16_t char2send);
 	void uartSendString( char *ptr );
+	void SendViaDma(char *startBuf, int sizeofBytes);
 
 	void buffer_init(void);
 	int BufferIn(char byte);

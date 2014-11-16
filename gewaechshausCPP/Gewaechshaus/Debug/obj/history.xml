@@ -10,8 +10,8 @@
       <target file="stm32f4xx_syscfg.o" lastModified="149ab45507f">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="14996b429ff"/>
       </target>
-      <target file="startup_stm32f4xx.o" lastModified="149ab455377">
-         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="14996b42a87"/>
+      <target file="startup_stm32f4xx.o" lastModified="149b9dda722">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="149b929ccae"/>
       </target>
       <target file="system_stm32f4xx.o" lastModified="149ab4554d3">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="14996b42a4d"/>
@@ -40,11 +40,11 @@
       <target file="stm32f4_discovery_callbacks.o" lastModified="149ab455552">
          <source file="..\..\..\stm32f4_discovery_callbacks.c" lastModified="14995114a63"/>
       </target>
-      <target file="uart.o" lastModified="149ab4c7219">
-         <source file="..\..\..\src\uart.cpp" lastModified="149ab493a8c"/>
-      </target>
       <target file="stm32f4xx_dac.o" lastModified="149ab4552c6">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="14996b42a34"/>
+      </target>
+      <target file="uart.o" lastModified="149ba207cf7">
+         <source file="..\..\..\src\uart.cpp" lastModified="149ba206a1f"/>
       </target>
       <target file="stm32f4xx_i2c.o" lastModified="149ab4555fb">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="14996b42a1b"/>
@@ -52,11 +52,11 @@
       <target file="stm32f4_discovery_lis302dl.o" lastModified="149ab4556b0">
          <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery_lis302dl.c" lastModified="14996b429b0"/>
       </target>
+      <target file="main.o" lastModified="149ba3303fb">
+         <source file="..\..\..\main.cpp" lastModified="149ba30fc61"/>
+      </target>
       <target file="stm32f4xx_usart.o" lastModified="149ab45513b">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="14996b429fb"/>
-      </target>
-      <target file="main.o" lastModified="149ab482284">
-         <source file="..\..\..\main.cpp" lastModified="149ab480d1a"/>
       </target>
    </processor>
 </history>

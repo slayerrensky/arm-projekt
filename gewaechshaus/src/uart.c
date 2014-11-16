@@ -5,6 +5,7 @@
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_tim.h"
+#include "stm32f4xx_dma.h"
 #include "misc.h"
 #include <stdlib.h>
 
@@ -113,6 +114,50 @@ void usart3Init(void)
   NVIC_Init(&NVIC_InitStructure);
 
 }
+
+/*
+ * DMA konfigurieren mit Startadresse der Daten und länge des Strings
+ * DMA sendet dann die Daten via Uart
+ */
+void SendViaDma(char *startBuf, int sizeofBytes)
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
+	DMA_InitTypeDef DMA_InitStruct;
+	DMA_StructInit(&DMA_InitStruct);
+
+
+
+	DMA_InitStruct.DMA_Channel = DMA_Channel_4;
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART3->DR);
+	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral;
+	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStruct.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal; //normal
+	DMA_InitStruct.DMA_Priority = DMA_Priority_High;
+	DMA_InitStruct.DMA_FIFOMode = DMA_FIFOMode_Enable; //DMA_FIFOMode_Disable;
+	DMA_InitStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_Full; //DMA_FIFOThreshold_HalfFull;
+	DMA_InitStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+	DMA_InitStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+	// ob das klappt
+	//while (DMA_GetCurrDataCounter(DMA1_Stream3) == 0);
+
+	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)startBuf;
+	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
+
+	DMA_Init(DMA1_Stream3, &DMA_InitStruct);
+
+	USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
+
+	/* Enable DMA Stream Transfer Complete interrupt */
+	DMA_ITConfig(DMA1_Stream3, DMA_IT_TC, ENABLE);
+
+	DMA_FlowControllerConfig(DMA1_Stream3, DMA_FlowCtrl_Memory);
+	DMA_Cmd(DMA1_Stream3, ENABLE);
+
+}
+
 /*
  * Ein einzelnes Zeichen senden
  */
@@ -135,7 +180,15 @@ void uartSendString( char *ptr )
 }
 
 
-
+void DMA1_Stream3_IRQHandler(void)
+{
+  /* Test on DMA Stream Transfer Complete interrupt */
+  if (DMA_GetITStatus(DMA1_Stream4, DMA_IT_TCIF3))
+  {
+    /* Clear DMA Stream Transfer Complete interrupt pending bit */
+    DMA_ClearITPendingBit(DMA1_Stream4, DMA_IT_TCIF4);
+  }
+}
 
 /*
  *  UART3-Interrupt

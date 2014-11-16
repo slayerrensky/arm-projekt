@@ -23,6 +23,7 @@ public:
 	int BufferIn(char byte);
 	char* ReadBuffer(void);
 	void SendViaDma(char *startBuf, int sizeofBytes);
+	void EnableSingelton(Usart *usart);
 
 protected:
 	char *buffer;
@@ -32,6 +33,7 @@ protected:
 	char *OutputString;
 	DMA_InitTypeDef DMA_InitStruct;
 	void buffer_init(void);
+	int SendFirst = 1;
 
 };
 
