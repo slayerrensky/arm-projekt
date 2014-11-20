@@ -32,6 +32,7 @@
 *.cogui
 *.comarker
 *.coproj
+*.pbxproj
 
-./gewaechshausCPP/Gewaechshaus/
-./gewaechshaus/Gewaechshaus/
+**/Debug
+
