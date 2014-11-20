@@ -40,11 +40,11 @@
       <target file="stm32f4_discovery_callbacks.o" lastModified="149ab455552">
          <source file="..\..\..\stm32f4_discovery_callbacks.c" lastModified="14995114a63"/>
       </target>
+      <target file="uart.o" lastModified="149bacaf8b7">
+         <source file="..\..\..\src\uart.cpp" lastModified="149bacae5a9"/>
+      </target>
       <target file="stm32f4xx_dac.o" lastModified="149ab4552c6">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="14996b42a34"/>
-      </target>
-      <target file="uart.o" lastModified="149ba207cf7">
-         <source file="..\..\..\src\uart.cpp" lastModified="149ba206a1f"/>
       </target>
       <target file="stm32f4xx_i2c.o" lastModified="149ab4555fb">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="14996b42a1b"/>
