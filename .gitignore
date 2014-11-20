@@ -29,10 +29,10 @@
 *.hex
 
 # COOCOX Particular Files
-*.cogui
-*.comarker
-*.coproj
-*.pbxproj
+**/*.cogui
+**/*.comarker
+**/*.coproj
+**/*.pbxproj
 
 **/Debug/**/*
 

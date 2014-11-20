@@ -34,5 +34,5 @@
 *.coproj
 *.pbxproj
 
-**/Debug
+**/Debug/**/*
 
