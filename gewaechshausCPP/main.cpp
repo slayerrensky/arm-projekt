@@ -1,11 +1,12 @@
 #include "led.h"
 #include "uart.h"
+#include "rotary.h"
 #include "stm32f4xx.h"
 #include "string.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TIME_DELAY              50000
+#define TIME_DELAY              1000000
 char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
 // Delay Function
@@ -23,8 +24,8 @@ int main(void)
 	/* Initialize system */
 	SystemInit();
 	Usart com3(128);
-	com3.EnableSingelton(&com3);
-	char bytes;
+	Rotary rotary;
+	com3.EnableSingelton();
 
 	com3.SendViaDma(buffer, strlen(buffer));
 	com3.SendViaDma(buffer, strlen(buffer));
@@ -51,6 +52,9 @@ int main(void)
 			com3.SendViaDma(OutputString, strlen(OutputString));
 			free(OutputString);
 		}
+
+		sprintf(buffer, "Position: %d \n\r", rotary.GetPosition());
+		com3.SendViaDma(buffer, strlen(buffer));
 
     }
 }

@@ -7,7 +7,7 @@
 #include "misc.h"
 
 #include <stdlib.h>
-#include "string.h";
+#include "string.h"
 
 
 Usart *Usart3Instance;
@@ -20,6 +20,7 @@ Usart::Usart(int buffersize){
 
 	this->bufferSize = buffersize;
 	buffer_init();
+	SendFirst = 1;
 	this->OutputString = (char*) malloc(sizeof(char)*this->bufferSize);
 	Usart3Instance = this;
 	this->usart3InitDMA();
@@ -74,7 +75,6 @@ char* Usart::ReadBuffer(void)
 	char *out;
 	while(BufferOut(OutputString + count) == 0)
 	{
-		char a = OutputString[count];
 		count++;
 	}
 	if (count <= 0 )
@@ -244,10 +244,8 @@ void Usart::uartSendString( char *ptr )
   }
 }
 
-void Usart::EnableSingelton(Usart *usart)
+void Usart::EnableSingelton(void)
 {
-
-	Usart3Instance = usart;
 	Usart3Instance = this;
 }
 
