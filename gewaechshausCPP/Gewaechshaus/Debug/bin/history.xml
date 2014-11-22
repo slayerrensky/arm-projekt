@@ -1,27 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -Map=Gewaechshaus.map -O0 --gc-sections -lm -lgcc -lc -lstdc++ -LD:/git/arm-projekt/gewaechshausCPP -TD:/git/arm-projekt/gewaechshausCPP/arm-gcc-link.ld -g -L..\..\.. -lstdc++ -L..\..\.. -lsupc++ -L..\..\.. -lnosys -L..\..\..\STM32F4-Discovery -lpdmfilter_gcc">
-      <target file="Gewaechshaus.elf" lastModified="149cfa35eba">
-         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="149ce8378bb"/>
-         <source file="..\obj\stm32f4_discovery_audio_codec.o" lastModified="149ce837929"/>
-         <source file="..\obj\stm32f4xx_usart.o" lastModified="149ce837982"/>
-         <source file="..\obj\led.o" lastModified="149ce837ad2"/>
-         <source file="..\obj\stm32f4xx_dac.o" lastModified="149ce837b1a"/>
-         <source file="..\obj\rotary.o" lastModified="149cfa221a1"/>
-         <source file="..\obj\uart.o" lastModified="149cf5a5db7"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="149ce837bc0"/>
-         <source file="..\obj\stm32f4_discovery.o" lastModified="149ce837bfd"/>
-         <source file="..\obj\main.o" lastModified="149cfa35ce1"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="149ce837ca8"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="149ce837cf0"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="149ce837d28"/>
-         <source file="..\obj\stm32f4xx_dma.o" lastModified="149ce837d78"/>
-         <source file="..\obj\stm32f4_discovery_callbacks.o" lastModified="149ce837dae"/>
-         <source file="..\obj\stm32f4xx_spi.o" lastModified="149ce837e04"/>
-         <source file="..\obj\stm32f4xx_i2c.o" lastModified="149ce837e63"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="149ce837e9f"/>
-         <source file="..\obj\misc.o" lastModified="149ce837ed8"/>
-         <source file="..\obj\stm32f4_discovery_lis302dl.o" lastModified="149ce837f1f"/>
+      <target file="Gewaechshaus.elf" lastModified="149d7eb5c48">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="149d7eb27d0"/>
+         <source file="..\obj\stm32f4_discovery_audio_codec.o" lastModified="149d7eb2879"/>
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="149d7eb28d7"/>
+         <source file="..\obj\quadrature_encoder.o" lastModified="149d7eb2be3"/>
+         <source file="..\obj\led.o" lastModified="149d7eb2c2c"/>
+         <source file="..\obj\stm32f4xx_dac.o" lastModified="149d7eb2c85"/>
+         <source file="..\obj\rotary.o" lastModified="149d7eb2d15"/>
+         <source file="..\obj\uart.o" lastModified="149d7eb2d9c"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="149d7eb2dcc"/>
+         <source file="..\obj\stm32f4_discovery.o" lastModified="149d7eb2e10"/>
+         <source file="..\obj\main.o" lastModified="149d7eb5924"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="149d7eb2ea4"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="149d7eb2ef3"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="149d7eb2f35"/>
+         <source file="..\obj\stm32f4xx_dma.o" lastModified="149d7eb2f8c"/>
+         <source file="..\obj\stm32f4_discovery_callbacks.o" lastModified="149d7eb2fc8"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="149d7eb3030"/>
+         <source file="..\obj\stm32f4xx_i2c.o" lastModified="149d7eb308f"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="149d7eb30d2"/>
+         <source file="..\obj\misc.o" lastModified="149d7eb3112"/>
+         <source file="..\obj\stm32f4_discovery_lis302dl.o" lastModified="149d7eb3173"/>
       </target>
    </processor>
 </history>

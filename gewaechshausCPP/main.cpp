@@ -1,6 +1,7 @@
 #include "led.h"
 #include "uart.h"
 #include "rotary.h"
+#include "quadrature_encoder.h"
 #include "stm32f4xx.h"
 #include "string.h"
 #include <stdio.h>
