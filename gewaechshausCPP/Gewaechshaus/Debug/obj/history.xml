@@ -1,65 +1,68 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DSYSTEM_LIB -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -DSUPPORT_CPLUSPLUS -ID:\git\arm-projekt\gewaechshausCPP\cmsis_boot -ID:\git\arm-projekt -ID:\git\arm-projekt\gewaechshausCPP\cmsis_lib -ID:\git\arm-projekt\gewaechshausCPP\cmsis -ID:\git\arm-projekt\gewaechshausCPP\STM32F4-Discovery -ID:\git\arm-projekt\gewaechshausCPP\src -ID:\git\arm-projekt\gewaechshausCPP -ID:\git\arm-projekt\gewaechshausCPP\cmsis_lib\include">
-      <target file="stm32f4xx_exti.o" lastModified="149ce837e9f">
+      <target file="stm32f4xx_exti.o" lastModified="149dd9804b3">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="149953dd77f"/>
       </target>
-      <target file="stm32f4xx_gpio.o" lastModified="149ce837cf0">
+      <target file="stm32f4xx_gpio.o" lastModified="149dd980316">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14996b42a25"/>
       </target>
-      <target file="rotary.o" lastModified="149d36a3673">
+      <target file="rotary.o" lastModified="149dd980155">
          <source file="..\..\..\src\rotary.cpp" lastModified="149d36a28b8"/>
       </target>
-      <target file="stm32f4xx_syscfg.o" lastModified="149ce8378bb">
+      <target file="stm32f4xx_syscfg.o" lastModified="149dd97fe2d">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="14996b429ff"/>
       </target>
-      <target file="startup_stm32f4xx.o" lastModified="149ce837bc0">
+      <target file="startup_stm32f4xx.o" lastModified="149dd9801ed">
          <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="149b929ccae"/>
       </target>
-      <target file="system_stm32f4xx.o" lastModified="149ce837d28">
+      <target file="system_stm32f4xx.o" lastModified="149dd98034c">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="14996b42a4d"/>
       </target>
-      <target file="led.o" lastModified="149ce837ad2">
+      <target file="led.o" lastModified="149dd98007e">
          <source file="..\..\..\src\led.cpp" lastModified="1499520e40b"/>
       </target>
-      <target file="stm32f4_discovery.o" lastModified="149ce837bfd">
+      <target file="stm32f4_discovery.o" lastModified="149dd980227">
          <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery.c" lastModified="14996b4299f"/>
       </target>
-      <target file="misc.o" lastModified="149ce837ed8">
+      <target file="misc.o" lastModified="149dd9804ed">
          <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="14995114ab1"/>
       </target>
-      <target file="stm32f4_discovery_audio_codec.o" lastModified="149ce837929">
+      <target file="stm32f4_discovery_audio_codec.o" lastModified="149dd97fe93">
          <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery_audio_codec.c" lastModified="14996b429c3"/>
       </target>
-      <target file="stm32f4xx_dma.o" lastModified="149ce837d78">
+      <target file="stm32f4xx_dma.o" lastModified="149dd980398">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="14996b42a2d"/>
       </target>
-      <target file="stm32f4xx_spi.o" lastModified="149ce837e04">
+      <target file="stm32f4xx_spi.o" lastModified="149dd98041d">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="14996b42a09"/>
       </target>
-      <target file="stm32f4xx_rcc.o" lastModified="149ce837ca8">
+      <target file="stm32f4xx_rcc.o" lastModified="149dd9802d4">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="14996b42a13"/>
       </target>
-      <target file="stm32f4_discovery_callbacks.o" lastModified="149ce837dae">
+      <target file="stm32f4_discovery_callbacks.o" lastModified="149dd9803ca">
          <source file="..\..\..\stm32f4_discovery_callbacks.c" lastModified="14995114a63"/>
       </target>
-      <target file="stm32f4xx_dac.o" lastModified="149ce837b1a">
+      <target file="stm32f4xx_dac.o" lastModified="149dd9800c3">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="14996b42a34"/>
       </target>
-      <target file="uart.o" lastModified="149cf5a5db7">
+      <target file="uart.o" lastModified="149dd9801c4">
          <source file="..\..\..\src\uart.cpp" lastModified="149cf59b5dd"/>
       </target>
-      <target file="stm32f4xx_i2c.o" lastModified="149ce837e63">
+      <target file="quadrature_encoder.o" lastModified="149dd98003d">
+         <source file="..\..\..\src\quadrature_encoder.cpp" lastModified="149dd94227a"/>
+      </target>
+      <target file="stm32f4xx_i2c.o" lastModified="149dd980477">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="14996b42a1b"/>
       </target>
-      <target file="stm32f4_discovery_lis302dl.o" lastModified="149ce837f1f">
+      <target file="stm32f4_discovery_lis302dl.o" lastModified="149dd980542">
          <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery_lis302dl.c" lastModified="14996b429b0"/>
       </target>
-      <target file="stm32f4xx_usart.o" lastModified="149ce837982">
-         <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="14996b429fb"/>
+      <target file="main.o" lastModified="149dd98027c">
+         <source file="..\..\..\main.cpp" lastModified="149dd94226c"/>
       </target>
-      <target file="main.o" lastModified="149cfa35ce1">
-         <source file="..\..\..\main.cpp" lastModified="149cfa338d7"/>
+      <target file="stm32f4xx_usart.o" lastModified="149dd97fee9">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="14996b429fb"/>
       </target>
    </processor>
 </history>

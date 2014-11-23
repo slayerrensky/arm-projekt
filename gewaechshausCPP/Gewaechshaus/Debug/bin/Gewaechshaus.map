@@ -242,6 +242,50 @@ Discarded input sections
                 0x00000000       0x38 ..\obj\stm32f4xx_usart.o
  .text.USART_ClearITPendingBit
                 0x00000000       0x38 ..\obj\stm32f4xx_usart.o
+ .text          0x00000000        0x0 ..\obj\quadrature_encoder.o
+ .data          0x00000000        0x0 ..\obj\quadrature_encoder.o
+ .bss           0x00000000        0x0 ..\obj\quadrature_encoder.o
+ .text._ZN17QuadratureEncoderC2Ev
+                0x00000000       0xa0 ..\obj\quadrature_encoder.o
+ .ARM.extab.text._ZN17QuadratureEncoderC2Ev
+                0x00000000        0xc ..\obj\quadrature_encoder.o
+ .ARM.exidx.text._ZN17QuadratureEncoderC2Ev
+                0x00000000        0x8 ..\obj\quadrature_encoder.o
+ .text._ZN17QuadratureEncoder5resetEv
+                0x00000000       0x24 ..\obj\quadrature_encoder.o
+ .ARM.extab.text._ZN17QuadratureEncoder5resetEv
+                0x00000000        0x0 ..\obj\quadrature_encoder.o
+ .ARM.exidx.text._ZN17QuadratureEncoder5resetEv
+                0x00000000        0x8 ..\obj\quadrature_encoder.o
+ .text._ZN17QuadratureEncoder4readEv
+                0x00000000       0x50 ..\obj\quadrature_encoder.o
+ .ARM.extab.text._ZN17QuadratureEncoder4readEv
+                0x00000000        0xc ..\obj\quadrature_encoder.o
+ .ARM.exidx.text._ZN17QuadratureEncoder4readEv
+                0x00000000        0x8 ..\obj\quadrature_encoder.o
+ .text._ZN17QuadratureEncoder12getRotaryPosEv
+                0x00000000       0x1c ..\obj\quadrature_encoder.o
+ .ARM.extab.text._ZN17QuadratureEncoder12getRotaryPosEv
+                0x00000000        0xc ..\obj\quadrature_encoder.o
+ .ARM.exidx.text._ZN17QuadratureEncoder12getRotaryPosEv
+                0x00000000        0x8 ..\obj\quadrature_encoder.o
+ .text._ZN17QuadratureEncoder13getRotaryDiffEv
+                0x00000000       0x1c ..\obj\quadrature_encoder.o
+ .ARM.extab.text._ZN17QuadratureEncoder13getRotaryDiffEv
+                0x00000000        0xc ..\obj\quadrature_encoder.o
+ .ARM.exidx.text._ZN17QuadratureEncoder13getRotaryDiffEv
+                0x00000000        0x8 ..\obj\quadrature_encoder.o
+ .debug_info    0x00000000      0x629 ..\obj\quadrature_encoder.o
+ .debug_abbrev  0x00000000      0x1f7 ..\obj\quadrature_encoder.o
+ .debug_aranges
+                0x00000000       0x40 ..\obj\quadrature_encoder.o
+ .debug_ranges  0x00000000       0x30 ..\obj\quadrature_encoder.o
+ .debug_line    0x00000000      0x29d ..\obj\quadrature_encoder.o
+ .debug_str     0x00000000      0x5f2 ..\obj\quadrature_encoder.o
+ .comment       0x00000000       0x71 ..\obj\quadrature_encoder.o
+ .ARM.attributes
+                0x00000000       0x33 ..\obj\quadrature_encoder.o
+ .debug_frame   0x00000000       0xac ..\obj\quadrature_encoder.o
  .text          0x00000000        0x0 ..\obj\led.o
  .data          0x00000000        0x0 ..\obj\led.o
  .bss           0x00000000        0x0 ..\obj\led.o
@@ -1746,6 +1790,7 @@ LOAD c:/program files (x86)/gnu tools arm embedded/4.8 2014q3/bin/../lib/gcc/arm
 LOAD ..\obj\stm32f4xx_syscfg.o
 LOAD ..\obj\stm32f4_discovery_audio_codec.o
 LOAD ..\obj\stm32f4xx_usart.o
+LOAD ..\obj\quadrature_encoder.o
 LOAD ..\obj\led.o
 LOAD ..\obj\stm32f4xx_dac.o
 LOAD ..\obj\rotary.o
