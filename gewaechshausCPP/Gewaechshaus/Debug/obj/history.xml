@@ -7,8 +7,8 @@
       <target file="stm32f4xx_gpio.o" lastModified="149ce837cf0">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14996b42a25"/>
       </target>
-      <target file="rotary.o" lastModified="149cfa221a1">
-         <source file="..\..\..\src\rotary.cpp" lastModified="149cf9feab2"/>
+      <target file="rotary.o" lastModified="149d36a3673">
+         <source file="..\..\..\src\rotary.cpp" lastModified="149d36a28b8"/>
       </target>
       <target file="stm32f4xx_syscfg.o" lastModified="149ce8378bb">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="14996b429ff"/>
@@ -55,11 +55,11 @@
       <target file="stm32f4_discovery_lis302dl.o" lastModified="149ce837f1f">
          <source file="..\..\..\STM32F4-Discovery\stm32f4_discovery_lis302dl.c" lastModified="14996b429b0"/>
       </target>
-      <target file="main.o" lastModified="149cfa35ce1">
-         <source file="..\..\..\main.cpp" lastModified="149cfa338d7"/>
-      </target>
       <target file="stm32f4xx_usart.o" lastModified="149ce837982">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="14996b429fb"/>
+      </target>
+      <target file="main.o" lastModified="149cfa35ce1">
+         <source file="..\..\..\main.cpp" lastModified="149cfa338d7"/>
       </target>
    </processor>
 </history>
