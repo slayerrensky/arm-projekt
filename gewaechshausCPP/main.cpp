@@ -1,13 +1,13 @@
-#include "led.h"
-#include "uart.h"
-//#include "rotary.h"
-#include "quadrature_encoder.h"
 #include "stm32f4xx.h"
 #include "string.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "led.h"
+#include "uart.h"
+#include "quadrature_encoder.h"
+#include "adc.h"
 
-#define TIME_DELAY              1000000
+#define TIME_DELAY              5000000
 char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
 // Delay Function
@@ -23,8 +23,10 @@ int main(void) {
 	/* Initialize system */
 	SystemInit();
 	Usart com3(128);
-	//Rotary rotary;
 	QuadratureEncoder rotary;
+	AnalogDigitalConverter adc;
+
+
 	com3.EnableSingelton();
 
 	com3.SendViaDma(buffer, strlen(buffer));
@@ -50,10 +52,10 @@ int main(void) {
 			com3.SendViaDma(OutputString, strlen(OutputString));
 			free(OutputString);
 		}
-		if (rotary.isRotDiff()) {
-			sprintf(buffer, "Position: %d \n\r", rotary.getRotaryDiff());
+		//if (rotary.isRotDiff()) {
+			sprintf(buffer, "Position: %5d ADC Value: %5d\n", rotary.getRotaryDiff(), adc.getConvertedValue());
 			com3.SendViaDma(buffer, strlen(buffer));
-		}
+		//}
 
 	}
 }
