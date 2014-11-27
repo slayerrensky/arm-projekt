@@ -1,6 +1,6 @@
 #include "led.h"
 #include "uart.h"
-#include "rotary.h"
+//#include "rotary.h"
 #include "quadrature_encoder.h"
 #include "stm32f4xx.h"
 #include "string.h"
@@ -11,27 +11,25 @@
 char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
 // Delay Function
-static void Delay(volatile int tick)
-{
-	while(tick--);
+static void Delay(volatile int tick) {
+	while (tick--)
+		;
 }
 
 LED LPC1768_LED;
 
-
 // Main function entry
-int main(void)
-{
+int main(void) {
 	/* Initialize system */
 	SystemInit();
 	Usart com3(128);
-	Rotary rotary;
+	//Rotary rotary;
+	QuadratureEncoder rotary;
 	com3.EnableSingelton();
 
 	com3.SendViaDma(buffer, strlen(buffer));
 	com3.SendViaDma(buffer, strlen(buffer));
-	while(1)
-    {
+	while (1) {
 		// Turn all four color led on
 		//LPC1768_LED.On();
 		//com3.uartSendString("LED ON\r\n");
@@ -48,14 +46,14 @@ int main(void)
 		//Delay
 		Delay(TIME_DELAY);
 		OutputString = com3.ReadBuffer();
-		if (OutputString != NULL)
-		{
+		if (OutputString != NULL) {
 			com3.SendViaDma(OutputString, strlen(OutputString));
 			free(OutputString);
 		}
+		if (rotary.isRotDiff()) {
+			sprintf(buffer, "Position: %d \n\r", rotary.getRotaryDiff());
+			com3.SendViaDma(buffer, strlen(buffer));
+		}
 
-		sprintf(buffer, "Position: %d \n\r", rotary.GetPosition());
-		com3.SendViaDma(buffer, strlen(buffer));
-
-    }
+	}
 }
