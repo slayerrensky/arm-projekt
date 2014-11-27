@@ -31,6 +31,7 @@ public:
 	void reset(void);
 	int32_t getRotaryPos (void);
 	int16_t getRotaryDiff (void);
+	bool isRotDiff(void);
 
 private:
 	void read(void);

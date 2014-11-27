@@ -60,3 +60,10 @@ int16_t QuadratureEncoder::getRotaryDiff(void) {
 	read();
 	return rotCount;
 }
+
+bool QuadratureEncoder::isRotDiff(void) {
+	if ( ((int16_t)TIM_GetCounter(TIM8)) != rotActual)
+		return true;
+	else
+		return false;
+}
