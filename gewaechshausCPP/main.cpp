@@ -6,15 +6,18 @@
 #include "uart.h"
 #include "quadrature_encoder.h"
 #include "adc.h"
+#include "temp_sensors.h"
+
+extern "C" {
+#include "tm_stm32f4_onewire.h"
+#include "tm_stm32f4_ds18b20.h"
+#include "stm32_ub_systick.h"
+}
 
 #define TIME_DELAY              5000000
+#define EXPECTING_SENSORS    2
 char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
-// Delay Function
-static void Delay(volatile int tick) {
-	while (tick--)
-		;
-}
 
 LED LPC1768_LED;
 
@@ -22,40 +25,32 @@ LED LPC1768_LED;
 int main(void) {
 	/* Initialize system */
 	SystemInit();
+
 	Usart com3(128);
 	QuadratureEncoder rotary;
 	AnalogDigitalConverter adc;
-
+	TemperaturSensoren tempSensors;
 
 	com3.EnableSingelton();
 
-	com3.SendViaDma(buffer, strlen(buffer));
-	com3.SendViaDma(buffer, strlen(buffer));
+	sprintf(buffer, "Es wurden %d Temperatursensoren gefunden.\n",
+			tempSensors.getAnzahlGefunderSensoren());
+	com3.uartSendString(buffer);
+
 	while (1) {
-		// Turn all four color led on
-		//LPC1768_LED.On();
-		//com3.uartSendString("LED ON\r\n");
-		// Delay
-		//Delay(TIME_DELAY);
-
-		// Turn all four color led off
-		//LPC1768_LED.Off();
-		//com3.uartSendString("LED OFF\r\n");
-		// Delay
-		//Delay(TIME_DELAY);
-
-		//com3.SendViaDma(buffer, strlen(buffer));
-		//Delay
-		Delay(TIME_DELAY);
+		UB_Systick_Pause_ms(500);
+		tempSensors.startTempMeasurementAllSensors();
 		OutputString = com3.ReadBuffer();
 		if (OutputString != NULL) {
 			com3.SendViaDma(OutputString, strlen(OutputString));
 			free(OutputString);
 		}
 		//if (rotary.isRotDiff()) {
-			sprintf(buffer, "Position: %5d ADC Value: %5d\n", rotary.getRotaryDiff(), adc.getConvertedValue());
-			com3.SendViaDma(buffer, strlen(buffer));
+		sprintf(buffer, "RotDiff: %4d ADC Value: %5d (%1.3fV) Temp0: %3.2f C\n",
+				rotary.getRotaryDiff(), adc.getConvertedValue(),
+				adc.getConvertedValueAsVoltage(),
+				tempSensors.getTempWertFromSensor(0));
+		com3.SendViaDma(buffer, strlen(buffer));
 		//}
-
 	}
 }

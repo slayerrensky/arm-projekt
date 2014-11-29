@@ -1,28 +1,35 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -Map=Gewaechshaus.map -O0 --gc-sections -lm -lgcc -lc -lstdc++ -LD:/git/arm-projekt/gewaechshausCPP -TD:/git/arm-projekt/gewaechshausCPP/arm-gcc-link.ld -g -L..\..\.. -lstdc++ -L..\..\.. -lsupc++ -L..\..\.. -lnosys -L..\..\..\STM32F4-Discovery -lpdmfilter_gcc">
-      <target file="Gewaechshaus.elf" lastModified="149dda33bd4">
-         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="149dd97fe2d"/>
-         <source file="..\obj\stm32f4_discovery_audio_codec.o" lastModified="149dd97fe93"/>
-         <source file="..\obj\stm32f4xx_usart.o" lastModified="149dd97fee9"/>
-         <source file="..\obj\quadrature_encoder.o" lastModified="149dd98003d"/>
-         <source file="..\obj\led.o" lastModified="149dd98007e"/>
-         <source file="..\obj\stm32f4xx_dac.o" lastModified="149dd9800c3"/>
-         <source file="..\obj\rotary.o" lastModified="149dd980155"/>
-         <source file="..\obj\uart.o" lastModified="149dd9801c4"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="149dd9801ed"/>
-         <source file="..\obj\stm32f4_discovery.o" lastModified="149dd980227"/>
-         <source file="..\obj\main.o" lastModified="149dd98027c"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="149dd9802d4"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="149dd980316"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="149dd98034c"/>
-         <source file="..\obj\stm32f4xx_dma.o" lastModified="149dd980398"/>
-         <source file="..\obj\stm32f4_discovery_callbacks.o" lastModified="149dd9803ca"/>
-         <source file="..\obj\stm32f4xx_spi.o" lastModified="149dd98041d"/>
-         <source file="..\obj\stm32f4xx_i2c.o" lastModified="149dd980477"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="149dd9804b3"/>
-         <source file="..\obj\misc.o" lastModified="149dd9804ed"/>
-         <source file="..\obj\stm32f4_discovery_lis302dl.o" lastModified="149dd980542"/>
+      <target file="Gewaechshaus.elf" lastModified="149fc78468d">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="149fc76647d"/>
+         <source file="..\obj\temp_sensors.o" lastModified="149fc7664c6"/>
+         <source file="..\obj\tm_stm32f4_ds18b20.o" lastModified="149fc766512"/>
+         <source file="..\obj\stm32f4_discovery_audio_codec.o" lastModified="149fc766580"/>
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="149fc7665d5"/>
+         <source file="..\obj\quadrature_encoder.o" lastModified="149fc76661e"/>
+         <source file="..\obj\led.o" lastModified="149fc766664"/>
+         <source file="..\obj\stm32f4xx_dac.o" lastModified="149fc7666ac"/>
+         <source file="..\obj\rotary.o" lastModified="149fc766718"/>
+         <source file="..\obj\uart.o" lastModified="149fc766782"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="149fc7667ae"/>
+         <source file="..\obj\stm32f4_discovery.o" lastModified="149fc7667ef"/>
+         <source file="..\obj\main.o" lastModified="149fc78448e"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="149fc7668ab"/>
+         <source file="..\obj\stm32f4xx_adc.o" lastModified="149fc76690d"/>
+         <source file="..\obj\stm32_ub_systick.o" lastModified="149fc766953"/>
+         <source file="..\obj\tm_stm32f4_onewire.o" lastModified="149fc7669a1"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="149fc7669e9"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="149fc766a27"/>
+         <source file="..\obj\stm32f4xx_dma.o" lastModified="149fc766a76"/>
+         <source file="..\obj\adc.o" lastModified="149fc766ac1"/>
+         <source file="..\obj\stm32f4_discovery_callbacks.o" lastModified="149fc766afc"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="149fc766b50"/>
+         <source file="..\obj\stm32f4xx_i2c.o" lastModified="149fc766baa"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="149fc766be8"/>
+         <source file="..\obj\misc.o" lastModified="149fc766c25"/>
+         <source file="..\obj\stm32f4_discovery_lis302dl.o" lastModified="149fc766c70"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="149fc766d07"/>
       </target>
    </processor>
 </history>

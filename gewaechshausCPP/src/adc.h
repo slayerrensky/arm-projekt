@@ -14,6 +14,7 @@ class AnalogDigitalConverter {
 public:
 	AnalogDigitalConverter(void);
 	uint16_t getConvertedValue(void);
+	float getConvertedValueAsVoltage(void);
 private:
 	uint16_t convertedValue;
 };

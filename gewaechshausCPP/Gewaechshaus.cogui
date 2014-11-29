@@ -20,71 +20,45 @@
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
-<part id="5"/>
-<part id="6"/>
-<part id="7"/>
-<part id="8"/>
-<part id="9"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" partName="main.cpp" path="D:/git/arm-projekt/gewaechshausCPP/main.cpp" title="main.cpp" tooltip="D:/git/arm-projekt/gewaechshausCPP/main.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/main.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="562" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="775" selectionTopPixel="330"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="uart.h" partName="uart.h" path="D:/git/arm-projekt/gewaechshausCPP/src/uart.h" title="uart.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/uart.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/uart.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="815" selectionTopPixel="170"/>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_ds18b20.h" partName="tm_stm32f4_ds18b20.h" path="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_ds18b20.h" title="tm_stm32f4_ds18b20.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_ds18b20.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/Libs/tm_stm32f4_ds18b20.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1230"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="uart.cpp" partName="uart.cpp" path="D:/git/arm-projekt/gewaechshausCPP/src/uart.cpp" title="uart.cpp" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/uart.cpp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/uart.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2858" selectionTopPixel="2053"/>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="temp_sensors.h" partName="temp_sensors.h" path="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.h" title="temp_sensors.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/temp_sensors.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="554" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="rotary.cpp" partName="rotary.cpp" path="D:/git/arm-projekt/gewaechshausCPP/src/rotary.cpp" title="rotary.cpp" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/rotary.cpp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/rotary.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2567" selectionTopPixel="1180"/>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="temp_sensors.cpp" partName="temp_sensors.cpp" path="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.cpp" title="temp_sensors.cpp" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/temp_sensors.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="19" selectionOffset="534" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="rotary.h" partName="rotary.h" path="D:/git/arm-projekt/gewaechshausCPP/src/rotary.h" title="rotary.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/rotary.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/rotary.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="11" selectionOffset="272" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" partName="startup_stm32f4xx.c" path="D:/git/arm-projekt/gewaechshausCPP/cmsis_boot/startup/startup_stm32f4xx.c" title="startup_stm32f4xx.c" tooltip="D:/git/arm-projekt/gewaechshausCPP/cmsis_boot/startup/startup_stm32f4xx.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2105" selectionTopPixel="863"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4_discovery.h" partName="stm32f4_discovery.h" path="D:/git/arm-projekt/gewaechshausCPP/STM32F4-Discovery/stm32f4_discovery.h" title="stm32f4_discovery.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/STM32F4-Discovery/stm32f4_discovery.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/STM32F4-Discovery/stm32f4_discovery.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3874" selectionTopPixel="2064"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4_discovery.c" partName="stm32f4_discovery.c" path="D:/git/arm-projekt/gewaechshausCPP/STM32F4-Discovery/stm32f4_discovery.c" title="stm32f4_discovery.c" tooltip="D:/git/arm-projekt/gewaechshausCPP/STM32F4-Discovery/stm32f4_discovery.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/STM32F4-Discovery/stm32f4_discovery.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="10" selectionOffset="2451" selectionTopPixel="1088"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_exti.c" partName="stm32f4xx_exti.c" path="D:/git/arm-projekt/gewaechshausCPP/cmsis_lib/source/stm32f4xx_exti.c" title="stm32f4xx_exti.c" tooltip="D:/git/arm-projekt/gewaechshausCPP/cmsis_lib/source/stm32f4xx_exti.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/cmsis_lib/source/stm32f4xx_exti.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10044" selectionTopPixel="4495"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_exti.h" partName="stm32f4xx_exti.h" path="D:/git/arm-projekt/gewaechshausCPP/cmsis_lib/include/stm32f4xx_exti.h" title="stm32f4xx_exti.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/cmsis_lib/include/stm32f4xx_exti.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/cmsis_lib/include/stm32f4xx_exti.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="5704" selectionTopPixel="1904"/>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_onewire.c" partName="tm_stm32f4_onewire.c" path="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_onewire.c" title="tm_stm32f4_onewire.c" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_onewire.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/Libs/tm_stm32f4_onewire.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3240" selectionTopPixel="2023"/>
 </editor>
 </editors>
 <views>
 <view id="org.eclipse.debug.ui.ExpressionView" partName="Expressions">
 <viewState>
-<ExpressionKeySet ExpKeys="buffer[0],buffer[0],&amp;com3,OutputString,OutputString[0],"/>
+<ExpressionKeySet ExpKeys="this-&gt;rotActual,this,TIM_GetCounter(TIM8),tmp_Count,"/>
 </viewState>
 </view>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
 <viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
 <expanded>
 <element path="/Gewaechshaus"/>
-<element path="/Gewaechshaus/src"/>
 <element path="/Gewaechshaus/STM32F4-Discovery"/>
 </expanded>
 <selection>
-<element path="/Gewaechshaus/STM32F4-Discovery/stm32f4_discovery.h"/>
+<element path="/Gewaechshaus"/>
 </selection>
 </viewState>
 </view>
@@ -247,8 +221,8 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
 <hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <view id="org.coocox.builder.ui.views.ProjectView"/>
@@ -257,29 +231,43 @@
 <view id="org.eclipse.debug.ui.ExpressionView"/>
 <fastViewBars/>
 <viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
-<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.ui.internal.ViewStack@1c938e5">&#x0A;<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<layout>
+<mainWindow>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1c938e5">
+<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">
+<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1c938e5">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1c938e5">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1a84433" ratio="0.7676609" ratioLeft="489" ratioRight="148" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1c938e5">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1a84433" ratio="0.7676609" ratioLeft="489" ratioRight="148" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1c938e5">
+<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@157c67" ratio="0.37267825" ratioLeft="622" ratioRight="1047" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1a84433">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@157c67" ratio="0.37267825" ratioLeft="622" ratioRight="1047" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1a84433">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@9a62c0" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1c938e5">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@9a62c0" ratio="0.7496318" ratioLeft="1018" ratioRight="340" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1c938e5">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
 <page content="org.coocox.coassistant.view.CoAssistantView_debug" label="LabelNotFound"/>
@@ -287,10 +275,13 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.29960707" ratioLeft="305" ratioRight="713" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1c938e5"/>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@99c2aa" ratio="0.6991404" ratioLeft="732" ratioRight="315" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.debug.ui.ExpressionView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@99c2aa" ratio="0.6991404" ratioLeft="732" ratioRight="315" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.debug.ui.ExpressionView" appearance="2" expanded="2">
+<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
 <page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="Expressions"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 </presentation>
@@ -304,157 +295,160 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/main.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/rotary.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/rotary.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/uart.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/temp_sensors.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/temp_sensors.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/Libs/tm_stm32f4_onewire.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/cmsis_boot/system_stm32f4xx.c"/>
 </editors>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2905" y="0"/>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="1475" y="64"/>
 </item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="297" y="0"/>
+<item historyLabel="temp_sensors.h" index="1">
+<position info="not_deleted" x="589" y="0"/>
 </item>
-<item historyLabel="startup_stm32f4xx.c" index="3">
-<position info="not_deleted" x="2105" y="0"/>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="1475" y="64"/>
 </item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="517" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2710" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2801" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2853" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2905" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2947" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3052" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3078" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3193" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3280" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3321" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3369" y="0"/>
+<item historyLabel="temp_sensors.h" index="1">
+<position info="not_deleted" x="503" y="0"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="328" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2710" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2801" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2853" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2905" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2947" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3052" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3170" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3193" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3280" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3321" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3369" y="0"/>
-</item>
-<item historyLabel="uart.cpp" index="4">
-<position info="not_deleted" x="381" y="0"/>
+<position info="not_deleted" x="971" y="0"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="328" y="0"/>
+<position info="not_deleted" x="326" y="16"/>
 </item>
-<item historyLabel="uart.cpp" index="4">
-<position info="not_deleted" x="381" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3369" y="0"/>
-</item>
-<item historyLabel="rotary.h" index="2">
-<position info="not_deleted" x="343" y="0"/>
-</item>
-<item historyLabel="rotary.h" index="2">
-<position info="not_deleted" x="267" y="19"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="3369" y="0"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2625" y="0"/>
-</item>
-<item historyLabel="rotary.h" index="2">
-<position info="not_deleted" x="331" y="8"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2586" y="0"/>
-</item>
-<item historyLabel="uart.cpp" index="4">
-<position info="not_deleted" x="2858" y="0"/>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="328" y="0"/>
+<position info="not_deleted" x="1794" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="1014" y="54"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="1312" y="59"/>
+</item>
+<item historyLabel="temp_sensors.h" index="1">
+<position info="not_deleted" x="554" y="0"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="1193" y="0"/>
+<position info="not_deleted" x="775" y="34"/>
 </item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2586" y="0"/>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="1388" y="0"/>
 </item>
-<item historyLabel="rotary.h" index="2">
-<position info="not_deleted" x="272" y="11"/>
-</item>
-<item historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2586" y="0"/>
+<item historyLabel="temp_sensors.h" index="1">
+<position info="not_deleted" x="554" y="0"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="1193" y="0"/>
+<position info="not_deleted" x="775" y="34"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="1236" y="0"/>
+<position info="not_deleted" x="585" y="0"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="185" y="0"/>
+<position info="not_deleted" x="680" y="0"/>
+</item>
+<item historyLabel="system_stm32f4xx.c" index="4">
+<position info="not_deleted" x="8616" y="0"/>
+</item>
+<item historyLabel="system_stm32f4xx.c" index="4">
+<position info="not_deleted" x="8683" y="0"/>
+</item>
+<item historyLabel="system_stm32f4xx.c" index="4">
+<position info="not_deleted" x="8755" y="0"/>
+</item>
+<item historyLabel="system_stm32f4xx.c" index="4">
+<position info="not_deleted" x="8825" y="0"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="180" y="0"/>
+<position info="not_deleted" x="698" y="0"/>
 </item>
 <item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="562" y="0"/>
+<position info="not_deleted" x="717" y="0"/>
 </item>
-<item active="true" historyLabel="rotary.cpp" index="1">
-<position info="not_deleted" x="2710" y="0"/>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="745" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="775" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="2058" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="2070" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="4126" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3110" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="129" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="2058" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3907" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3240" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="198" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="2058" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3907" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3240" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="198" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="2058" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3907" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3240" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="198" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="2058" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3907" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3240" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="198" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="2058" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3907" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<position info="not_deleted" x="3240" y="0"/>
+</item>
+<item active="true" historyLabel="temp_sensors.cpp" index="2">
+<position info="not_deleted" x="198" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -463,50 +457,47 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f4xx.c" tooltip="Gewaechshaus/cmsis_boot/system_stm32f4xx.c">
+<persistable path="/Gewaechshaus/cmsis_boot/system_stm32f4xx.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_onewire.c" tooltip="Gewaechshaus/Libs/tm_stm32f4_onewire.c">
+<persistable path="/Gewaechshaus/Libs/tm_stm32f4_onewire.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="quadrature_encoder.h" tooltip="Gewaechshaus/src/quadrature_encoder.h">
+<persistable path="/Gewaechshaus/src/quadrature_encoder.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="quadrature_encoder.cpp" tooltip="Gewaechshaus/src/quadrature_encoder.cpp">
+<persistable path="/Gewaechshaus/src/quadrature_encoder.cpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="temp_sensors.cpp" tooltip="Gewaechshaus/src/temp_sensors.cpp">
+<persistable path="/Gewaechshaus/src/temp_sensors.cpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="temp_sensors.h" tooltip="Gewaechshaus/src/temp_sensors.h">
+<persistable path="/Gewaechshaus/src/temp_sensors.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_ds18b20.h" tooltip="Gewaechshaus/Libs/tm_stm32f4_ds18b20.h">
+<persistable path="/Gewaechshaus/Libs/tm_stm32f4_ds18b20.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_onewire.h" tooltip="Gewaechshaus/Libs/tm_stm32f4_onewire.h">
+<persistable path="/Gewaechshaus/Libs/tm_stm32f4_onewire.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f4xx.h" tooltip="Gewaechshaus/cmsis_boot/system_stm32f4xx.h">
+<persistable path="/Gewaechshaus/cmsis_boot/system_stm32f4xx.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_systick.h" tooltip="Gewaechshaus/Libs/stm32_ub_systick.h">
+<persistable path="/Gewaechshaus/Libs/stm32_ub_systick.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx.h" tooltip="Gewaechshaus/cmsis_boot/stm32f4xx.h">
+<persistable path="/Gewaechshaus/cmsis_boot/stm32f4xx.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_ds18b20.c" tooltip="Gewaechshaus/Libs/tm_stm32f4_ds18b20.c">
+<persistable path="/Gewaechshaus/Libs/tm_stm32f4_ds18b20.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" tooltip="Gewaechshaus/main.cpp">
 <persistable path="/Gewaechshaus/main.cpp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_exti.h" tooltip="Gewaechshaus/cmsis_lib/include/stm32f4xx_exti.h">
-<persistable path="/Gewaechshaus/cmsis_lib/include/stm32f4xx_exti.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_exti.c" tooltip="Gewaechshaus/cmsis_lib/source/stm32f4xx_exti.c">
-<persistable path="/Gewaechshaus/cmsis_lib/source/stm32f4xx_exti.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4_discovery.c" tooltip="Gewaechshaus/STM32F4-Discovery/stm32f4_discovery.c">
-<persistable path="/Gewaechshaus/STM32F4-Discovery/stm32f4_discovery.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4_discovery.h" tooltip="Gewaechshaus/STM32F4-Discovery/stm32f4_discovery.h">
-<persistable path="/Gewaechshaus/STM32F4-Discovery/stm32f4_discovery.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4_discovery_callbacks.c" tooltip="Gewaechshaus/stm32f4_discovery_callbacks.c">
-<persistable path="/Gewaechshaus/stm32f4_discovery_callbacks.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c">
-<persistable path="/Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_syscfg.h" tooltip="Gewaechshaus/cmsis_lib/include/stm32f4xx_syscfg.h">
-<persistable path="/Gewaechshaus/cmsis_lib/include/stm32f4xx_syscfg.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="rotary.h" tooltip="Gewaechshaus/src/rotary.h">
-<persistable path="/Gewaechshaus/src/rotary.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="rotary.cpp" tooltip="Gewaechshaus/src/rotary.cpp">
-<persistable path="/Gewaechshaus/src/rotary.cpp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_dma.c" tooltip="Gewaechshaus/cmsis_lib/source/stm32f4xx_dma.c">
-<persistable path="/Gewaechshaus/cmsis_lib/source/stm32f4xx_dma.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart.h" tooltip="Gewaechshaus/src/uart.h">
 <persistable path="/Gewaechshaus/src/uart.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_dma.h" tooltip="Gewaechshaus/cmsis_lib/include/stm32f4xx_dma.h">
-<persistable path="/Gewaechshaus/cmsis_lib/include/stm32f4xx_dma.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart.cpp" tooltip="Gewaechshaus/src/uart.cpp">
-<persistable path="/Gewaechshaus/src/uart.cpp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" tooltip="Gewaechshaus/main.cpp">
-<persistable path="/Gewaechshaus/main.cpp"/>
 </file>
 </mruList>
 </workbench>

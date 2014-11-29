@@ -79,3 +79,7 @@ AnalogDigitalConverter::AnalogDigitalConverter(void) {
 uint16_t AnalogDigitalConverter::getConvertedValue(void) {
 	return ADC_BUFF;
 }
+
+float AnalogDigitalConverter::getConvertedValueAsVoltage(void) {
+	return (3.3/65535)*ADC_BUFF;
+}
