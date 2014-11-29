@@ -26,11 +26,6 @@ uint8_t TM_OneWire_LastDiscrepancy;
 uint8_t TM_OneWire_LastFamilyDiscrepancy;
 uint8_t TM_OneWire_LastDeviceFlag;
 
-static void Delay(volatile int tick) {
-	while (tick--)
-		;
-}
-
 void TM_OneWire_Init(void) {
 	//TM_DELAY_Init();
 	UB_Systick_Init();
