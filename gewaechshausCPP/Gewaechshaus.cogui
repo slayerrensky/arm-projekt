@@ -16,33 +16,13 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
-<part id="2"/>
-<part id="3"/>
-<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" partName="main.cpp" path="D:/git/arm-projekt/gewaechshausCPP/main.cpp" title="main.cpp" tooltip="D:/git/arm-projekt/gewaechshausCPP/main.cpp" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" partName="main.cpp" path="D:/git/arm-projekt/gewaechshausCPP/main.cpp" title="main.cpp" tooltip="D:/git/arm-projekt/gewaechshausCPP/main.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/main.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="775" selectionTopPixel="330"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_ds18b20.h" partName="tm_stm32f4_ds18b20.h" path="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_ds18b20.h" title="tm_stm32f4_ds18b20.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_ds18b20.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/Libs/tm_stm32f4_ds18b20.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1230"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="temp_sensors.h" partName="temp_sensors.h" path="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.h" title="temp_sensors.h" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/temp_sensors.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="554" selectionTopPixel="0"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="temp_sensors.cpp" partName="temp_sensors.cpp" path="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.cpp" title="temp_sensors.cpp" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/temp_sensors.cpp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/src/temp_sensors.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="19" selectionOffset="534" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_onewire.c" partName="tm_stm32f4_onewire.c" path="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_onewire.c" title="tm_stm32f4_onewire.c" tooltip="D:/git/arm-projekt/gewaechshausCPP/src/lib/tm_stm32f4_onewire.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gewaechshaus/Libs/tm_stm32f4_onewire.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3240" selectionTopPixel="2023"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1173" selectionTopPixel="364"/>
 </editor>
 </editors>
 <views>
@@ -55,10 +35,13 @@
 <viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
 <expanded>
 <element path="/Gewaechshaus"/>
+<element path="/Gewaechshaus/cmsis_boot"/>
+<element path="/Gewaechshaus/Libs"/>
+<element path="/Gewaechshaus/src"/>
 <element path="/Gewaechshaus/STM32F4-Discovery"/>
 </expanded>
 <selection>
-<element path="/Gewaechshaus"/>
+<element path="/Gewaechshaus/cmsis_boot/stm32f4xx_conf.h"/>
 </selection>
 </viewState>
 </view>
@@ -90,7 +73,7 @@
 <viewState horizontalPosition="0" verticalPosition="0"/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
+<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.coocox.builder.perspective.CoBuilder">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.coocox.builder.ui.PerspectiveCoBuilder" id="org.coocox.builder.perspective.CoBuilder" label="CooCox CoBuilder"/>
 <alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
@@ -153,7 +136,7 @@
 </presentation>
 </folder>
 </info>
-<info part="org.coocox.builder.ui.exampleView" ratio="0.21944036" ratioLeft="298" ratioRight="1060" relationship="2" relative="org.eclipse.ui.internal.ViewStack@cd666f"/>
+<info part="org.coocox.builder.ui.exampleView" ratio="0.15610267" ratioLeft="298" ratioRight="1611" relationship="2" relative="org.eclipse.ui.internal.ViewStack@cd666f"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@b4818" ratio="0.8187856" ratioLeft="863" ratioRight="191" relationship="2" relative="org.coocox.builder.ui.exampleView">
 <folder activePageID="org.coocox.coassistant.view.CoAssistantView" appearance="2" expanded="2">
 <page content="org.coocox.component.ui.Help" label="Help"/>
@@ -221,8 +204,8 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
+<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <view id="org.coocox.builder.ui.views.ProjectView"/>
@@ -294,161 +277,163 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/main.cpp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/temp_sensors.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/temp_sensors.cpp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/Libs/tm_stm32f4_onewire.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/cmsis_boot/system_stm32f4xx.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/main.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/Libs/tm_stm32f4_onewire.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/adc.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Gewaechshaus/src/adc.h"/>
 </editors>
-<item historyLabel="temp_sensors.cpp" index="2">
-<position info="not_deleted" x="1475" y="64"/>
-</item>
-<item historyLabel="temp_sensors.h" index="1">
-<position info="not_deleted" x="589" y="0"/>
-</item>
-<item historyLabel="temp_sensors.cpp" index="2">
-<position info="not_deleted" x="1475" y="64"/>
-</item>
-<item historyLabel="temp_sensors.h" index="1">
-<position info="not_deleted" x="503" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="971" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="326" y="16"/>
-</item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
-<position/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="1794" y="0"/>
-</item>
-<item historyLabel="temp_sensors.cpp" index="2">
-<position info="not_deleted" x="1014" y="54"/>
-</item>
-<item historyLabel="temp_sensors.cpp" index="2">
-<position info="not_deleted" x="1312" y="59"/>
-</item>
-<item historyLabel="temp_sensors.h" index="1">
-<position info="not_deleted" x="554" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="775" y="34"/>
-</item>
-<item historyLabel="temp_sensors.cpp" index="2">
-<position info="not_deleted" x="1388" y="0"/>
-</item>
-<item historyLabel="temp_sensors.h" index="1">
-<position info="not_deleted" x="554" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="775" y="34"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="585" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="680" y="0"/>
-</item>
-<item historyLabel="system_stm32f4xx.c" index="4">
-<position info="not_deleted" x="8616" y="0"/>
-</item>
-<item historyLabel="system_stm32f4xx.c" index="4">
-<position info="not_deleted" x="8683" y="0"/>
-</item>
-<item historyLabel="system_stm32f4xx.c" index="4">
-<position info="not_deleted" x="8755" y="0"/>
-</item>
-<item historyLabel="system_stm32f4xx.c" index="4">
-<position info="not_deleted" x="8825" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="698" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="717" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="745" y="0"/>
-</item>
-<item historyLabel="main.cpp" index="0">
-<position info="not_deleted" x="775" y="0"/>
-</item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
-<position info="not_deleted" x="2058" y="0"/>
-</item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
-<position info="not_deleted" x="2070" y="0"/>
-</item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="4126" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3110" y="0"/>
 </item>
-<item historyLabel="temp_sensors.cpp" index="2">
+<item historyLabel="temp_sensors.cpp" index="0">
 <position info="not_deleted" x="129" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="2058" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3907" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3240" y="0"/>
 </item>
-<item historyLabel="temp_sensors.cpp" index="2">
+<item historyLabel="temp_sensors.cpp" index="0">
 <position info="not_deleted" x="198" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="2058" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3907" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3240" y="0"/>
 </item>
-<item historyLabel="temp_sensors.cpp" index="2">
+<item historyLabel="temp_sensors.cpp" index="0">
 <position info="not_deleted" x="198" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="2058" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3907" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3240" y="0"/>
 </item>
-<item historyLabel="temp_sensors.cpp" index="2">
+<item historyLabel="temp_sensors.cpp" index="0">
 <position info="not_deleted" x="198" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="2058" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3907" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3240" y="0"/>
 </item>
-<item historyLabel="temp_sensors.cpp" index="2">
+<item historyLabel="temp_sensors.cpp" index="0">
 <position info="not_deleted" x="198" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="2058" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3907" y="0"/>
 </item>
-<item historyLabel="tm_stm32f4_onewire.c" index="3">
+<item historyLabel="tm_stm32f4_onewire.c" index="1">
 <position info="not_deleted" x="3240" y="0"/>
 </item>
-<item active="true" historyLabel="temp_sensors.cpp" index="2">
-<position info="not_deleted" x="198" y="0"/>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="534" y="19"/>
+</item>
+<item historyLabel="main.cpp" index="2">
+<position info="not_deleted" x="1207" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="534" y="19"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="192" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="127" y="0"/>
+</item>
+<item historyLabel="startup_stm32f4xx.c" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="2">
+<position info="not_deleted" x="563" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="129" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="4">
+<position info="not_deleted" x="2058" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="4">
+<position info="not_deleted" x="3907" y="0"/>
+</item>
+<item historyLabel="tm_stm32f4_onewire.c" index="4">
+<position info="not_deleted" x="3110" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="129" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="175" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="333" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="365" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="453" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="532" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="333" y="0"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="734" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="2">
+<position info="not_deleted" x="1209" y="1"/>
+</item>
+<item historyLabel="temp_sensors.cpp" index="0">
+<position info="not_deleted" x="682" y="1"/>
+</item>
+<item historyLabel="main.cpp" index="2">
+<position info="not_deleted" x="1198" y="0"/>
+</item>
+<item historyLabel="adc.cpp" index="5">
+<position/>
+</item>
+<item historyLabel="adc.h" index="6">
+<position info="not_deleted" x="340" y="0"/>
+</item>
+<item historyLabel="adc.cpp" index="5">
+<position/>
+</item>
+<item historyLabel="main.cpp" index="2">
+<position info="not_deleted" x="1192" y="0"/>
+</item>
+<item historyLabel="adc.cpp" index="5">
+<position info="not_deleted" x="3226" y="0"/>
+</item>
+<item active="true" historyLabel="main.cpp" index="2">
+<position info="not_deleted" x="1192" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -457,6 +442,15 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc.cpp" tooltip="Gewaechshaus/src/adc.cpp">
+<persistable path="/Gewaechshaus/src/adc.cpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc.h" tooltip="Gewaechshaus/src/adc.h">
+<persistable path="/Gewaechshaus/src/adc.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c">
+<persistable path="/Gewaechshaus/cmsis_boot/startup/startup_stm32f4xx.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f4xx.c" tooltip="Gewaechshaus/cmsis_boot/system_stm32f4xx.c">
 <persistable path="/Gewaechshaus/cmsis_boot/system_stm32f4xx.c"/>
 </file>
@@ -492,12 +486,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tm_stm32f4_ds18b20.c" tooltip="Gewaechshaus/Libs/tm_stm32f4_ds18b20.c">
 <persistable path="/Gewaechshaus/Libs/tm_stm32f4_ds18b20.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" tooltip="Gewaechshaus/main.cpp">
-<persistable path="/Gewaechshaus/main.cpp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="uart.h" tooltip="Gewaechshaus/src/uart.h">
-<persistable path="/Gewaechshaus/src/uart.h"/>
 </file>
 </mruList>
 </workbench>
