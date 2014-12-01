@@ -109,18 +109,20 @@
     <File name="STM32F4-Discovery/stm32f4_discovery.h" path="STM32F4-Discovery/stm32f4_discovery.h" type="1"/>
     <File name="src/temp_sensors.h" path="src/temp_sensors.h" type="1"/>
     <File name="cmsis_boot/stm32f4xx.h" path="cmsis_boot/stm32f4xx.h" type="1"/>
-    <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
+    <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis_lib/source/stm32f4xx_spi.c" path="cmsis_lib/source/stm32f4xx_spi.c" type="1"/>
     <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
     <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
     <File name="Libs/stm32_ub_systick.c" path="src/lib/stm32_ub_systick.c" type="1"/>
     <File name="src/led.h" path="src/led.h" type="1"/>
+    <File name="src/stepper.cpp" path="src/stepper.cpp" type="1"/>
     <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_adc.c" path="cmsis_lib/source/stm32f4xx_adc.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_i2c.c" path="cmsis_lib/source/stm32f4xx_i2c.c" type="1"/>
     <File name="cmsis_lib/source" path="" type="2"/>
+    <File name="src/stepper.h" path="src/stepper.h" type="1"/>
     <File name="STM32F4-Discovery/stm32f4_discovery_lis302dl.h" path="STM32F4-Discovery/stm32f4_discovery_lis302dl.h" type="1"/>
     <File name="Libs/tm_stm32f4_onewire.c" path="src/lib/tm_stm32f4_onewire.c" type="1"/>
     <File name="Libs/stm32_ub_systick.h" path="src/lib/stm32_ub_systick.h" type="1"/>
@@ -142,8 +144,8 @@
     <File name="src/quadrature_encoder.h" path="src/quadrature_encoder.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_adc.h" path="cmsis_lib/include/stm32f4xx_adc.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_exti.h" path="cmsis_lib/include/stm32f4xx_exti.h" type="1"/>
-    <File name="Libs/tm_stm32f4_ds18b20.c" path="src/lib/tm_stm32f4_ds18b20.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_exti.c" path="cmsis_lib/source/stm32f4xx_exti.c" type="1"/>
+    <File name="Libs/tm_stm32f4_ds18b20.c" path="src/lib/tm_stm32f4_ds18b20.c" type="1"/>
     <File name="cmsis_boot/system_stm32f4xx.c" path="cmsis_boot/system_stm32f4xx.c" type="1"/>
     <File name="STM32F4-Discovery/libPDMFilter_GCC.a" path="STM32F4-Discovery/libPDMFilter_GCC.a" type="1"/>
     <File name="src/adc.cpp" path="src/adc.cpp" type="1"/>

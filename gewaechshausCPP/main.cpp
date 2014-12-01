@@ -7,6 +7,7 @@
 #include "quadrature_encoder.h"
 #include "adc.h"
 #include "temp_sensors.h"
+#include "stepper.h"
 
 extern "C" {
 #include "tm_stm32f4_onewire.h"
@@ -30,12 +31,15 @@ int main(void) {
 	QuadratureEncoder rotary;
 	AnalogDigitalConverter adc;
 	TemperaturSensoren tempSensors;
+	Stepper step;
 
 	com3.EnableSingelton();
 
 	sprintf(buffer, "Es wurden %d Temperatursensoren gefunden.\n",
 			tempSensors.getAnzahlGefunderSensoren());
 	com3.uartSendString(buffer);
+
+	step.Left(40,20);
 
 	while (1) {
 		UB_Systick_Pause_ms(500);
