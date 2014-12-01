@@ -2,6 +2,8 @@
  * Owner: René Galow and Dennis Rump
  *
  */
+#ifndef UART_H_
+#define UART_H__
 #include "stm32f4xx.h"
 #include "stm32f4xx_dma.h"
 
@@ -38,4 +40,4 @@ protected:
 };
 
 extern Usart *Usart3Instance;
-
+#endif
