@@ -18,7 +18,9 @@
 #define DIRECTION_RIGHT 0
 
 Stepper *StepperInstance;
-const uint8_t steps[4][4] = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+//                               A0,A1,B0,B1
+const uint8_t steps[2][8][4] = {{{1, 0, 1, 0}, {0, 0, 1, 0}, {0, 1, 1, 0}, {0, 1, 0, 0},{0, 1, 0, 1}, {0, 0, 0, 1},{1, 0, 0, 1},{1, 0, 0, 0}},
+								{{1, 0, 1, 0}, {1, 0, 0, 0}, {1, 0, 0, 1}, {0, 0, 0, 1}, {0, 1, 0, 1},{0, 1, 0, 0}, {0, 1, 1, 0},{0, 0, 1, 0}}} ;
 int currentStep = 0;
 int stepperEnd = 0;
 int direction = DIRECTION_LEFT;
@@ -42,8 +44,9 @@ void Stepper::Init(void)
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOD, &GPIO_InitStructure);
+	GPIO_Init(GPIOE, &GPIO_InitStructure);
 
+	GPIO_WriteBit(GPIOE, GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10, Bit_RESET);
 }
 
 /*
@@ -51,10 +54,15 @@ void Stepper::Init(void)
  */
 void Stepper::Left(int stepps,int time)
 {
-	stepperEnd = stepps;
-	direction = DIRECTION_LEFT;
-	InitTim2(40000, 500);
+	if (StepperStatus == STEPPER_USABLE)
+	{
+		StepperStatus = STEPPER_BUSSY;
+		stepperEnd = stepps;
+		direction = DIRECTION_LEFT;
 
+		// FRQ = 84MHz / (Prescaler+1) / (Periode+1)
+		InitTim2(84-1, 1000 - 1); //10HZ
+	}
 }
 
 /*
@@ -62,20 +70,31 @@ void Stepper::Left(int stepps,int time)
  */
 void Stepper::Right(int stepps,int time)
 {
-	stepperEnd = stepps;
-	direction = DIRECTION_RIGHT;
-	InitTim2(40000, 500);
+	if (StepperStatus == STEPPER_USABLE)
+	{
+		StepperStatus = STEPPER_BUSSY;
+		stepperEnd = stepps;
+		direction = DIRECTION_RIGHT;
+		InitTim2(84, 1000 - 1); //10HZ
+	}
 
+}
+
+void Stepper::Leerlauf()
+{
+	currentStep = 0;
+	StepperStatus = STEPPER_USABLE;
+	GPIO_ResetBits(GPIOE, GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 );
 }
 
 void Stepper::RunStep()
 {
 	uint8_t j;
 	for (j = 0; j < 4; j++) {
-		if (steps[currentStep%4][j] == 0) {
-			GPIO_ResetBits(GPIOD, 1 << (j+8) );
+		if (steps[direction][currentStep%8][j] == 0) {
+			GPIO_ResetBits(GPIOE, 1 << (j+7) );
 		} else {
-			GPIO_SetBits(GPIOD, 1 << (j+8) );
+			GPIO_SetBits(GPIOE, 1 << (j+7) );
 		}
 	}
 	currentStep++;
@@ -88,6 +107,13 @@ void Stepper::EnableSingelton(void)
 
 void Stepper::InitTim2(int prescaler, int period)
 {
+	NVIC_InitTypeDef nvicStructure;
+	nvicStructure.NVIC_IRQChannel = TIM2_IRQn;
+	nvicStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	nvicStructure.NVIC_IRQChannelSubPriority = 1;
+	nvicStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&nvicStructure);
+
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
 	TIM_TimeBaseInitTypeDef timerInitStructure;
@@ -98,12 +124,8 @@ void Stepper::InitTim2(int prescaler, int period)
 	timerInitStructure.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(TIM2, &timerInitStructure);
 
-	NVIC_InitTypeDef nvicStructure;
-	nvicStructure.NVIC_IRQChannel = TIM2_IRQn;
-	nvicStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	nvicStructure.NVIC_IRQChannelSubPriority = 1;
-	nvicStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&nvicStructure);
+	/* TIM IT enable */
+	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 
 	TIM_Cmd(TIM2, ENABLE);
 }
@@ -122,7 +144,9 @@ extern "C" void TIM2_IRQHandler()
          }
          else
          {
+        	 TIM_ITConfig(TIM2, TIM_IT_Update, DISABLE);
         	 TIM_Cmd(TIM2, DISABLE);
+        	 StepperInstance->Leerlauf();
          }
      }
  }

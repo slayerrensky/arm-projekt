@@ -32,6 +32,7 @@ int main(void) {
 	AnalogDigitalConverter adc;
 	TemperaturSensoren tempSensors;
 	Stepper step;
+	int TimerCount;
 
 	com3.EnableSingelton();
 
@@ -39,22 +40,33 @@ int main(void) {
 			tempSensors.getAnzahlGefunderSensoren());
 	com3.uartSendString(buffer);
 
-	step.Left(40,20);
+
 
 	while (1) {
 		UB_Systick_Pause_ms(500);
 		tempSensors.startTempMeasurementAllSensors();
 		OutputString = com3.ReadBuffer();
+
+
 		if (OutputString != NULL) {
 			com3.SendViaDma(OutputString, strlen(OutputString));
 			free(OutputString);
 		}
 		//if (rotary.isRotDiff()) {
-		sprintf(buffer, "RotDiff: %4d ADC Value: %5d (%1.3fV) Temp0: %3.2f C\n",
-				rotary.getRotaryDiff(), adc.getConvertedValue(),
+		TimerCount = rotary.getRotaryDiff();
+		sprintf(buffer, "RotDiff: %4d ADC Value: %5d (%1.3fV) Temp0: %3.2f C\r\n",
+				TimerCount, adc.getConvertedValue(),
 				adc.getConvertedValueAsVoltage(),
 				tempSensors.getTempWertFromSensor(0));
 		com3.SendViaDma(buffer, strlen(buffer));
+		if (TimerCount > 0 )
+			step.Left(TimerCount,20);
+		else if (TimerCount < 0 )
+		{
+			step.Right(TimerCount,20);
+
+		}
+
 		//}
 	}
 }
