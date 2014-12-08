@@ -9,8 +9,7 @@
 
 #define FAIL -1;
 #define SUCSESS 0;
-
-
+#define KOMMANDO_BUFFER 512
 
 class Usart {
 
@@ -24,8 +23,15 @@ public:
 	int BufferOut(char *pByte);
 	int BufferIn(char byte);
 	char* ReadBuffer(void);
+	int ReadBuffer(char *p);
 	void SendViaDma(char *startBuf, int sizeofBytes);
 	void EnableSingelton(void);
+
+	void SendMessage(char *massage);
+	int IsCommandoAvalible();
+	void ProzessCommando();
+	char tmpBuffer[KOMMANDO_BUFFER];
+
 
 protected:
 	char *buffer;
@@ -36,6 +42,11 @@ protected:
 	DMA_InitTypeDef DMA_InitStruct;
 	void buffer_init(void);
 	int SendFirst;
+
+	void CommandoProzess(char *commando);
+	char *KommandoBuffer;
+	int currentKommandoChar;
+	int KommandoTerminator;
 
 };
 

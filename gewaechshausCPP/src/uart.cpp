@@ -1,13 +1,18 @@
-#include "uart.h"
 #include "stm32f4xx_usart.h"
 #include <stdio.h>
 #include "stm32f4xx.h"
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
 #include "misc.h"
-
 #include <stdlib.h>
 #include "string.h"
+
+#include "uart.h"
+#include "stepper.h"
+#include "StaticCommandos.h"
+#include "ampermeter.h"
+#include "adc.h"
+
 
 
 Usart *Usart3Instance;
@@ -25,6 +30,9 @@ Usart::Usart(int buffersize){
 	Usart3Instance = this;
 	this->usart3InitDMA();
 	this->usart3Init();
+
+	KommandoBuffer = (char*) malloc(sizeof(char)*KOMMANDO_BUFFER);
+	currentKommandoChar = 0;
 
 }
 
@@ -86,6 +94,25 @@ char* Usart::ReadBuffer(void)
 }
 
 /*
+ * Ließt den Input Buffer aus
+ * Note: Bitte den Speicher freigeben wenn der String nicht mehr benötigt wird.
+ * Return: Zeiger auf *char
+ */
+int Usart::ReadBuffer(char *p)
+{
+	int count = 0;
+
+	while(BufferOut(p + count) == 0)
+	{
+		count++;
+	}
+	if (count <= 0 )
+		return 0;
+	p[count] = 0;
+		return count;
+}
+
+/*
  * Init DMA Initialisieren
  * DMA wird so initialisiert das er Daten über den Uart senden kann.
  */
@@ -130,9 +157,9 @@ void Usart::usart3InitDMA()
  */
 void Usart::SendViaDma(char *startBuf, int sizeofBytes)
 {
-	if (SendFirst)
+	if (Usart3Instance->SendFirst)
 	{
-		SendFirst = 0;
+		Usart3Instance->SendFirst = 0;
 	}
 	else
 	{
@@ -244,11 +271,110 @@ void Usart::uartSendString( char *ptr )
   }
 }
 
+void Usart::SendMessage(char *massage){
+	SendViaDma(massage, strlen(massage));
+}
+int Usart::IsCommandoAvalible(){
+	int oldcommando = currentKommandoChar;
+	int n; //Anzahl eingelesenener Zeichen
+	int i; //Forschleivenzählvariable
+	n = ReadBuffer(KommandoBuffer + currentKommandoChar);
+	currentKommandoChar += n;
+	for (i = oldcommando; i < currentKommandoChar;i++)
+	{
+		if (KommandoBuffer[i] == '\r')
+		{	//Befehl vollständig
+			KommandoTerminator = i;
+			return 1;
+		}
+		else
+		{
+			uartPutChar(KommandoBuffer[i]);
+		}
+	}
+
+	return 0;
+}
+
+void Usart::ProzessCommando(){
+	char* cmd = (char*) malloc(sizeof(char) * KommandoTerminator + 1);
+	KommandoBuffer[KommandoTerminator] = '\0';
+	strcpy(cmd, KommandoBuffer);
+	strcpy(KommandoBuffer, KommandoBuffer + KommandoTerminator+1);
+	currentKommandoChar -= KommandoTerminator+1;
+	KommandoTerminator = 0;
+	CommandoProzess(cmd);
+}
+
+/*
+ * Verarbeiten der Kommandos die vom Terminal kommen.
+ */
+void Usart::CommandoProzess(char *commando){
+	char delimiter[] = " ";
+	char *ptr;
+
+	ptr = strtok(commando, delimiter);
+
+	if (ptr != NULL)
+	{
+		if (strcmp(ptr,"left")==0)
+		{
+			ptr = strtok(NULL, delimiter);
+			if (strcmp(ptr,"-n")==0)
+			{
+				ptr = strtok(NULL, delimiter);
+				int n = atoi(ptr);
+				StepperInstance->Left(n,20);
+			}
+			else
+			uartSendString((char *)"\r\nUsage: left -n <int>");
+
+		}
+		else if (strcmp(commando,"right")==0)
+		{
+			ptr = strtok(NULL, delimiter);
+			if (strcmp(ptr,"-n")==0)
+			{
+				ptr = strtok(NULL, delimiter);
+				int n = atoi(ptr);
+				StepperInstance->Right(n,20);
+			}
+			else
+			uartSendString((char *)"\r\nUsage: right -n <int>");
+
+		}
+		else if (strcmp(commando,"current")==0)
+		{
+			sprintf(tmpBuffer, "\r\nCurrent: %1.3fA",AmpermeterInstance->getCurrent());
+			uartSendString(tmpBuffer);
+		}
+		else if (strcmp(commando,"voltage")==0)
+		{
+			sprintf(tmpBuffer, "\r\nCurrent: %1.3fV",AnalogDigitalConverterInstance->getConvertedValueAsVoltage(1));
+			uartSendString(tmpBuffer);
+		}
+		else
+		uartSendString(MessageHelp);
+
+	}
+	uartSendString((char *)"\r\n");
+}
+
+/*
+ * Singelton Zeiger schreiben
+ */
 void Usart::EnableSingelton(void)
 {
 	Usart3Instance = this;
 }
 
+/////////////////////////////////////////
+// Begin Interrupt Funktionen
+//////////////////////////////////////////
+
+/*
+ * DMA1- Interrupt
+ */
 extern "C" { void DMA1_Stream3_IRQHandler(void)
 {
   /* Test on DMA Stream Transfer Complete interrupt */
