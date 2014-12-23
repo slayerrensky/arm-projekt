@@ -7,27 +7,28 @@
 #include <stdlib.h>
 #include "string.h"
 
-#include "uart.h"
+#include "terminal.h"
 #include "stepper.h"
-#include "StaticCommandos.h"
+#include "static_commandos.h"
 #include "ampermeter.h"
 #include "adc.h"
+#include "fassade.h"
 
 
 
-Usart *Usart3Instance;
+Terminal *TerminalInstance;
 
-Usart::Usart(void){
-	Usart(128);
+Terminal::Terminal(void){
+	Terminal(128);
 }
 
-Usart::Usart(int buffersize){
+Terminal::Terminal(int buffersize){
 
 	this->bufferSize = buffersize;
 	buffer_init();
 	SendFirst = 1;
 	this->OutputString = (char*) malloc(sizeof(char)*this->bufferSize);
-	Usart3Instance = this;
+	TerminalInstance = this;
 	this->usart3InitDMA();
 	this->usart3Init();
 
@@ -36,14 +37,14 @@ Usart::Usart(int buffersize){
 
 }
 
-void Usart::buffer_init(void)
+void Terminal::buffer_init(void)
 {
 	this->read = 0;
 	this->write = 0;
 	this->buffer = (char*) malloc(sizeof(char)*this->bufferSize);
 }
 
-int Usart::BufferIn(char byte)
+int Terminal::BufferIn(char byte)
 {
   //if (this->buffer.this->write >= BUFFER_SIZE)
   //  this->buffer.this->write = 0; // erhöht sicherheit
@@ -60,7 +61,7 @@ int Usart::BufferIn(char byte)
 
 }
 
-int Usart::BufferOut(char *pByte)
+int Terminal::BufferOut(char *pByte)
 {
   if (this->read == this->write)
     return -1;
@@ -77,7 +78,7 @@ int Usart::BufferOut(char *pByte)
  * Note: Bitte den Speicher freigeben wenn der String nicht mehr benötigt wird.
  * Return: Zeiger auf *char
  */
-char* Usart::ReadBuffer(void)
+char* Terminal::ReadBuffer(void)
 {
 	int count = 0;
 	char *out;
@@ -98,7 +99,7 @@ char* Usart::ReadBuffer(void)
  * Note: Bitte den Speicher freigeben wenn der String nicht mehr benötigt wird.
  * Return: Zeiger auf *char
  */
-int Usart::ReadBuffer(char *p)
+int Terminal::ReadBuffer(char *p)
 {
 	int count = 0;
 
@@ -116,7 +117,7 @@ int Usart::ReadBuffer(char *p)
  * Init DMA Initialisieren
  * DMA wird so initialisiert das er Daten über den Uart senden kann.
  */
-void Usart::usart3InitDMA()
+void Terminal::usart3InitDMA()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
@@ -155,11 +156,11 @@ void Usart::usart3InitDMA()
  * DMA konfigurieren mit Startadresse der Daten und länge des Strings
  * DMA sendet dann die Daten via Uart
  */
-void Usart::SendViaDma(char *startBuf, int sizeofBytes)
+void Terminal::SendViaDma(char *startBuf, int sizeofBytes)
 {
-	if (Usart3Instance->SendFirst)
+	if (TerminalInstance->SendFirst)
 	{
-		Usart3Instance->SendFirst = 0;
+		TerminalInstance->SendFirst = 0;
 	}
 	else
 	{
@@ -187,7 +188,7 @@ void Usart::SendViaDma(char *startBuf, int sizeofBytes)
 /*
  * Uart 3 initialisieren
  */
-void Usart::usart3Init(void)
+void Terminal::usart3Init(void)
 {
   /* USARTx configured as follow:
         - BaudRate = 115200 baud
@@ -253,7 +254,7 @@ void Usart::usart3Init(void)
 /*
  * Ein einzelnes Zeichen senden
  */
-void Usart::uartPutChar(uint16_t char2send)
+void Terminal::uartPutChar(uint16_t char2send)
 {
 	while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
 	USART_SendData(USART3, char2send);
@@ -262,7 +263,7 @@ void Usart::uartPutChar(uint16_t char2send)
 /*
  * Einen kompletten String senden
  */
-void Usart::uartSendString( char *ptr )
+void Terminal::uartSendString( char *ptr )
 {
   // sende String (So lange bis \0 byte kommt)
   while (*ptr != 0) {
@@ -271,10 +272,10 @@ void Usart::uartSendString( char *ptr )
   }
 }
 
-void Usart::SendMessage(char *massage){
+void Terminal::SendMessage(char *massage){
 	SendViaDma(massage, strlen(massage));
 }
-int Usart::IsCommandoAvalible(){
+int Terminal::IsCommandoAvalible(){
 	int oldcommando = currentKommandoChar;
 	int n; //Anzahl eingelesenener Zeichen
 	int i; //Forschleivenzählvariable
@@ -296,7 +297,7 @@ int Usart::IsCommandoAvalible(){
 	return 0;
 }
 
-void Usart::ProzessCommando(){
+void Terminal::ProzessCommando(){
 	char* cmd = (char*) malloc(sizeof(char) * KommandoTerminator + 1);
 	KommandoBuffer[KommandoTerminator] = '\0';
 	strcpy(cmd, KommandoBuffer);
@@ -309,7 +310,7 @@ void Usart::ProzessCommando(){
 /*
  * Verarbeiten der Kommandos die vom Terminal kommen.
  */
-void Usart::CommandoProzess(char *commando){
+void Terminal::CommandoProzess(char *commando){
 	char delimiter[] = " ";
 	char *ptr;
 
@@ -350,8 +351,13 @@ void Usart::CommandoProzess(char *commando){
 		}
 		else if (strcmp(commando,"voltage")==0)
 		{
-			sprintf(tmpBuffer, "\r\nCurrent: %1.3fV",AnalogDigitalConverterInstance->getConvertedValueAsVoltage(1));
+			sprintf(tmpBuffer, "\r\nVoltage: %1.3fV",AnalogDigitalConverterInstance->getConvertedValueAsVoltage(1));
 			uartSendString(tmpBuffer);
+		}
+		else if (strcmp(commando,"window")==0)
+		{
+			FassadeInstance->Window2Position();
+
 		}
 		else
 		uartSendString(MessageHelp);
@@ -363,9 +369,9 @@ void Usart::CommandoProzess(char *commando){
 /*
  * Singelton Zeiger schreiben
  */
-void Usart::EnableSingelton(void)
+void Terminal::EnableSingelton(void)
 {
-	Usart3Instance = this;
+	TerminalInstance = this;
 }
 
 /////////////////////////////////////////
@@ -395,6 +401,6 @@ extern "C" { void USART3_IRQHandler(void) {
 		// wenn ein Byte im Empfangspuffer steht
 		wert=USART_ReceiveData(USART3);
 		// Byte speichern
-		Usart3Instance->BufferIn(wert);
+		TerminalInstance->BufferIn(wert);
 	}
 }}

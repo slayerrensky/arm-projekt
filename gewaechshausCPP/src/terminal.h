@@ -2,8 +2,8 @@
  * Owner: René Galow and Dennis Rump
  *
  */
-#ifndef UART_H_
-#define UART_H__
+#ifndef TERMINAL_H_
+#define TERMINAL_H__
 #include "stm32f4xx.h"
 #include "stm32f4xx_dma.h"
 
@@ -11,11 +11,11 @@
 #define SUCSESS 0;
 #define KOMMANDO_BUFFER 512
 
-class Usart {
+class Terminal {
 
 public:
-	Usart();
-	Usart(int buffersize);
+	Terminal();
+	Terminal(int buffersize);
 	void usart3Init(void);
 	void usart3InitDMA();
 	void uartPutChar(uint16_t char2send);
@@ -50,5 +50,5 @@ protected:
 
 };
 
-extern Usart *Usart3Instance;
+extern Terminal *TerminalInstance;
 #endif

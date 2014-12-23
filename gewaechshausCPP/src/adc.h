@@ -9,11 +9,13 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_dma.h"
 
+#define ADC_CHANNEL_CURRENT 0
+#define ADC_CHANNEL_VOLTAGE 1
 
 class AnalogDigitalConverter {
 public:
 	AnalogDigitalConverter(void);
-	uint16_t getConvertedValue(void);
+	uint16_t getConvertedValue(int channel);
 	float getConvertedValueAsVoltage(int channel);
 private:
 	uint16_t convertedValue;

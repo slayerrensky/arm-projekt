@@ -1,6 +1,9 @@
 #include "temp_sensors.h"
 
+TemperaturSensoren *TemperaturSensorenInstance;
+
 TemperaturSensoren::TemperaturSensoren(void) {
+	TemperaturSensorenInstance = this;
 	gefundeTempSensoren = 0;
 
 	TM_OneWire_Init();

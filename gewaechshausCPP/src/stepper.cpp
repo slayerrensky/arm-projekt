@@ -14,16 +14,12 @@
 #include "misc.h"
 #include <stdlib.h>
 
-#define DIRECTION_LEFT 1
-#define DIRECTION_RIGHT 0
+
 
 Stepper *StepperInstance;
 //                               A0,A1,B0,B1
 const uint8_t steps[2][8][4] = {{{1, 0, 1, 0}, {0, 0, 1, 0}, {0, 1, 1, 0}, {0, 1, 0, 0},{0, 1, 0, 1}, {0, 0, 0, 1},{1, 0, 0, 1},{1, 0, 0, 0}},
 								{{1, 0, 1, 0}, {1, 0, 0, 0}, {1, 0, 0, 1}, {0, 0, 0, 1}, {0, 1, 0, 1},{0, 1, 0, 0}, {0, 1, 1, 0},{0, 0, 1, 0}}} ;
-int currentStep = 0;
-int stepperEnd = 0;
-int direction = DIRECTION_LEFT;
 
 Stepper::Stepper(void){
 
@@ -33,6 +29,12 @@ Stepper::Stepper(void){
 
 void Stepper::Init(void)
 {
+	StepperInstance->StepperStatus = STEPPER_USABLE;
+	StepperInstance->currentStep = 0;
+	StepperInstance->stepperEnd = 0;
+	StepperInstance->direction = DIRECTION_LEFT;
+	StepperInstance->position = 0;
+
 	GPIO_InitTypeDef   GPIO_InitStructure;
 
 	/* Enable GPIOD clock */
@@ -54,14 +56,14 @@ void Stepper::Init(void)
  */
 void Stepper::Left(int stepps,int time)
 {
-	if (StepperStatus == STEPPER_USABLE)
+	if (StepperInstance->StepperStatus == STEPPER_USABLE)
 	{
-		StepperStatus = STEPPER_BUSSY;
-		stepperEnd = stepps;
-		direction = DIRECTION_LEFT;
+		StepperInstance->StepperStatus = STEPPER_BUSSY;
+		StepperInstance->stepperEnd = stepps;
+		StepperInstance->direction = DIRECTION_LEFT;
 
 		// FRQ = 84MHz / (Prescaler+1) / (Periode+1)
-		InitTim2(84-1, 1000 - 1); //10HZ
+		StepperInstance->InitTim2(84-1, 1000 - 1); //10HZ
 	}
 }
 
@@ -70,20 +72,33 @@ void Stepper::Left(int stepps,int time)
  */
 void Stepper::Right(int stepps,int time)
 {
-	if (StepperStatus == STEPPER_USABLE)
+	if (StepperInstance->StepperStatus == STEPPER_USABLE)
 	{
-		StepperStatus = STEPPER_BUSSY;
-		stepperEnd = stepps;
-		direction = DIRECTION_RIGHT;
-		InitTim2(84, 1000 - 1); //10HZ
+		StepperInstance->StepperStatus = STEPPER_BUSSY;
+		StepperInstance->stepperEnd = stepps;
+		StepperInstance->direction = DIRECTION_RIGHT;
+		StepperInstance->InitTim2(84, 1000 - 1); //10HZ
 	}
 
 }
 
+void Stepper::Go2Step(int g){
+	int n;
+	if (g < StepperInstance->position)
+	{
+		n = StepperInstance->position - g;
+		StepperInstance->Left(n,10);
+	} else if ( g > StepperInstance->position)
+	{
+		n = g - StepperInstance->position;
+		StepperInstance->Right(n,10);
+	}
+}
+
 void Stepper::Leerlauf()
 {
-	currentStep = 0;
-	StepperStatus = STEPPER_USABLE;
+	StepperInstance->currentStep = 0;
+	StepperInstance->StepperStatus = STEPPER_USABLE;
 	GPIO_ResetBits(GPIOE, GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 );
 }
 
@@ -91,13 +106,21 @@ void Stepper::RunStep()
 {
 	uint8_t j;
 	for (j = 0; j < 4; j++) {
-		if (steps[direction][currentStep%8][j] == 0) {
+		if (steps[StepperInstance->direction][StepperInstance->currentStep%8][j] == 0) {
 			GPIO_ResetBits(GPIOE, 1 << (j+7) );
 		} else {
 			GPIO_SetBits(GPIOE, 1 << (j+7) );
 		}
 	}
-	currentStep++;
+	if (StepperInstance->direction == DIRECTION_RIGHT)
+	{
+		StepperInstance->position++;
+	}
+	else
+	{
+		StepperInstance->position--;
+	}
+	StepperInstance->currentStep++;
 }
 
 void Stepper::EnableSingelton(void)
@@ -137,7 +160,7 @@ extern "C" void TIM2_IRQHandler()
  {
      if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
      {
-         if (currentStep < stepperEnd)
+         if (StepperInstance->currentStep < StepperInstance->stepperEnd)
          {
         	 TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
         	 StepperInstance->RunStep();

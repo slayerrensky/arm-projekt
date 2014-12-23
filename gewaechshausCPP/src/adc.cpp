@@ -80,10 +80,10 @@ AnalogDigitalConverter::AnalogDigitalConverter(void) {
 
 }
 
-uint16_t AnalogDigitalConverter::getConvertedValue(void) {
-	return ADC_BUFF[0];
+uint16_t AnalogDigitalConverter::getConvertedValue(int channel) {
+	return ADC_BUFF[channel];
 }
 
 float AnalogDigitalConverter::getConvertedValueAsVoltage(int channel) {
-	return (3.3/65535)*ADC_BUFF[channel];
+	return (3.3/4096)*ADC_BUFF[channel];
 }

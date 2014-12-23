@@ -5,6 +5,9 @@
 #include "stm32f4xx.h"
 #define STEPPER_USABLE 1
 #define STEPPER_BUSSY 0
+#define STEPPER_MAX_POSITION 10000
+#define DIRECTION_LEFT 1
+#define DIRECTION_RIGHT 0
 
 class Stepper {
 
@@ -17,7 +20,13 @@ public:
 	void Left(int stepps,int time);
 	void Leerlauf();
 	void InitTim2(int prescaler, int period);
-	int StepperStatus = STEPPER_USABLE;
+	void Go2Step(int g);
+
+	int StepperStatus;
+	int currentStep;
+	int stepperEnd;
+	int direction;
+	int position;
 
 };
 

@@ -27,4 +27,6 @@ private:
 	uint8_t sensorAdressen[MAX_EXPECTED_SENSORS][8];
 	float sensorTemperaturen[MAX_EXPECTED_SENSORS];
 };
+
+extern TemperaturSensoren *TemperaturSensorenInstance;
 #endif

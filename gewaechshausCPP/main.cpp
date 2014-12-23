@@ -8,7 +8,7 @@
 #include "temp_sensors.h"
 #include "stepper.h"
 #include "ampermeter.h"
-#include "fassade.h"
+#include "terminal.h"
 
 extern "C" {
 #include "tm_stm32f4_onewire.h"
@@ -18,7 +18,7 @@ extern "C" {
 
 #define TIME_DELAY              5000000
 #define EXPECTING_SENSORS    2
-char buffer[129] = "Hello World, this is a DMA test.\n\r";
+//char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
 
 LED LPC1768_LED;
@@ -28,18 +28,16 @@ int main(void) {
 	/* Initialize system */
 	SystemInit();
 
-	Usart terminal(128);
+	Terminal terminal(128);
 	terminal.EnableSingelton();
 	QuadratureEncoder rotary;
 	AnalogDigitalConverter adc;
 	TemperaturSensoren tempSensors;
 	Stepper step;
 	Ampermeter current;
-	int TimerCount;
+//	int TimerCount;
 
-	sprintf(buffer, "Es wurden %d Temperatursensoren gefunden.\r\n",
-			tempSensors.getAnzahlGefunderSensoren());
-	terminal.SendMessage(buffer);
+
 
 	while (1) {
 		//UB_Systick_Pause_ms(500);
@@ -54,12 +52,12 @@ int main(void) {
 
 		//if (rotary.isRotDiff()) {
 //		TimerCount = rotary.getRotaryDiff();
-		sprintf(buffer, "RotDiff: %4d, ADC Value: %1.3fV, Current: %2.4fA, Temp0: %3.2f C\r\n",
-				TimerCount,
-				adc.getConvertedValueAsVoltage(1),
-				current.getCurrent(),
-				tempSensors.getTempWertFromSensor(0));
-		terminal.SendMessage(buffer);
+//		sprintf(buffer, "RotDiff: %4d, ADC Value: %1.3fV, Current: %2.4fA, Temp0: %3.2f C\r\n",
+//				TimerCount,
+//				adc.getConvertedValueAsVoltage(1),
+//				current.getCurrent(),
+//				tempSensors.getTempWertFromSensor(0));
+//		terminal.SendMessage(buffer);
 //		if (TimerCount > 0 )
 //			step.Left(TimerCount,20);
 //		else if (TimerCount < 0 )
