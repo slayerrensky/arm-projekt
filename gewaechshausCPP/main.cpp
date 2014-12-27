@@ -3,11 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "led.h"
-#include "uart.h"
 #include "quadrature_encoder.h"
 #include "adc.h"
 #include "temp_sensors.h"
 #include "stepper.h"
+#include "ampermeter.h"
+#include "terminal.h"
 
 extern "C" {
 #include "tm_stm32f4_onewire.h"
@@ -17,7 +18,7 @@ extern "C" {
 
 #define TIME_DELAY              5000000
 #define EXPECTING_SENSORS    2
-char buffer[129] = "Hello World, this is a DMA test.\n\r";
+//char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
 
 LED LPC1768_LED;
@@ -27,45 +28,43 @@ int main(void) {
 	/* Initialize system */
 	SystemInit();
 
-	Usart com3(128);
+	Terminal terminal(128);
+	terminal.EnableSingelton();
 	QuadratureEncoder rotary;
 	AnalogDigitalConverter adc;
 	TemperaturSensoren tempSensors;
 	Stepper step;
-	int TimerCount;
-
-	com3.EnableSingelton();
-
-	sprintf(buffer, "Es wurden %d Temperatursensoren gefunden.\n",
-			tempSensors.getAnzahlGefunderSensoren());
-	com3.uartSendString(buffer);
+	Ampermeter current;
+//	int TimerCount;
 
 
 
 	while (1) {
-		UB_Systick_Pause_ms(500);
-		tempSensors.startTempMeasurementAllSensors();
-		OutputString = com3.ReadBuffer();
-
-
-		if (OutputString != NULL) {
-			com3.SendViaDma(OutputString, strlen(OutputString));
-			free(OutputString);
-		}
-		//if (rotary.isRotDiff()) {
-		TimerCount = rotary.getRotaryDiff();
-		sprintf(buffer, "RotDiff: %4d ADC Value: %5d (%1.3fV) Temp0: %3.2f C\r\n",
-				TimerCount, adc.getConvertedValue(),
-				adc.getConvertedValueAsVoltage(),
-				tempSensors.getTempWertFromSensor(0));
-		com3.SendViaDma(buffer, strlen(buffer));
-		if (TimerCount > 0 )
-			step.Left(TimerCount,20);
-		else if (TimerCount < 0 )
+		//UB_Systick_Pause_ms(500);
+		//tempSensors.startTempMeasurementAllSensors();
+		//OutputString = com3.ReadBuffer();
+		if (terminal.IsCommandoAvalible())
 		{
-			step.Right(TimerCount,20);
-
+			terminal.ProzessCommando();
 		}
+
+
+
+		//if (rotary.isRotDiff()) {
+//		TimerCount = rotary.getRotaryDiff();
+//		sprintf(buffer, "RotDiff: %4d, ADC Value: %1.3fV, Current: %2.4fA, Temp0: %3.2f C\r\n",
+//				TimerCount,
+//				adc.getConvertedValueAsVoltage(1),
+//				current.getCurrent(),
+//				tempSensors.getTempWertFromSensor(0));
+//		terminal.SendMessage(buffer);
+//		if (TimerCount > 0 )
+//			step.Left(TimerCount,20);
+//		else if (TimerCount < 0 )
+//		{
+//			step.Right(TimerCount,20);
+//
+//		}
 
 		//}
 	}

@@ -1,21 +1,15 @@
-#ifndef ADC_H_
-#define ADC_H_
+#define AMPERMETER_H_
 
-#include "stm32f4xx_tim.h"
-#include "stdint.h"
-#include "stm32f4xx_gpio.h"
-#include "stm32f4xx_rcc.h"
-#include "stm32f4xx_adc.h"
+#ifdef AMPERMETER_H_
+
 #include "stm32f4xx.h"
-#include "stm32f4xx_dma.h"
-
 
 class Ampermeter {
 public:
-	AnalogDigitalConverter(void);
-	uint16_t getConvertedValue(void);
-	float getConvertedValueAsVoltage(void);
-private:
-	uint16_t convertedValue;
+	Ampermeter();
+	float getCurrent(void);
 };
+
+extern Ampermeter *AmpermeterInstance;
+
 #endif

@@ -2,21 +2,20 @@
  * Owner: René Galow and Dennis Rump
  *
  */
-#ifndef UART_H_
-#define UART_H__
+#ifndef TERMINAL_H_
+#define TERMINAL_H__
 #include "stm32f4xx.h"
 #include "stm32f4xx_dma.h"
 
 #define FAIL -1;
 #define SUCSESS 0;
+#define KOMMANDO_BUFFER 512
 
-
-
-class Usart {
+class Terminal {
 
 public:
-	Usart();
-	Usart(int buffersize);
+	Terminal();
+	Terminal(int buffersize);
 	void usart3Init(void);
 	void usart3InitDMA();
 	void uartPutChar(uint16_t char2send);
@@ -24,8 +23,15 @@ public:
 	int BufferOut(char *pByte);
 	int BufferIn(char byte);
 	char* ReadBuffer(void);
+	int ReadBuffer(char *p);
 	void SendViaDma(char *startBuf, int sizeofBytes);
 	void EnableSingelton(void);
+
+	void SendMessage(char *massage);
+	int IsCommandoAvalible();
+	void ProzessCommando();
+	char tmpBuffer[KOMMANDO_BUFFER];
+
 
 protected:
 	char *buffer;
@@ -37,7 +43,12 @@ protected:
 	void buffer_init(void);
 	int SendFirst;
 
+	void CommandoProzess(char *commando);
+	char *KommandoBuffer;
+	int currentKommandoChar;
+	int KommandoTerminator;
+
 };
 
-extern Usart *Usart3Instance;
+extern Terminal *TerminalInstance;
 #endif
