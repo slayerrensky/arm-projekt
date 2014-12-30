@@ -1,9 +1,9 @@
-class LED {
+class Led {
 
 public:
 	unsigned long LED_PINS;
-	LED(void);
-	~LED(void);
+	Led(void);
+	~Led(void);
 	void On();
 	void Off();
 };

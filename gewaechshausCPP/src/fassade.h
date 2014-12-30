@@ -11,7 +11,7 @@ class Fassade {
 public:
 	Fassade();
 	void InitGewaechshaus(void);
-	void Window2Position(void);
+	void Window2Position(int inProzent);
 };
 
 extern Fassade *FassadeInstance;

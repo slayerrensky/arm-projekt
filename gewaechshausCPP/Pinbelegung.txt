@@ -6,7 +6,7 @@ Pinbelegung für das STM32F4 Dicovery board
 			PC1 * * PC0								PH0 * * PH1
 			PC3 * * PC2							   PC14 * * PC15
 			PA1 * * PA0							    PE6 * * PC13
-			PA3 * * PA2								PE4 * * PE5
+	TX2		PA3 * * PA2		RX2						PE4 * * PE5
 			PA5 * * PA4								PE2 * * PE3
 			PA7 * * PA6								PE0 * * PE1
 			PC5 * * PC4								PB8 * * PB9
@@ -18,7 +18,7 @@ Pinbelegung für das STM32F4 Dicovery board
 		   PE13 * * PE14							PD4 * * PD3
 		   PE15 * * PB10							PD2 * * PD1
 	RX3	   PB11 * * PB12						   PC12 * * PD0
-		   PB13 * * PB14						   PC10 * * PC11
+		   PB13 * * PB14					TX4	   PC10 * * PC11
 		   PB15 * * PD8		TX3					   PA14 * * PA15
 		    PD9 * * PD10						   PA10 * * PA13
 		   PD11 * * PD12							PA8 * * PA9

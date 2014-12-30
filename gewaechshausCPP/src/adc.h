@@ -11,6 +11,7 @@
 
 #define ADC_CHANNEL_CURRENT 0
 #define ADC_CHANNEL_VOLTAGE 1
+#define ADC_MAX_VALUE 4096
 
 class AnalogDigitalConverter {
 public:

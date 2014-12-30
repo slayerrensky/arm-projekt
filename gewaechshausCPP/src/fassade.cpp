@@ -26,12 +26,16 @@ void Fassade::InitGewaechshaus(void){
 		 TerminalInstance->SendMessage(buffer);
 }
 
-
-void Fassade::Window2Position(void){
-	int current = AnalogDigitalConverterInstance->getConvertedValue(ADC_CHANNEL_VOLTAGE);
-	int position = current * (int)(2.44 + 0.5);
+/*
+ * Steuerung der Fenster Aufgrund eines Prozent Werts
+ */
+void Fassade::Window2Position(int inProzent){
+	//int voltage = AnalogDigitalConverterInstance->getConvertedValue(ADC_CHANNEL_VOLTAGE);
+	//int position = voltage * (int)(2.44 + 0.5); //Scritte pro millivolt
+	int position = (int) ((ADC_MAX_VALUE / 100.0 * inProzent)+0.5);
 #ifdef DEBUG
-	sprintf(buffer, "\r\nADV_Value: %d -> Go2Step: %d \r\n",current, position);
+	//sprintf(buffer, "\r\nADV_Value: %d -> Go2Step: %d \r\n",voltage, position);
+	sprintf(buffer, "\r\nNew Stepper Position: %d \r\n", position);
 	TerminalInstance->SendMessage(buffer);
 #endif
 	StepperInstance->Go2Step(position);

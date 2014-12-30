@@ -9,6 +9,9 @@
 #include "stepper.h"
 #include "ampermeter.h"
 #include "terminal.h"
+#include "display.h"
+#include "xbee.h"
+#include "stm32f4xx_usart.h"
 
 extern "C" {
 #include "tm_stm32f4_onewire.h"
@@ -21,7 +24,7 @@ extern "C" {
 //char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
 
-LED LPC1768_LED;
+Led led;
 
 // Main function entry
 int main(void) {
@@ -35,9 +38,17 @@ int main(void) {
 	TemperaturSensoren tempSensors;
 	Stepper step;
 	Ampermeter current;
+	Display display(20);
+	Xbee xbee(128);
 //	int TimerCount;
 
+	display.SpecialCommand(DISPLAY_ClearDisplay);
+	display.SetCursorPosition(0);
+	display.uartSendString("Gewaechshaus");
+	display.SetCursorPosition(20);
+	display.uartSendString("Version 0.1");
 
+	xbee.SendString("Teststring");
 
 	while (1) {
 		//UB_Systick_Pause_ms(500);
@@ -47,25 +58,21 @@ int main(void) {
 		{
 			terminal.ProzessCommando();
 		}
+		if (xbee.IsCommandoAvalible())
+		{
+			xbee.ProzessCommando();
+		}
+		char wert = USART_ReceiveData(USART2);
+		// Fensterregelung
 
+		// Hole Temperaturvalues
+		// Schaue lookuptable oder Rechner Fensterstand
+		// Fensterstand setzen
+		//FassadeInstance->Window2Position(20);
 
+		led.On();
+		UB_Systick_Pause_ms(100);
+		led.Off();
 
-		//if (rotary.isRotDiff()) {
-//		TimerCount = rotary.getRotaryDiff();
-//		sprintf(buffer, "RotDiff: %4d, ADC Value: %1.3fV, Current: %2.4fA, Temp0: %3.2f C\r\n",
-//				TimerCount,
-//				adc.getConvertedValueAsVoltage(1),
-//				current.getCurrent(),
-//				tempSensors.getTempWertFromSensor(0));
-//		terminal.SendMessage(buffer);
-//		if (TimerCount > 0 )
-//			step.Left(TimerCount,20);
-//		else if (TimerCount < 0 )
-//		{
-//			step.Right(TimerCount,20);
-//
-//		}
-
-		//}
 	}
 }

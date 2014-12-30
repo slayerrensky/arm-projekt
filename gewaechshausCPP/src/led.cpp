@@ -10,26 +10,26 @@
 #define ALL_LEDS (GREEN | ORANGE | RED | BLUE) // all leds
 
 
-LED::LED(void)
+Led::Led(void)
 {
 	STM_EVAL_LEDInit(LED3);
 
 }
 
-LED::~LED(void)
+Led::~Led(void)
 {
 	// Do nothing
 }
 
 // Turn on the led
-void LED::On()
+void Led::On()
 {
 	STM_EVAL_LEDOn(LED3);
 
 }
 
 // Turn off the led
-void LED::Off()
+void Led::Off()
 {
 	STM_EVAL_LEDOff(LED3);
 }

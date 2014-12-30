@@ -85,5 +85,5 @@ uint16_t AnalogDigitalConverter::getConvertedValue(int channel) {
 }
 
 float AnalogDigitalConverter::getConvertedValueAsVoltage(int channel) {
-	return (3.3/4096)*ADC_BUFF[channel];
+	return (3.3/ADC_MAX_VALUE)*ADC_BUFF[channel];
 }

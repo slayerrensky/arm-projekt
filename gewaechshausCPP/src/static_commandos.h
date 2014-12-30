@@ -6,4 +6,6 @@ static char MessageHelp[] = "\r\nAvaleble Commandos"\
 							"\r\nLinkslauf  : left -n <int>"\
 							"\r\nCurrent    : current"\
 							"\r\nVoltage    : voltage"\
-							"\r\nTempratur  : temp";
+							"\r\nTempratur  : temp"\
+							"\r\nDisplay    : display";
+
