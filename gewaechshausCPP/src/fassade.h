@@ -12,6 +12,7 @@ public:
 	Fassade(int type);
 	void InitGewaechshaus(void);
 	void Window2Position(int inProzent);
+	void RegelungFenster(void);
 	void DisplayMassage(char* massage);
 	int type;
 };

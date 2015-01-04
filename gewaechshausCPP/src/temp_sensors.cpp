@@ -50,7 +50,7 @@ uint8_t TemperaturSensoren::getAnzahlGefunderSensoren(void) {
 }
 
 void TemperaturSensoren::getAlleTempWerte(float *tempArray) {
-	for (uint8_t i; i < gefundeTempSensoren; i++) {
+	for (uint8_t i=0; i < gefundeTempSensoren; i++) {
 		tempArray[i] = sensorTemperaturen[i];
 	}
 }

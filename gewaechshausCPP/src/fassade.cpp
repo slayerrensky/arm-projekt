@@ -29,16 +29,17 @@ void Fassade::InitGewaechshaus(void){
 		 TerminalInstance->SendMessage(buffer);
 }
 
-//void Fassade::RegelungFenster(void)
-//{
-//	int i;
-//	float sensoren[TemperaturSensorenInstance->getAnzahlGefunderSensoren()];
-//	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
-//	for (i=0, i<TemperaturSensorenInstance->getAnzahlGefunderSensoren(); i++)
-//	sprintf(buffer, "Es wurden %d Temperatursensoren gefunden.\r\n",
-//					TemperaturSensorenInstance->getAnzahlGefunderSensoren());
-//			 TerminalInstance->SendMessage(buffer);
-//}
+void Fassade::RegelungFenster(void)
+{
+	int i;
+	float sensoren[TemperaturSensorenInstance->getAnzahlGefunderSensoren()];
+	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+	for (i=0; i<TemperaturSensorenInstance->getAnzahlGefunderSensoren(); i++)
+	{
+		sprintf(buffer, "Sensor %d value %f3.3 .\r\n",i, sensoren[i]);
+		TerminalInstance->SendMessage(buffer);
+	}
+}
 
 /*
  * Steuerung der Fenster Aufgrund eines Prozent Werts

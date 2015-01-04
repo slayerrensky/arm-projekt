@@ -53,6 +53,7 @@ int main(void) {
 
 	FassadeInstance->DisplayMassage("hallo");
 	FassadeInstance->InitGewaechshaus();
+	FassadeInstance->RegelungFenster();
 
 	while (1) {
 		//UB_Systick_Pause_ms(500);
