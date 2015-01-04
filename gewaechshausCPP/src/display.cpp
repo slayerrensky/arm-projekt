@@ -11,11 +11,11 @@
 
 Display *DisplayInstance;
 
-Display::Display(void){
+Display::Display(void) {
 	Display(128);
 }
 
-Display::Display(int buffersize){
+Display::Display(int buffersize) {
 
 	SendFirst = 1;
 	DisplayInstance = this;
@@ -27,13 +27,12 @@ Display::Display(int buffersize){
  * Init DMA Initialisieren
  * DMA wird so initialisiert das er Daten über den Uart senden kann.
  */
-void Display::InitDMA()
-{
+void Display::InitDMA() {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
 	//DMA_DeInit(DMA1_Stream3);
 	DMA_InitStruct.DMA_Channel = DMA_Channel_4;
-	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART3->DR);
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t) & (USART3->DR);
 	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral;
 	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
@@ -46,7 +45,7 @@ void Display::InitDMA()
 	DMA_InitStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
 	DMA_InitStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
 
-	USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
+	USART_DMACmd(USART3, USART_DMAReq_Tx, ENABLE);
 
 	/* Enable DMA Stream Transfer Complete interrupt */
 	DMA_ITConfig(DMA1_Stream3, DMA_IT_TC, ENABLE);
@@ -66,17 +65,12 @@ void Display::InitDMA()
  * DMA konfigurieren mit Startadresse der Daten und länge des Strings
  * DMA sendet dann die Daten via Uart
  */
-void Display::SendViaDma(char *startBuf, int sizeofBytes)
-{
-	if (DisplayInstance->SendFirst)
-	{
+void Display::SendViaDma(char *startBuf, int sizeofBytes) {
+	if (DisplayInstance->SendFirst) {
 		DisplayInstance->SendFirst = 0;
-	}
-	else
-	{
+	} else {
 		int a = DMA_GetFlagStatus(DMA1_Stream3, DMA_FLAG_TCIF3) == RESET;
-		while (a)
-		{
+		while (a) {
 			a = DMA_GetFlagStatus(DMA1_Stream3, DMA_FLAG_TCIF3) == RESET;
 		}
 	}
@@ -84,12 +78,12 @@ void Display::SendViaDma(char *startBuf, int sizeofBytes)
 	DMA_DeInit(DMA1_Stream3);
 	USART_ClearFlag(USART3, USART_FLAG_TC);
 
-	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)startBuf;
+	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t) startBuf;
 	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
 
 	DMA_Init(DMA1_Stream3, &DMA_InitStruct);
 
-	USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
+	USART_DMACmd(USART3, USART_DMAReq_Tx, ENABLE);
 
 	DMA_Cmd(DMA1_Stream3, ENABLE);
 
@@ -98,57 +92,57 @@ void Display::SendViaDma(char *startBuf, int sizeofBytes)
 /*
  * Uart 4 initialisieren
  */
-void Display::Init(void)
-{
-  /* USARTx configured as follow:
-        - BaudRate = 115200 baud
-        - Word Length = 8 Bits
-        - One Stop Bit
-        - No parity
-        - Hardware flow control disabled (RTS and CTS signals)
-        - Receive and transmit enabled
-  */
-  GPIO_InitTypeDef GPIO_InitStructure;
-  USART_InitTypeDef USART_InitStructure;
+void Display::Init(void) {
+	/* USARTx configured as follow:
+	 - BaudRate = 115200 baud
+	 - Word Length = 8 Bits
+	 - One Stop Bit
+	 - No parity
+	 - Hardware flow control disabled (RTS and CTS signals)
+	 - Receive and transmit enabled
+	 */
+	GPIO_InitTypeDef GPIO_InitStructure;
+	USART_InitTypeDef USART_InitStructure;
 
-  /* Enable GPIO clock */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+	/* Enable GPIO clock */
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 
-  /* Enable UART clock */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
+	/* Enable UART clock */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
 
-  /* Connect PXx to USARTx_Tx*/
-  GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_UART4);
+	/* Connect PXx to USARTx_Tx*/
+	GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_UART4);
 
-  /* Connect PXx to USARTx_Rx*/
-  GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_UART4);
+	/* Connect PXx to USARTx_Rx*/
+	GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_UART4);
 
-  /* Configure USART Tx as alternate function  */
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	/* Configure USART Tx as alternate function  */
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-  /* Configure USART Rx as alternate function  */
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+	/* Configure USART Rx as alternate function  */
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-  USART_InitStructure.USART_BaudRate = 9600;
-  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-  USART_InitStructure.USART_StopBits = USART_StopBits_1;
-  USART_InitStructure.USART_Parity = USART_Parity_No;
-  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_InitStructure.USART_BaudRate = 9600;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl =
+			USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
-  /* USART configuration */
-  USART_Init(UART4, &USART_InitStructure);
+	/* USART configuration */
+	USART_Init(UART4, &USART_InitStructure);
 
-  /* Enable USART */
-  USART_Cmd(UART4, ENABLE);
+	/* Enable USART */
+	USART_Cmd(UART4, ENABLE);
 
 //  USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
 //
@@ -163,40 +157,37 @@ void Display::Init(void)
 /*
  * Ein einzelnes Zeichen senden
  */
-void Display::uartPutChar(uint16_t char2send)
-{
-	while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET);
+void Display::uartPutChar(uint16_t char2send) {
+	while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET)
+		;
 	USART_SendData(UART4, char2send);
 }
 
 /*
  * Einen kompletten String senden
  */
-void Display::SendString( char *ptr )
-{
-  // sende String (So lange bis \0 byte kommt)
-  while (*ptr != 0) {
-	  uartPutChar((uint16_t) *ptr);
-	  ptr++;
-  }
+void Display::SendString(char *ptr) {
+	// sende String (So lange bis \0 byte kommt)
+	while (*ptr != 0) {
+		uartPutChar((uint16_t) * ptr);
+		ptr++;
+	}
 }
 
-void Display::SendMessage(char *massage){
+void Display::SendMessage(char *massage) {
 	SendViaDma(massage, strlen(massage));
 }
 
-void Display::SendByte( char *ptr , int lenght)
-{
+void Display::SendByte(char *ptr, int lenght) {
 	int i;
-	for (i=0;i<lenght;i++)
-		uartPutChar((uint16_t) *(ptr + i));
+	for (i = 0; i < lenght; i++)
+		uartPutChar((uint16_t) * (ptr + i));
 }
 
 /*
  * Singelton Zeiger schreiben
  */
-void Display::EnableSingelton(void)
-{
+void Display::EnableSingelton(void) {
 	DisplayInstance = this;
 }
 
@@ -204,10 +195,8 @@ void Display::EnableSingelton(void)
  * Set Backlight litning stange
  * from 0 to 29.
  */
-void Display::Backlight(char value)
-{
-	if (value >= 0 && value <30)
-	{
+void Display::Backlight(char value) {
+	if (value >= 0 && value < 30) {
 		DisplayInstance->uartPutChar(0x7c);
 		DisplayInstance->uartPutChar(128 + value);
 	}
@@ -216,8 +205,7 @@ void Display::Backlight(char value)
 /*
  * Send Special character
  */
-void Display::SpecialCommand(char value)
-{
+void Display::SpecialCommand(char value) {
 	DisplayInstance->uartPutChar(254);
 	DisplayInstance->uartPutChar(value);
 }
@@ -229,12 +217,29 @@ void Display::SpecialCommand(char value)
  * 		  Line 3 Position 20-39
  * 		  Line 4 Position 84-103
  */
-void Display::SetCursorPosition(char position)
-{
+void Display::SetCursorPosition(char line, char pos) {
 	DisplayInstance->uartPutChar(254);
-	DisplayInstance->uartPutChar(0x80 + position);
-}
+	//DisplayInstance->uartPutChar(0x80);
 
+	if (line < 0 || line > 20 || pos < 0 || pos > 19)
+		return;
+
+	pos += 128;
+	switch (line) {
+	case 1:
+		pos += 64;
+		break;
+	case 2:
+		pos += 20;
+		break;
+	case 3:
+		pos += 84;
+		break;
+	default:
+		break;
+	}
+	DisplayInstance->uartPutChar((char)pos);
+}
 
 /////////////////////////////////////////
 // Begin Interrupt Funktionen

@@ -25,7 +25,7 @@ public:
 	void EnableSingelton(void);
 	void Backlight(char value);
 	void SpecialCommand(char value);
-	void SetCursorPosition(char position);
+	void SetCursorPosition(char line, char pos);
 
 	void SendMessage(char *massage);
 	void SendByte( char *ptr , int lenght);
