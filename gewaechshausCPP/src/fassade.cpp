@@ -3,7 +3,6 @@
  *
  */
 
-#define DEBUG
 #include "fassade.h"
 #include "stepper.h"
 #include "terminal.h"
@@ -12,12 +11,16 @@
 #include <stdlib.h>
 #include "string.h"
 #include <stdio.h>
+#include "xbee.h"
+#include "defines.h"
+
 
 char buffer[129] = "";
 Fassade *FassadeInstance;
 
-Fassade::Fassade(){
-
+Fassade::Fassade(int type){
+	FassadeInstance = this;
+	this->type = type;
 }
 
 void Fassade::InitGewaechshaus(void){
@@ -25,6 +28,17 @@ void Fassade::InitGewaechshaus(void){
 				TemperaturSensorenInstance->getAnzahlGefunderSensoren());
 		 TerminalInstance->SendMessage(buffer);
 }
+
+//void Fassade::RegelungFenster(void)
+//{
+//	int i;
+//	float sensoren[TemperaturSensorenInstance->getAnzahlGefunderSensoren()];
+//	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+//	for (i=0, i<TemperaturSensorenInstance->getAnzahlGefunderSensoren(); i++)
+//	sprintf(buffer, "Es wurden %d Temperatursensoren gefunden.\r\n",
+//					TemperaturSensorenInstance->getAnzahlGefunderSensoren());
+//			 TerminalInstance->SendMessage(buffer);
+//}
 
 /*
  * Steuerung der Fenster Aufgrund eines Prozent Werts
@@ -41,4 +55,12 @@ void Fassade::Window2Position(int inProzent){
 	StepperInstance->Go2Step(position);
 
 }
+
+void Fassade::DisplayMassage(char *massage){
+
+#ifdef TYPE_CORE
+	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE, (char)0x10,(char) 0x00,  massage ,(char)strlen(massage));
+#endif
+}
+
 

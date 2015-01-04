@@ -172,7 +172,7 @@ void Display::uartPutChar(uint16_t char2send)
 /*
  * Einen kompletten String senden
  */
-void Display::uartSendString( char *ptr )
+void Display::SendString( char *ptr )
 {
   // sende String (So lange bis \0 byte kommt)
   while (*ptr != 0) {
@@ -183,6 +183,13 @@ void Display::uartSendString( char *ptr )
 
 void Display::SendMessage(char *massage){
 	SendViaDma(massage, strlen(massage));
+}
+
+void Display::SendByte( char *ptr , int lenght)
+{
+	int i;
+	for (i=0;i<lenght;i++)
+		uartPutChar((uint16_t) *(ptr + i));
 }
 
 /*

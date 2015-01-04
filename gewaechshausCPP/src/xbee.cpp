@@ -19,12 +19,17 @@
 Xbee *XbeeInstance;
 
 Xbee::Xbee(void){
-	Xbee(256);
+	Xbee(256, XBEE_TYPE_NONE);
 }
 
-Xbee::Xbee(int buffersize){
+Xbee::Xbee(int type){
+	Xbee(256, type);
+}
+
+Xbee::Xbee(int buffersize, int type){
 
 	this->bufferSize = buffersize;
+	this->xbeeType = type;
 	buffer_init();
 	SendFirst = 1;
 	this->OutputString = (char*) malloc(sizeof(char)*this->bufferSize);
@@ -262,13 +267,29 @@ void Xbee::PutChar(uint16_t char2send)
 /*
  * Einen kompletten String senden
  */
-void Xbee::SendString( char *ptr )
+void Xbee::SendTransmission( char version, char receiver, char commando, char packetnumber, char *daten , char datalength )
 {
-  // sende String (So lange bis \0 byte kommt)
-  while (*ptr != 0) {
-	  PutChar((uint16_t) *ptr);
-	  ptr++;
-  }
+	int i;
+	char crc = 0x00;
+	PutChar((uint16_t) 0x01);
+	PutChar((uint16_t) version);
+	crc += version;
+	char lenght = 5 + datalength + 1;
+	PutChar((uint16_t) lenght); //Längenbyte Version bis CRC
+	crc += lenght;
+	PutChar((uint16_t) receiver);
+	crc += receiver;
+	PutChar((uint16_t) commando);
+	crc += commando;
+	PutChar((uint16_t) packetnumber);
+	crc += packetnumber;
+	for (i=0;i<datalength;i++)
+	{
+		PutChar((uint16_t) *(daten + i));
+		crc += *(daten + i) ;
+	}
+	PutChar((uint16_t) crc); //Längenbyte Version bis CRC
+	PutChar((uint16_t) 0x04);
 }
 
 void Xbee::SendMessage(char *massage){
@@ -285,6 +306,7 @@ int Xbee::IsCommandoAvalible(){
 	{
 		if (KommandoBuffer[i] == 0x04) // EOT (End of Transmission)
 		{	//Befehl vollständig
+			i++; // Terminator soll mit kopiert werden.
 			KommandoTerminator = i;
 			return 1;
 		}
@@ -293,13 +315,14 @@ int Xbee::IsCommandoAvalible(){
 }
 
 void Xbee::ProzessCommando(){
-	char* cmd = (char*) malloc(sizeof(char) * KommandoTerminator + 1); //Speicher resavieren für das aktuelle kommando
-	KommandoBuffer[KommandoTerminator] = '\0'; 	// \n mit \0 austauschen
+	char* cmd = (char*) malloc(sizeof(char) * KommandoTerminator); //Speicher resavieren für das aktuelle kommando
+	//KommandoBuffer[KommandoTerminator] = '\0'; 	// \n mit \0 austauschen
 	memcpy(cmd, KommandoBuffer,KommandoTerminator); // Transmission sichern
-	memcpy(KommandoBuffer, KommandoBuffer + KommandoTerminator +1 ,bufferSize - KommandoTerminator - currentKommandoChar); //Buffer nach vorne verschieben
-	currentKommandoChar -= KommandoTerminator+1; // Anfangszeiger setzen
+	memcpy(KommandoBuffer, KommandoBuffer + KommandoTerminator ,bufferSize - KommandoTerminator); //Buffer nach vorne verschieben
+	currentKommandoChar -= KommandoTerminator; // Anfangszeiger setzen
 	KommandoTerminator = 0;
 	CommandoProzess(cmd);
+	free(cmd);
 }
 
 /*
@@ -314,61 +337,55 @@ void Xbee::CommandoProzess(char *transmission){
 	}
 	int version = transmission[startbyte + 1];
 	int laenge = transmission[startbyte + 2];
-	char crc = transmission[startbyte + laenge + 1];
-	if(transmission[startbyte+laenge+2] == 0x04 )
+	char crc = transmission[startbyte + laenge];
+	int commando;
+	int paketnummer;
+	int dataStart;
+	int dataEnd;
+	if(transmission[startbyte+laenge+1] == 0x04 )
 	{
 		char crc_sum = 0;
 		int i;
-		for (i=startbyte+1;i<=laenge;i++)
+		for (i=startbyte+1;i<laenge;i++) // CRC von byte 1 bis zum CRC byte (ohne CRC)
 		{
 			crc_sum += transmission[i];
 		}
 		if (crc_sum == crc )
 		{
-			if (version == 0)
+			if (version == XBEE_PROTOKOLL_VERSION)
 			{
-				int commando = transmission[startbyte + 3];
-				int paketnummer = transmission[startbyte + 4];
-				int dataStart = startbyte + 5;
-				int dataEnd = startbyte + laenge;
+				commando = transmission[startbyte + 4];
+				paketnummer = transmission[startbyte + 5];
+				dataStart = startbyte + 6;
+				dataEnd = startbyte + laenge - 1;
 			}
 			else
 			{
 				TerminalInstance->SendMessage("\n\rDebug: Unknown version number->\n\r");
+				return;
 			}
 		}
 		else
 		{
 			TerminalInstance->SendMessage("\n\rDebug: CRC is wrong\n\r");
+			return;
 		}
 	}
 	else
 	{
 		TerminalInstance->SendMessage("\n\rDebug: End byte not right->\n\r");
+		return;
 	}
 
-//	if (ptr != NULL)
-//	{
-//		if (strcmp(ptr,"left")==0)
-//		{
-//			ptr = strtok(NULL, delimiter);
-//			if (strcmp(ptr,"-n")==0)
-//			{
-//				ptr = strtok(NULL, delimiter);
-//				int n = atoi(ptr);
-//				StepperInstance->Left(n,20);
-//			}
-//			else
-//			SendString((char *)"\r\nUsage: left -n <int>");
-//
-//		}
-//		else if (strcmp(commando,"right")==0)
-//		{
-//
-//		}
-//		else
-//		SendString(MessageHelp);
-//	}
+	if (commando == 0x10)
+	{
+		DisplayInstance->SendByte(transmission + dataStart, dataEnd - dataStart + 1);
+	}
+	else if (commando = 0x20)
+	{
+
+	}
+
 }
 
 /*
@@ -389,10 +406,10 @@ void Xbee::EnableSingelton(void)
 extern "C" { void DMA1_Stream5_IRQHandler(void)
 {
   /* Test on DMA Stream Transfer Complete interrupt */
-  if (DMA_GetITStatus(DMA1_Stream5, DMA_IT_TCIF3))
+  if (DMA_GetITStatus(DMA1_Stream5, DMA_IT_TCIF5))
   {
     /* Clear DMA Stream Transfer Complete interrupt pending bit */
-    DMA_ClearITPendingBit(DMA1_Stream5, DMA_IT_TCIF3);
+    DMA_ClearITPendingBit(DMA1_Stream5, DMA_IT_TCIF5);
   }
 }}
 

@@ -10,16 +10,22 @@
 #define FAIL -1;
 #define SUCSESS 0;
 #define KOMMANDO_BUFFER 512
+#define XBEE_TYPE_NONE (char) 0x00
+#define XBEE_TYPE_CORE (char) 0x01
+#define XBEE_TYPE_REMOUTE (char) 0x02
+#define XBEE_TYPE_NETWORK_MANAGER (char) 0x03
+#define XBEE_PROTOKOLL_VERSION (char)0x00
 
 class Xbee {
 
 public:
 	Xbee();
-	Xbee(int buffersize);
+	Xbee(int type);
+	Xbee(int buffersize,int type);
 	void Init(void);
 	void InitDMA();
 	void PutChar(uint16_t char2send);
-	void SendString( char *ptr );
+	void SendTransmission( char version, char receiver, char commando, char packetnumber, char *daten , char datalenght);
 	int BufferOut(char *pByte);
 	int BufferIn(char byte);
 	char* ReadBuffer(void);
@@ -31,6 +37,7 @@ public:
 	int IsCommandoAvalible();
 	void ProzessCommando();
 	char tmpBuffer[KOMMANDO_BUFFER];
+	int xbeeType;
 
 
 protected:

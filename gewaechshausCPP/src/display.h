@@ -19,7 +19,7 @@ public:
 	void Init(void);
 	void InitDMA();
 	void uartPutChar(uint16_t char2send);
-	void uartSendString( char *ptr );
+	void SendString( char *ptr );
 
 	void SendViaDma(char *startBuf, int sizeofBytes);
 	void EnableSingelton(void);
@@ -28,6 +28,7 @@ public:
 	void SetCursorPosition(char position);
 
 	void SendMessage(char *massage);
+	void SendByte( char *ptr , int lenght);
 
 
 protected:

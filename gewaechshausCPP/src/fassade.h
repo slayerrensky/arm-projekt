@@ -9,9 +9,11 @@
 class Fassade {
 
 public:
-	Fassade();
+	Fassade(int type);
 	void InitGewaechshaus(void);
 	void Window2Position(int inProzent);
+	void DisplayMassage(char* massage);
+	int type;
 };
 
 extern Fassade *FassadeInstance;

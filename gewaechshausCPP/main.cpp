@@ -10,8 +10,10 @@
 #include "ampermeter.h"
 #include "terminal.h"
 #include "display.h"
+#include "fassade.h"
 #include "xbee.h"
 #include "stm32f4xx_usart.h"
+#include "defines.h"
 
 extern "C" {
 #include "tm_stm32f4_onewire.h"
@@ -39,21 +41,25 @@ int main(void) {
 	Stepper step;
 	Ampermeter current;
 	Display display(20);
-	Xbee xbee(128);
+	Xbee xbee(256, XBEE_TYPE_CORE);
 //	int TimerCount;
+	Fassade fassade(TYPE_CORE);
 
 	display.SpecialCommand(DISPLAY_ClearDisplay);
 	display.SetCursorPosition(0);
-	display.uartSendString("Gewaechshaus");
+	display.SendString("Gewaechshaus");
 	display.SetCursorPosition(20);
-	display.uartSendString("Version 0.1");
+	display.SendString("Version 0.1");
 
-	xbee.SendString("Teststring");
+	FassadeInstance->DisplayMassage("hallo");
+	FassadeInstance->InitGewaechshaus();
 
 	while (1) {
 		//UB_Systick_Pause_ms(500);
 		//tempSensors.startTempMeasurementAllSensors();
 		//OutputString = com3.ReadBuffer();
+
+
 		if (terminal.IsCommandoAvalible())
 		{
 			terminal.ProzessCommando();
@@ -62,7 +68,7 @@ int main(void) {
 		{
 			xbee.ProzessCommando();
 		}
-		char wert = USART_ReceiveData(USART2);
+//		char wert = USART_ReceiveData(USART2);
 		// Fensterregelung
 
 		// Hole Temperaturvalues
