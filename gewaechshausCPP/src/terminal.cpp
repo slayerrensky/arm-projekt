@@ -15,7 +15,7 @@
 #include "fassade.h"
 #include "display.h"
 
-
+char writeBuffer[256];
 
 Terminal *TerminalInstance;
 
@@ -170,12 +170,13 @@ void Terminal::SendViaDma(char *startBuf, int sizeofBytes)
 		{
 			a = DMA_GetFlagStatus(DMA1_Stream3, DMA_FLAG_TCIF3) == RESET;
 		}
+		memcpy(writeBuffer, startBuf, sizeofBytes);
 	}
 
 	DMA_DeInit(DMA1_Stream3);
 	USART_ClearFlag(USART3, USART_FLAG_TC);
 
-	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)startBuf;
+	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)writeBuffer;
 	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
 
 	DMA_Init(DMA1_Stream3, &DMA_InitStruct);

@@ -50,62 +50,42 @@ int main(void) {
 	display.SetCursorPosition(1,0);
 	display.SendString("Version 0.1");
 
-	FassadeInstance->DisplayMassage("hallo");
-	//FassadeInstance->InitGewaechshaus();
-	//FassadeInstance->RegelungFenster();
-
-	sprintf(buff, "Es wurden %d Temperatursensoren gefunden.\r\n",
-			tempSensors.getAnzahlGefunderSensoren());
-	terminal.SendMessage(buff);
-	int i;
-	tempSensors.startTempMeasurementAllSensors();
-	float sensoren[4];
-	tempSensors.getAlleTempWerte(sensoren);
-	for (i=0; i<tempSensors.getAnzahlGefunderSensoren(); i++)
-	{
-		sprintf(buff, "Sensor %d value %.3f .\r\n",i, sensoren[i]);
-		terminal.SendMessage(buff);
-	}
+	//FassadeInstance->DisplayMassage("hallo");
+	FassadeInstance->InitGewaechshaus();
 
 	char buffer[129] = "";
 	float sensoren[TemperaturSensorenInstance->getAnzahlGefunderSensoren()];
 
 	while (1) {
-		UB_Systick_Pause_ms(500);
-		tempSensors.startTempMeasurementAllSensors();
-
-		tempSensors.startTempMeasurementAllSensors();
-			float sensoren[4];
-			tempSensors.getAlleTempWerte(sensoren);
-			for (i=0; i<4; i++)
-			{
-				sprintf(buff, "Sensor %d value %.3f .\r\n",i, sensoren[i]);
-				terminal.SendMessage(buff);
-			}
+		UB_Systick_Pause_ms(1000);
 
 		//OutputString = com3.ReadBuffer();
-		TemperaturSensorenInstance->startTempMeasurementAllSensors();
-		TemperaturSensorenInstance->getAlleTempWerte(sensoren);
-		DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay);
-		for (int i=0; i<TemperaturSensorenInstance->getAnzahlGefunderSensoren(); i++)
+//		TemperaturSensorenInstance->startTempMeasurementAllSensors();
+//		TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+//		DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay);
+//		for (int i=0; i<TemperaturSensorenInstance->getAnzahlGefunderSensoren(); i++)
+//		{
+//			sprintf(buffer, "Sensor %d: %3.2f",i, sensoren[i]);
+//			DisplayInstance->SetCursorPosition(i,0);
+//			DisplayInstance->SendString(buffer);
+//		}
+
+
+
+
+		if (terminal.IsCommandoAvalible())
 		{
-			sprintf(buffer, "Sensor %d: %3.2f",i, sensoren[i]);
-			DisplayInstance->SetCursorPosition(i,0);
-			DisplayInstance->SendString(buffer);
+			terminal.ProzessCommando();
 		}
-
-		//if (terminal.IsCommandoAvalible())
-		//{
-		//	terminal.ProzessCommando();
-		//}
-		//if (xbee.IsCommandoAvalible())
-		//{
-		//	xbee.ProzessCommando();
-		//}
+		if (xbee.IsCommandoAvalible())
+		{
+			xbee.ProzessCommando();
+		}
 //		char wert = USART_ReceiveData(USART2);
-		// Fensterregelung
 
+		// Fensterregelung
 		// Hole Temperaturvalues
+		FassadeInstance->RegelungFenster();
 		// Schaue lookuptable oder Rechner Fensterstand
 		// Fensterstand setzen
 		//FassadeInstance->Window2Position(20);
