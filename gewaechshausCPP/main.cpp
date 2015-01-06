@@ -45,9 +45,9 @@ int main(void) {
 	Fassade fassade(TYPE_CORE);
 
 	display.SpecialCommand(DISPLAY_ClearDisplay);
-	display.SetCursorPosition(0);
+	display.SetCursorPosition(0,0);
 	display.SendString("Gewaechshaus");
-	display.SetCursorPosition(20);
+	display.SetCursorPosition(1,0);
 	display.SendString("Version 0.1");
 
 	FassadeInstance->DisplayMassage("hallo");
@@ -67,6 +67,9 @@ int main(void) {
 		terminal.SendMessage(buff);
 	}
 
+	char buffer[129] = "";
+	float sensoren[TemperaturSensorenInstance->getAnzahlGefunderSensoren()];
+
 	while (1) {
 		UB_Systick_Pause_ms(500);
 		tempSensors.startTempMeasurementAllSensors();
@@ -81,7 +84,15 @@ int main(void) {
 			}
 
 		//OutputString = com3.ReadBuffer();
-
+		TemperaturSensorenInstance->startTempMeasurementAllSensors();
+		TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+		DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay);
+		for (int i=0; i<TemperaturSensorenInstance->getAnzahlGefunderSensoren(); i++)
+		{
+			sprintf(buffer, "Sensor %d: %3.2f",i, sensoren[i]);
+			DisplayInstance->SetCursorPosition(i,0);
+			DisplayInstance->SendString(buffer);
+		}
 
 		//if (terminal.IsCommandoAvalible())
 		//{
