@@ -48,6 +48,7 @@
 //Every onewire chip has different ROM code, but all the same chips has same family code,
 //in case of DS18B20 this is 0x28 and this is first byte of ROM address
 #define TM_DS18B20_FAMILY_CODE				0x28
+#define TM_DS18S20_FAMILY_CODE				0x10
 #define TM_DS18B20_CMD_ALARMSEARCH			0xEC
 
 //DS18B20 read temperature command

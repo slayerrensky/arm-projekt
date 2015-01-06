@@ -35,7 +35,7 @@ void TM_OneWire_Init(void) {
 	TM_OneWire_GPIO_InitDef.GPIO_Pin = TM_ONEWIRE_PIN;
 	TM_OneWire_GPIO_InitDef.GPIO_Mode = GPIO_Mode_OUT;
 	TM_OneWire_GPIO_InitDef.GPIO_OType = GPIO_OType_PP;
-	TM_OneWire_GPIO_InitDef.GPIO_PuPd = GPIO_PuPd_UP;
+	TM_OneWire_GPIO_InitDef.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	TM_OneWire_GPIO_InitDef.GPIO_Speed = GPIO_Speed_100MHz;
 	
 	GPIO_Init(TM_ONEWIRE_PORT, &TM_OneWire_GPIO_InitDef);

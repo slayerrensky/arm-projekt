@@ -32,11 +32,12 @@ void Fassade::InitGewaechshaus(void){
 void Fassade::RegelungFenster(void)
 {
 	int i;
-	float sensoren[TemperaturSensorenInstance->getAnzahlGefunderSensoren()];
+	TemperaturSensorenInstance->startTempMeasurementAllSensors();
+	float sensoren[4];
 	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
-	for (i=0; i<TemperaturSensorenInstance->getAnzahlGefunderSensoren(); i++)
+	for (i=0; i<4; i++)
 	{
-		sprintf(buffer, "Sensor %d value %f3.3 .\r\n",i, sensoren[i]);
+		sprintf(buffer, "Sensor %d value %.3f .\r\n",i, sensoren[i]);
 		TerminalInstance->SendMessage(buffer);
 	}
 }

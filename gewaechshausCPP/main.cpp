@@ -23,9 +23,8 @@ extern "C" {
 
 #define TIME_DELAY              5000000
 #define EXPECTING_SENSORS    2
-//char buffer[129] = "Hello World, this is a DMA test.\n\r";
 char *OutputString;
-
+char buff[129] = "";
 Led led;
 
 // Main function entry
@@ -52,23 +51,46 @@ int main(void) {
 	display.SendString("Version 0.1");
 
 	FassadeInstance->DisplayMassage("hallo");
-	FassadeInstance->InitGewaechshaus();
-	FassadeInstance->RegelungFenster();
+	//FassadeInstance->InitGewaechshaus();
+	//FassadeInstance->RegelungFenster();
+
+	sprintf(buff, "Es wurden %d Temperatursensoren gefunden.\r\n",
+			tempSensors.getAnzahlGefunderSensoren());
+	terminal.SendMessage(buff);
+	int i;
+	tempSensors.startTempMeasurementAllSensors();
+	float sensoren[4];
+	tempSensors.getAlleTempWerte(sensoren);
+	for (i=0; i<tempSensors.getAnzahlGefunderSensoren(); i++)
+	{
+		sprintf(buff, "Sensor %d value %.3f .\r\n",i, sensoren[i]);
+		terminal.SendMessage(buff);
+	}
 
 	while (1) {
-		//UB_Systick_Pause_ms(500);
-		//tempSensors.startTempMeasurementAllSensors();
+		UB_Systick_Pause_ms(500);
+		tempSensors.startTempMeasurementAllSensors();
+
+		tempSensors.startTempMeasurementAllSensors();
+			float sensoren[4];
+			tempSensors.getAlleTempWerte(sensoren);
+			for (i=0; i<4; i++)
+			{
+				sprintf(buff, "Sensor %d value %.3f .\r\n",i, sensoren[i]);
+				terminal.SendMessage(buff);
+			}
+
 		//OutputString = com3.ReadBuffer();
 
 
-		if (terminal.IsCommandoAvalible())
-		{
-			terminal.ProzessCommando();
-		}
-		if (xbee.IsCommandoAvalible())
-		{
-			xbee.ProzessCommando();
-		}
+		//if (terminal.IsCommandoAvalible())
+		//{
+		//	terminal.ProzessCommando();
+		//}
+		//if (xbee.IsCommandoAvalible())
+		//{
+		//	xbee.ProzessCommando();
+		//}
 //		char wert = USART_ReceiveData(USART2);
 		// Fensterregelung
 
@@ -78,8 +100,9 @@ int main(void) {
 		//FassadeInstance->Window2Position(20);
 
 		led.On();
-		UB_Systick_Pause_ms(100);
+		UB_Systick_Pause_ms(1);
 		led.Off();
+		UB_Systick_Pause_ms(1);
 
 	}
 }

@@ -46,8 +46,10 @@ uint8_t TM_DS18B20_Read(uint8_t *ROM, float *destination) {
 	uint8_t resolution;
 	int8_t digit, minus = 0;
 	float decimal;
+	uint8_t group;
 	
-	if (!TM_DS18B20_Is(ROM)) {
+	group = TM_DS18B20_Is(ROM);
+	if (!group) {
 		return 0;
 	}
 	
@@ -65,6 +67,11 @@ uint8_t TM_DS18B20_Read(uint8_t *ROM, float *destination) {
 	
 	//First two bytes of scratchpad are temperature values
 	temperature = TM_OneWire_ReadByte() | (TM_OneWire_ReadByte() << 8);
+
+	if (group == TM_DS18S20_FAMILY_CODE)
+	{
+		temperature = temperature << 3;
+	}
 
 	//Reset line
 	TM_OneWire_Reset();
@@ -196,7 +203,10 @@ uint8_t TM_DS18B20_SetResolution(uint8_t *ROM, TM_DS18B20_Resolution_t resolutio
 uint8_t TM_DS18B20_Is(uint8_t *ROM) {
 	//Checks if first byte is equal to DS18B20's family code (0x28)
 	if (*ROM == TM_DS18B20_FAMILY_CODE) {
-		return 1;
+		return 0x28;
+	}
+	if (*ROM == TM_DS18S20_FAMILY_CODE) {
+			return 0x10;
 	}
 	return 0;
 }
