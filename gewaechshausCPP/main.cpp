@@ -44,20 +44,21 @@ int main(void) {
 //	int TimerCount;
 	Fassade fassade(TYPE_CORE);
 
-	display.SpecialCommand(DISPLAY_ClearDisplay);
-	display.SetCursorPosition(0,0);
-	display.SendString("Gewaechshaus");
-	display.SetCursorPosition(1,0);
-	display.SendString("Version 0.1");
+	display.SpecialCommand(DISPLAY_ClearDisplay, DISPLAY_SOURCE_REMOUTE);
+	display.SetCursorPosition(0,0, DISPLAY_SOURCE_REMOUTE);
+	display.SendString("Gewaechshaus", DISPLAY_SOURCE_REMOUTE);
+	display.SetCursorPosition(1,0, DISPLAY_SOURCE_REMOUTE);
+	display.SendString("Version 0.1", DISPLAY_SOURCE_REMOUTE);
 
 	//FassadeInstance->DisplayMassage("hallo");
 	FassadeInstance->InitGewaechshaus();
 
 	char buffer[129] = "";
 	float sensoren[TemperaturSensorenInstance->getAnzahlGefunderSensoren()];
+	int sleep = 0;
+
 
 	while (1) {
-		UB_Systick_Pause_ms(1000);
 
 		//OutputString = com3.ReadBuffer();
 //		TemperaturSensorenInstance->startTempMeasurementAllSensors();
@@ -70,30 +71,34 @@ int main(void) {
 //			DisplayInstance->SendString(buffer);
 //		}
 
-
-
-
 		if (terminal.IsCommandoAvalible())
 		{
 			terminal.ProzessCommando();
 		}
 		if (xbee.IsCommandoAvalible())
 		{
-			xbee.ProzessCommando();
+			if (XbeeInstance->txin > 40)
+				xbee.ProzessCommando();
 		}
 //		char wert = USART_ReceiveData(USART2);
 
-		// Fensterregelung
-		// Hole Temperaturvalues
-		FassadeInstance->RegelungFenster();
-		// Schaue lookuptable oder Rechner Fensterstand
-		// Fensterstand setzen
-		//FassadeInstance->Window2Position(20);
+		if (sleep >= 10000)
+		{
+			// Fensterregelung
+			// Hole Temperaturvalues
+			FassadeInstance->RegelungFenster();
+			FassadeInstance->UpdateDisplayValues();
+			// Schaue lookuptable oder Rechner Fensterstand
+			// Fensterstand setzen
+			//FassadeInstance->Window2Position(20);
+			sleep = 0;
+		}
 
 		led.On();
 		UB_Systick_Pause_ms(1);
 		led.Off();
 		UB_Systick_Pause_ms(1);
+		sleep++;
 
 	}
 }

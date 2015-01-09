@@ -35,24 +35,29 @@ void Fassade::InitGewaechshaus(void){
 
 void Fassade::RegelungFenster(void)
 {
-	int i;
+
 	int anzahl = TemperaturSensorenInstance->getAnzahlGefunderSensoren();
 	TemperaturSensorenInstance->startTempMeasurementAllSensors();
 	float sensoren[anzahl];
 	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+#ifdef DEBUG
+	int i;
 	for (i=0; i<anzahl; i++)
 	{
 		sprintf(bufferD, "Sensor %d: %3.2f",i, sensoren[i]);
 		DisplayInstance->SetCursorPosition(i,0);
 		DisplayInstance->SendString(bufferD);
-	}
-	float in = sensoren[1];
-	float out = sensoren[0];
 
+	}
+#endif
+	float in = sensoren[TEMP_SENSOR_IN];
+	float out = sensoren[TEMP_SENSOR_OUT];
+#ifdef DEBUG
 	sprintf(bufferT, "Outdor: %.3f C.\r\n",out);
 			TerminalInstance->SendMessage(bufferT);
 	sprintf(bufferT, "Indor : %.3f C.\r\n",in);
 				TerminalInstance->SendMessage(bufferT);
+#endif
 	float difference;
 	int dif = 0;
 
@@ -117,14 +122,16 @@ void Fassade::RegelungFenster(void)
 			dif = 0;
 	}
 
-
+#ifdef DEBUG
 	sprintf(bufferT, "Difference %d \r\n",dif);
 		TerminalInstance->SendMessage(bufferT);
-
+#endif
 	FassadeInstance->Window2Position(TempReglungLUT[0][dif]);
 	//FassadeInstance->Lueftung(TempReglungLUT[1][dif]);
 
 }
+
+
 
 /*
  * Steuerung der Fenster Aufgrund eines Prozent Werts
@@ -142,10 +149,43 @@ void Fassade::Window2Position(int inProzent){
 
 }
 
-void Fassade::DisplayMassage(char *massage){
+void Fassade::UpdateDisplayValues(){
+
+	int i;
+	int anzahl = TemperaturSensorenInstance->getAnzahlGefunderSensoren();
+	TemperaturSensorenInstance->startTempMeasurementAllSensors();
+	float sensoren[anzahl];
+	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+	DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay,DISPLAY_SOURCE_REMOUTE);
+	for (i=0; i<anzahl; i++)
+	{
+		sprintf(bufferD, "Sensor %d: %3.2f",i, sensoren[i]);
+		DisplayInstance->SetCursorPosition(i,0, DISPLAY_SOURCE_REMOUTE);
+		DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
+	}
+}
+void Fassade::TerminalDisplayTemp()
+{
+	int anzahl = TemperaturSensorenInstance->getAnzahlGefunderSensoren();
+	TemperaturSensorenInstance->startTempMeasurementAllSensors();
+	float sensoren[anzahl];
+	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+	float in = sensoren[TEMP_SENSOR_IN];
+	float out = sensoren[TEMP_SENSOR_OUT];
+
+	sprintf(bufferT, "Outdor: %.3f C.\r\n",out);
+			TerminalInstance->SendMessage(bufferT);
+	sprintf(bufferT, "Indor : %.3f C.\r\n",in);
+			TerminalInstance->SendMessage(bufferT);
+}
+
+void Fassade::SendMassageToDisplay(char *massage){
 
 #ifdef TYPE_CORE
 	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE, (char)0x10,(char) 0x00,  massage ,(char)strlen(massage));
+#endif
+#ifdef TYPE_BOTH
+	DisplayInstance->SendString(massage, DISPLAY_SOURCE_LOCAL);
 #endif
 }
 

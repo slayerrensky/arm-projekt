@@ -16,6 +16,18 @@
 #define XBEE_TYPE_NETWORK_MANAGER (char) 0x03
 #define XBEE_PROTOKOLL_VERSION (char)0x00
 
+#define XBEE_COM_DISPLAY_TEXT (char)0x10
+#define XBEE_COM_ROTARY (char)0x20
+#define XBEE_COM_ROTARY_BUTTON (char)0x21
+#define XBEE_COM_BUTTON_A (char)0x22
+#define XBEE_COM_BUTTON_B (char)0x23
+#define XBEE_COM_GETVALUE (char)0x30
+#define XBEE_COM_WINDOW_POS (char)0x40
+#define XBEE_COM_CURRENT (char)0x42
+#define XBEE_COM_T1 (char)0x44
+#define XBEE_COM_T2 (char)0x45
+
+
 class Xbee {
 
 public:
@@ -38,6 +50,8 @@ public:
 	void ProzessCommando();
 	char tmpBuffer[KOMMANDO_BUFFER];
 	int xbeeType;
+	char writeBuffer[256];
+	int txin = 0;
 
 
 protected:
@@ -53,7 +67,7 @@ protected:
 	void CommandoProzess(char *commando);
 	char *KommandoBuffer;
 	int currentKommandoChar;
-	int KommandoTerminator;
+	int lastKommandoTerminator;
 
 };
 

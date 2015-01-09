@@ -10,6 +10,8 @@
 #define FAIL -1;
 #define SUCSESS 0;
 #define KOMMANDO_BUFFER 512
+#define DISPLAY_SOURCE_REMOUTE 0
+#define DISPLAY_SOURCE_LOCAL 1
 
 class Display {
 
@@ -18,17 +20,18 @@ public:
 	Display(int buffersize);
 	void Init(void);
 	void InitDMA();
-	void uartPutChar(uint16_t char2send);
-	void SendString( char *ptr );
+	void PutChar(uint16_t char2send, int source);
+	void SendString( char *ptr , int source);
 
 	void SendViaDma(char *startBuf, int sizeofBytes);
 	void EnableSingelton(void);
-	void Backlight(char value);
-	void SpecialCommand(char value);
-	void SetCursorPosition(char line, char pos);
+	void Backlight(char value, int source);
+	void SpecialCommand(char value, int source);
+	void SetCursorPosition(char line, char pos, int source);
 
-	void SendMessage(char *massage);
-	void SendByte( char *ptr , int lenght);
+	void SendMessage(char *massage, int source);
+	void SendByte( char *ptr , int lenght, int source);
+	char buffer[128];
 
 
 protected:

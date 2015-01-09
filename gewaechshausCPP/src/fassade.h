@@ -13,7 +13,9 @@ public:
 	void InitGewaechshaus(void);
 	void Window2Position(int inProzent);
 	void RegelungFenster(void);
-	void DisplayMassage(char* massage);
+	void SendMassageToDisplay(char* massage);
+	void TerminalDisplayTemp();
+	void UpdateDisplayValues();
 	int type;
 };
 

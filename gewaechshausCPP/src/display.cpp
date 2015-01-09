@@ -6,6 +6,8 @@
 #include "misc.h"
 #include <stdlib.h>
 #include "string.h"
+#include "xbee.h"
+#include "defines.h"
 
 #include "display.h"
 
@@ -157,31 +159,58 @@ void Display::Init(void) {
 /*
  * Ein einzelnes Zeichen senden
  */
-void Display::uartPutChar(uint16_t char2send) {
-	while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET)
+void Display::PutChar(uint16_t char2send, int source) {
+	if (source == DISPLAY_SOURCE_REMOUTE )
+	{
+		XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE, XBEE_COM_DISPLAY_TEXT,(char) 0x00, (char*)&char2send , 1);
+	}
+	if (source == DISPLAY_SOURCE_LOCAL )
+	{
+		while (USART_GetFlagStatus(UART4, USART_FLAG_TXE) == RESET)
 		;
-	USART_SendData(UART4, char2send);
+		USART_SendData(UART4, char2send);
+	}
+
 }
 
 /*
  * Einen kompletten String senden
  */
-void Display::SendString(char *ptr) {
-	// sende String (So lange bis \0 byte kommt)
-	while (*ptr != 0) {
-		uartPutChar((uint16_t) * ptr);
-		ptr++;
+void Display::SendString(char *ptr, int source) {
+
+	if (source == DISPLAY_SOURCE_REMOUTE )
+	{
+		XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE, XBEE_COM_DISPLAY_TEXT,(char) 0x00,  ptr ,(char)strlen(ptr));
+	}
+	if (source == DISPLAY_SOURCE_LOCAL )
+	{
+		// sende String (So lange bis \0 byte kommt)
+		while (*ptr != 0) {
+			PutChar((uint16_t) * ptr, source);
+			ptr++;
+		}
 	}
 }
 
-void Display::SendMessage(char *massage) {
-	SendViaDma(massage, strlen(massage));
+void Display::SendMessage(char *massage, int source) {
+	if (source == DISPLAY_SOURCE_REMOUTE )
+	{
+		XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE, XBEE_COM_DISPLAY_TEXT,(char) 0x00,  massage ,(char)strlen(massage));
+	}
+	if (source == DISPLAY_SOURCE_LOCAL )
+	{
+		SendViaDma(massage, strlen(massage));
+	}
 }
 
-void Display::SendByte(char *ptr, int lenght) {
+void Display::SendByte(char *ptr, int lenght, int source) {
 	int i;
 	for (i = 0; i < lenght; i++)
-		uartPutChar((uint16_t) * (ptr + i));
+	{
+		DisplayInstance->buffer[i] =  *(ptr + i);
+	}
+	DisplayInstance->buffer[i+1] = 0;
+	DisplayInstance->SendString(buffer, source);
 }
 
 /*
@@ -195,19 +224,23 @@ void Display::EnableSingelton(void) {
  * Set Backlight litning stange
  * from 0 to 29.
  */
-void Display::Backlight(char value) {
+void Display::Backlight(char value, int source) {
 	if (value >= 0 && value < 30) {
-		DisplayInstance->uartPutChar(0x7c);
-		DisplayInstance->uartPutChar(128 + value);
+		DisplayInstance->buffer[0] = 0x7c;
+		DisplayInstance->buffer[1] = (char)(128 + value);
+		DisplayInstance->buffer[2] = 0;
+		DisplayInstance->SendString(buffer, source);
 	}
 }
 
 /*
  * Send Special character
  */
-void Display::SpecialCommand(char value) {
-	DisplayInstance->uartPutChar(254);
-	DisplayInstance->uartPutChar(value);
+void Display::SpecialCommand(char value, int source) {
+	DisplayInstance->buffer[0] = 254;
+	DisplayInstance->buffer[1] = (char)value;
+	DisplayInstance->buffer[2] = 0;
+	DisplayInstance->SendString(buffer, source);
 }
 
 /*
@@ -217,8 +250,8 @@ void Display::SpecialCommand(char value) {
  * 		  Line 3 Position 20-39
  * 		  Line 4 Position 84-103
  */
-void Display::SetCursorPosition(char line, char pos) {
-	DisplayInstance->uartPutChar(254);
+void Display::SetCursorPosition(char line, char pos, int source) {
+
 	//DisplayInstance->uartPutChar(0x80);
 
 	if (line < 0 || line > 20 || pos < 0 || pos > 19)
@@ -238,7 +271,10 @@ void Display::SetCursorPosition(char line, char pos) {
 	default:
 		break;
 	}
-	DisplayInstance->uartPutChar((char)pos);
+	DisplayInstance->buffer[0] = 254;
+	DisplayInstance->buffer[1] = (char)pos;
+	DisplayInstance->buffer[2] = 0;
+	DisplayInstance->SendString(buffer, source);
 }
 
 /////////////////////////////////////////

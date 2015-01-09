@@ -18,6 +18,7 @@
 
 Xbee *XbeeInstance;
 
+
 Xbee::Xbee(void){
 	Xbee(256, XBEE_TYPE_NONE);
 }
@@ -151,7 +152,7 @@ void Xbee::InitDMA()
 
 	/* Enable the USART2 RX DMA Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = DMA1_Stream5_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
@@ -168,11 +169,12 @@ void Xbee::SendViaDma(char *startBuf, int sizeofBytes)
 	}
 	else
 	{
-		int a = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_TCIF3) == RESET;
+		int a = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_TCIF5) == RESET;
 		while (a)
 		{
-			a = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_TCIF3) == RESET;
+			a = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_TCIF5) == RESET;
 		}
+		memcpy(XbeeInstance->writeBuffer, startBuf, sizeofBytes);
 	}
 
 	DMA_DeInit(DMA1_Stream5);
@@ -249,7 +251,7 @@ void Xbee::Init(void)
   
   NVIC_InitTypeDef NVIC_InitStructure;
   NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
@@ -297,17 +299,16 @@ void Xbee::SendMessage(char *massage){
 }
 
 int Xbee::IsCommandoAvalible(){
-	int oldcommando = currentKommandoChar;
+	//int oldcommando = currentKommandoChar;
 	int n; //Anzahl eingelesenener Zeichen
 	int i; //Forschleivenzählvariable
 	n = ReadBuffer(KommandoBuffer + currentKommandoChar);
 	currentKommandoChar += n;
-	for (i = oldcommando; i < currentKommandoChar;i++)
+	for (i = 0; i < bufferSize;i++)
 	{
 		if (KommandoBuffer[i] == 0x04) // EOT (End of Transmission)
 		{	//Befehl vollständig
-			i++; // Terminator soll mit kopiert werden.
-			KommandoTerminator = i;
+			lastKommandoTerminator = i;
 			return 1;
 		}
 	}
@@ -315,14 +316,38 @@ int Xbee::IsCommandoAvalible(){
 }
 
 void Xbee::ProzessCommando(){
-	char* cmd = (char*) malloc(sizeof(char) * KommandoTerminator); //Speicher resavieren für das aktuelle kommando
-	//KommandoBuffer[KommandoTerminator] = '\0'; 	// \n mit \0 austauschen
-	memcpy(cmd, KommandoBuffer,KommandoTerminator); // Transmission sichern
-	memcpy(KommandoBuffer, KommandoBuffer + KommandoTerminator ,bufferSize - KommandoTerminator); //Buffer nach vorne verschieben
-	currentKommandoChar -= KommandoTerminator; // Anfangszeiger setzen
-	KommandoTerminator = 0;
-	CommandoProzess(cmd);
-	free(cmd);
+		int EOTByte = 0;
+		int SOHByte = 0;
+		int tl; //Transmission lenght
+		int i = 0;
+		for(i=0;i<lastKommandoTerminator;i++)
+		{
+			if (KommandoBuffer[i] == 0x01)
+			{
+				SOHByte = i;
+				break;
+			}
+
+		}
+		i=SOHByte+8; //MINIMUM Transmisson length 7 Byte
+		// Forschleife ist überflüssig
+		for(;i<=lastKommandoTerminator;i++)
+		{
+			if (KommandoBuffer[i] == 0x04)
+			{
+				EOTByte = i;
+				break;
+			}
+		}
+
+		tl = EOTByte-SOHByte+1;
+		char* cmd = (char*) malloc(sizeof(char) * tl ); //Speicher resavieren für das aktuelle kommando
+		memcpy(cmd, KommandoBuffer,tl); // Transmission sichern
+		memcpy(KommandoBuffer, KommandoBuffer + EOTByte + 1 ,bufferSize - tl); //Buffer nach vorne verschieben
+		currentKommandoChar -= tl; // Anfangszeiger setzen
+		CommandoProzess(cmd);
+		free(cmd);
+		lastKommandoTerminator = 0;
 }
 
 /*
@@ -379,7 +404,7 @@ void Xbee::CommandoProzess(char *transmission){
 
 	if (commando == 0x10)
 	{
-		DisplayInstance->SendByte(transmission + dataStart, dataEnd - dataStart + 1);
+		DisplayInstance->SendByte(transmission + dataStart, dataEnd - dataStart+1, DISPLAY_SOURCE_LOCAL);
 	}
 	else if (commando = 0x20)
 	{
@@ -423,6 +448,7 @@ extern "C" { void USART2_IRQHandler(void) {
 		// wenn ein Byte im Empfangspuffer steht
 		wert=USART_ReceiveData(USART2);
 		// Byte speichern
+		XbeeInstance->txin++;
 		XbeeInstance->BufferIn(wert);
 	}
 }}

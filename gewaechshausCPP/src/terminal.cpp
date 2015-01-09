@@ -14,6 +14,7 @@
 #include "adc.h"
 #include "fassade.h"
 #include "display.h"
+#include "defines.h"
 
 char writeBuffer[256];
 
@@ -148,7 +149,7 @@ void Terminal::usart3InitDMA()
 
 	/* Enable the USART3 RX DMA Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = DMA1_Stream3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
@@ -247,7 +248,7 @@ void Terminal::usart3Init(void)
   
   NVIC_InitTypeDef NVIC_InitStructure;
   NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
@@ -356,6 +357,10 @@ void Terminal::CommandoProzess(char *commando){
 			sprintf(tmpBuffer, "\r\nVoltage: %1.3fV",AnalogDigitalConverterInstance->getConvertedValueAsVoltage(1));
 			uartSendString(tmpBuffer);
 		}
+		else if (strcmp(commando,"temp")==0)
+		{
+			FassadeInstance->TerminalDisplayTemp();
+		}
 		else if (strcmp(commando,"window")==0)
 		{
 			ptr = strtok(NULL, delimiter);
@@ -376,7 +381,14 @@ void Terminal::CommandoProzess(char *commando){
 				int n = atoi(ptr);
 				if(n >= 0 && n <=29)
 				{
-					DisplayInstance->Backlight(n);
+#ifdef TYPE_CORE
+					DisplayInstance->Backlight(n, DISPLAY_SOURCE_REMOUTE);
+#endif
+#ifdef TYPE_REMOUTE
+					DisplayInstance->Backlight(n, DISPLAY_SOURCE_LOCAL);
+#endif
+
+
 				}
 			}
 			else
