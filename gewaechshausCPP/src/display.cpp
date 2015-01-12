@@ -204,13 +204,20 @@ void Display::SendMessage(char *massage, int source) {
 }
 
 void Display::SendByte(char *ptr, int lenght, int source) {
-	int i;
-	for (i = 0; i < lenght; i++)
+	if (source == DISPLAY_SOURCE_REMOUTE )
 	{
-		DisplayInstance->buffer[i] =  *(ptr + i);
+		SendMessage(ptr, source);
 	}
-	DisplayInstance->buffer[i+1] = 0;
-	DisplayInstance->SendString(buffer, source);
+	else
+	{
+		int i;
+		for (i = 0; i < lenght; i++)
+		{
+			DisplayInstance->buffer[i] =  *(ptr + i);
+		}
+		DisplayInstance->buffer[i] = 0;
+		DisplayInstance->SendString(buffer, source);
+	}
 }
 
 /*
@@ -254,7 +261,7 @@ void Display::SetCursorPosition(char line, char pos, int source) {
 
 	//DisplayInstance->uartPutChar(0x80);
 
-	if (line < 0 || line > 20 || pos < 0 || pos > 19)
+	if (line < 0 || line > 4 || pos < 0 || pos > 19)
 		return;
 
 	pos += 128;

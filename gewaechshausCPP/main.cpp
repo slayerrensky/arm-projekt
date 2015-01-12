@@ -77,7 +77,7 @@ int main(void) {
 		}
 		if (xbee.IsCommandoAvalible())
 		{
-			if (XbeeInstance->txin > 40)
+			//if (XbeeInstance->txin > 70)
 				xbee.ProzessCommando();
 		}
 //		char wert = USART_ReceiveData(USART2);

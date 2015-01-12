@@ -14,7 +14,18 @@
 #include "misc.h"
 #include <stdlib.h>
 
-
+#define BESCHL 0
+#define RUN    1
+#define BREMS  2
+#define STOP   3
+#define MIN_DELAY 1000
+#define START_DELAY 1000
+#define BREMS_START 200
+#define BESCHL_STOP 200
+int runValue = BESCHL;
+int timerValue;
+int timerValueDown;
+int rest = 0;
 
 Stepper *StepperInstance;
 //                               A0,A1,B0,B1
@@ -63,7 +74,7 @@ void Stepper::Left(int stepps,int time)
 		StepperInstance->direction = DIRECTION_LEFT;
 
 		// FRQ = 84MHz / (Prescaler+1) / (Periode+1)
-		StepperInstance->InitTim2(84-1, 1000 - 1); //10HZ
+		StepperInstance->InitTim2(84 , START_DELAY ); //10HZ
 	}
 }
 
@@ -77,7 +88,7 @@ void Stepper::Right(int stepps,int time)
 		StepperInstance->StepperStatus = STEPPER_BUSSY;
 		StepperInstance->stepperEnd = stepps;
 		StepperInstance->direction = DIRECTION_RIGHT;
-		StepperInstance->InitTim2(84, 1000 - 1); //10HZ
+		StepperInstance->InitTim2(84, START_DELAY  ); //10HZ
 	}
 
 }
@@ -130,6 +141,7 @@ void Stepper::EnableSingelton(void)
 
 void Stepper::InitTim2(int prescaler, int period)
 {
+	timerValue = period;
 	NVIC_InitTypeDef nvicStructure;
 	nvicStructure.NVIC_IRQChannel = TIM2_IRQn;
 	nvicStructure.NVIC_IRQChannelPreemptionPriority = 0;
@@ -140,9 +152,9 @@ void Stepper::InitTim2(int prescaler, int period)
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
 	TIM_TimeBaseInitTypeDef timerInitStructure;
-	timerInitStructure.TIM_Prescaler = prescaler;
+	timerInitStructure.TIM_Prescaler = prescaler-1;
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	timerInitStructure.TIM_Period = period;
+	timerInitStructure.TIM_Period = period-1;
 	timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	timerInitStructure.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(TIM2, &timerInitStructure);
@@ -160,7 +172,61 @@ extern "C" void TIM2_IRQHandler()
  {
      if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
      {
-         if (StepperInstance->currentStep < StepperInstance->stepperEnd)
+//         switch ( StepperInstance->currentStep )
+//         {
+//         	case 40: TIM2->ARR = 1800 - 1; break;
+//         	case 80: TIM2->ARR = 1600 - 1; break;
+//         	case 120: TIM2->ARR = 1400 - 1; break;
+//         	case 160: TIM2->ARR = 1200 - 1; break;
+//         	case 200: TIM2->ARR = 1000 - 1; break;
+//         	case 240: TIM2->ARR = 800 - 1; break;
+//
+//         }
+//         switch ( StepperInstance->stepperEnd - StepperInstance->currentStep )
+//		 {
+//		 	 case 40: TIM2->ARR = 1800 - 1; break;
+//			 case 80: TIM2->ARR = 1600 - 1; break;
+//			 case 120: TIM2->ARR = 1400 - 1; break;
+//			 case 160: TIM2->ARR = 1200 - 1; break;
+//			 case 200: TIM2->ARR = 1000 - 1; break;
+//			 case 240: TIM2->ARR = 800 - 1; break;
+//		 }
+
+    	 switch (runValue)
+    	 {
+    	 	 case BESCHL:
+    	 	 {
+    	 		 timerValue = timerValue - (int)(((2.0 * timerValue)+rest)/(8 * (StepperInstance->currentStep +1) + 1));
+    	 		 rest = ((2 * (long)timerValue)+rest)%(4 * StepperInstance->currentStep + 1);
+    	 		 if((StepperInstance->stepperEnd - StepperInstance->currentStep) <= BREMS_START) {
+    	 		     runValue = BREMS;
+    	 		 }
+    	 		 // Chech if we hitted max speed.
+    	 		 else if(timerValue <= MIN_DELAY) {
+    	 			 timerValue = MIN_DELAY;
+    	 			 rest = 0;
+    	 			 runValue = RUN;
+    	 		 }
+    	 		 TIM2->ARR = timerValue;
+    	 		 break;
+    	 	 }
+    	 	 case RUN:
+    	 	 {
+    	 		 if((StepperInstance->stepperEnd - StepperInstance->currentStep) <= BREMS_START) {
+    	 			 timerValueDown=START_DELAY;
+    	 			 runValue = BREMS;
+    	 		 }
+    	 		 break;
+    	 	 }
+    	 	 case BREMS:
+    	 	 {
+    	 		 timerValue = (int)(1.0*timerValue/(1 - (2.0/(8.0 * (StepperInstance->stepperEnd - StepperInstance->currentStep+1) + 1))));
+    	 		 TIM2->ARR = timerValue;
+    	 		 break;
+    	 	 }
+    	 }
+
+    	 if (StepperInstance->currentStep < StepperInstance->stepperEnd)
          {
         	 TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
         	 StepperInstance->RunStep();
@@ -170,6 +236,8 @@ extern "C" void TIM2_IRQHandler()
         	 TIM_ITConfig(TIM2, TIM_IT_Update, DISABLE);
         	 TIM_Cmd(TIM2, DISABLE);
         	 StepperInstance->Leerlauf();
+        	 runValue = BESCHL;
+        	 rest=0;
          }
      }
  }

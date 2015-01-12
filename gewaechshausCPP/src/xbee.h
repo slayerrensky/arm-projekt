@@ -67,7 +67,7 @@ protected:
 	void CommandoProzess(char *commando);
 	char *KommandoBuffer;
 	int currentKommandoChar;
-	int lastKommandoTerminator;
+	int KommandoTerminator;
 
 };
 

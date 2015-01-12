@@ -156,13 +156,17 @@ void Fassade::UpdateDisplayValues(){
 	TemperaturSensorenInstance->startTempMeasurementAllSensors();
 	float sensoren[anzahl];
 	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
+
 	DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay,DISPLAY_SOURCE_REMOUTE);
-	for (i=0; i<anzahl; i++)
-	{
-		sprintf(bufferD, "Sensor %d: %3.2f",i, sensoren[i]);
-		DisplayInstance->SetCursorPosition(i,0, DISPLAY_SOURCE_REMOUTE);
-		DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-	}
+
+	sprintf(bufferD, "Indoor : %3.2f",sensoren[TEMP_SENSOR_IN]);
+	DisplayInstance->SetCursorPosition(0,0, DISPLAY_SOURCE_REMOUTE);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
+	sprintf(bufferD, "Outdoor: %3.2f",sensoren[TEMP_SENSOR_OUT]);
+	DisplayInstance->SetCursorPosition(1,0, DISPLAY_SOURCE_REMOUTE);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
+
+
 }
 void Fassade::TerminalDisplayTemp()
 {

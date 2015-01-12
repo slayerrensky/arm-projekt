@@ -276,7 +276,7 @@ void Xbee::SendTransmission( char version, char receiver, char commando, char pa
 	PutChar((uint16_t) 0x01);
 	PutChar((uint16_t) version);
 	crc += version;
-	char lenght = 5 + datalength + 1;
+	char lenght = 5 + datalength;
 	PutChar((uint16_t) lenght); //Längenbyte Version bis CRC
 	crc += lenght;
 	PutChar((uint16_t) receiver);
@@ -308,7 +308,7 @@ int Xbee::IsCommandoAvalible(){
 	{
 		if (KommandoBuffer[i] == 0x04) // EOT (End of Transmission)
 		{	//Befehl vollständig
-			lastKommandoTerminator = i;
+			KommandoTerminator = i;
 			return 1;
 		}
 	}
@@ -320,7 +320,7 @@ void Xbee::ProzessCommando(){
 		int SOHByte = 0;
 		int tl; //Transmission lenght
 		int i = 0;
-		for(i=0;i<lastKommandoTerminator;i++)
+		for(i=0;i<KommandoTerminator;i++)
 		{
 			if (KommandoBuffer[i] == 0x01)
 			{
@@ -329,25 +329,20 @@ void Xbee::ProzessCommando(){
 			}
 
 		}
-		i=SOHByte+8; //MINIMUM Transmisson length 7 Byte
-		// Forschleife ist überflüssig
-		for(;i<=lastKommandoTerminator;i++)
+		if (KommandoBuffer[KommandoTerminator] == 0x04)
 		{
-			if (KommandoBuffer[i] == 0x04)
-			{
-				EOTByte = i;
-				break;
-			}
+			if( KommandoBuffer[KommandoTerminator + 1] == 0x04)
+				KommandoTerminator++;
 		}
 
-		tl = EOTByte-SOHByte+1;
+		tl = KommandoTerminator-SOHByte+1;
 		char* cmd = (char*) malloc(sizeof(char) * tl ); //Speicher resavieren für das aktuelle kommando
 		memcpy(cmd, KommandoBuffer,tl); // Transmission sichern
-		memcpy(KommandoBuffer, KommandoBuffer + EOTByte + 1 ,bufferSize - tl); //Buffer nach vorne verschieben
+		memcpy(KommandoBuffer, KommandoBuffer + KommandoTerminator + 1 ,bufferSize - tl); //Buffer nach vorne verschieben
 		currentKommandoChar -= tl; // Anfangszeiger setzen
 		CommandoProzess(cmd);
 		free(cmd);
-		lastKommandoTerminator = 0;
+		KommandoTerminator = 0;
 }
 
 /*
@@ -362,16 +357,16 @@ void Xbee::CommandoProzess(char *transmission){
 	}
 	int version = transmission[startbyte + 1];
 	int laenge = transmission[startbyte + 2];
-	char crc = transmission[startbyte + laenge];
+	char crc = transmission[startbyte + laenge+1];
 	int commando;
 	int paketnummer;
 	int dataStart;
 	int dataEnd;
-	if(transmission[startbyte+laenge+1] == 0x04 )
+	if(transmission[startbyte+laenge+2] == 0x04 )
 	{
 		char crc_sum = 0;
 		int i;
-		for (i=startbyte+1;i<laenge;i++) // CRC von byte 1 bis zum CRC byte (ohne CRC)
+		for (i=startbyte+1;i<laenge+1;i++) // CRC von byte 1 bis zum CRC byte (ohne CRC)
 		{
 			crc_sum += transmission[i];
 		}
@@ -382,7 +377,7 @@ void Xbee::CommandoProzess(char *transmission){
 				commando = transmission[startbyte + 4];
 				paketnummer = transmission[startbyte + 5];
 				dataStart = startbyte + 6;
-				dataEnd = startbyte + laenge - 1;
+				dataEnd = startbyte + laenge;
 			}
 			else
 			{
@@ -393,18 +388,21 @@ void Xbee::CommandoProzess(char *transmission){
 		else
 		{
 			TerminalInstance->SendMessage("\n\rDebug: CRC is wrong\n\r");
+			TerminalInstance->SendViaDma(transmission,laenge + 2);
 			return;
 		}
 	}
 	else
 	{
 		TerminalInstance->SendMessage("\n\rDebug: End byte not right->\n\r");
+		TerminalInstance->SendViaDma(transmission,laenge + 2);
 		return;
 	}
 
 	if (commando == 0x10)
 	{
 		DisplayInstance->SendByte(transmission + dataStart, dataEnd - dataStart+1, DISPLAY_SOURCE_LOCAL);
+		TerminalInstance->SendViaDma(transmission + dataStart,dataEnd - dataStart+1);
 	}
 	else if (commando = 0x20)
 	{

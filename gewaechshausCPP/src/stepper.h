@@ -5,7 +5,7 @@
 #include "stm32f4xx.h"
 #define STEPPER_USABLE 1
 #define STEPPER_BUSSY 0
-#define STEPPER_MAX_POSITION 10000
+#define STEPPER_MAX_POSITION 20000
 #define DIRECTION_LEFT 1
 #define DIRECTION_RIGHT 0
 
