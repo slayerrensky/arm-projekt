@@ -11,6 +11,8 @@
 
 #include "display.h"
 
+char bufferD[129];
+
 Display *DisplayInstance;
 
 Display::Display(void) {

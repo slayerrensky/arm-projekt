@@ -21,6 +21,8 @@ public:
 	void Leerlauf();
 	void InitTim2(int prescaler, int period);
 	void Go2Step(int g);
+	int GetPosition();
+	int GetPositionInProzent();
 
 	int StepperStatus;
 	int currentStep;

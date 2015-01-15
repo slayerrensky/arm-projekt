@@ -17,10 +17,13 @@
 
 
 char bufferT[256] = "";
-char bufferD[129] = "";
-int idealeTemp = 24;
+float solltemp;
 
 Fassade *FassadeInstance;
+
+Fassade::Fassade(){
+	Fassade(TYPE_CORE);
+}
 
 Fassade::Fassade(int type){
 	FassadeInstance = this;
@@ -31,6 +34,7 @@ void Fassade::InitGewaechshaus(void){
 		sprintf(bufferT, "Es wurden %d Temperatursensoren gefunden.\r\n",
 				TemperaturSensorenInstance->getAnzahlGefunderSensoren());
 		 TerminalInstance->SendMessage(bufferT);
+		 SetSolltemp(24.0);
 }
 
 void Fassade::RegelungFenster(void)
@@ -61,9 +65,9 @@ void Fassade::RegelungFenster(void)
 	float difference;
 	int dif = 0;
 
-	if (idealeTemp > in && in < out && idealeTemp > out) // drin zu kalt, drauﬂen kalt aber w‰rmer als drin, fenster auf
+	if (GetSolltemp() > in && in < out && GetSolltemp() > out) // drin zu kalt, drauﬂen kalt aber w‰rmer als drin, fenster auf
 	{
-		difference = idealeTemp - in;
+		difference = GetSolltemp() - in;
 		if (difference > 0 )
 		{
 			dif = 0;
@@ -75,9 +79,9 @@ void Fassade::RegelungFenster(void)
 		else
 			dif = 0;
 	}
-	else if ( idealeTemp > in && idealeTemp <= out) // drin zu kalt, drauﬂen w‰rmer, fenster auf
+	else if ( GetSolltemp() > in && GetSolltemp() <= out) // drin zu kalt, drauﬂen w‰rmer, fenster auf
 	{
-			difference = idealeTemp - in;
+			difference = GetSolltemp() - in;
 			if (difference > 0 )
 			{
 				dif = 0;
@@ -89,13 +93,13 @@ void Fassade::RegelungFenster(void)
 			else
 				dif = 0;
 		}
-	else if (idealeTemp > in && out <= in) // drin zu kalt, drauﬂen k‰lter, fenster zu
+	else if (GetSolltemp() > in && out <= in) // drin zu kalt, drauﬂen k‰lter, fenster zu
 	{
 			dif = 0;
 	}
-	else if ( idealeTemp < in && out < in) // drin zu warm, drauﬂen k‰lter, fenster auf
+	else if ( GetSolltemp() < in && out < in) // drin zu warm, drauﬂen k‰lter, fenster auf
 	{
-		difference = in - idealeTemp;
+		difference = in - GetSolltemp();
 		if (difference > 0 )
 		{
 			dif = 0;
@@ -107,9 +111,9 @@ void Fassade::RegelungFenster(void)
 		else
 			dif = 0;
 	}
-	else if ( idealeTemp < in && out > in) // drin zu warm, drauﬂen w‰rmer, fenster auf
+	else if ( GetSolltemp() < in && out > in) // drin zu warm, drauﬂen w‰rmer, fenster auf
 	{
-		difference = in - idealeTemp;
+		difference = in - GetSolltemp();
 		if (difference > 0 )
 		{
 			dif = 0;
@@ -139,7 +143,7 @@ void Fassade::RegelungFenster(void)
 void Fassade::Window2Position(int inProzent){
 	//int voltage = AnalogDigitalConverterInstance->getConvertedValue(ADC_CHANNEL_VOLTAGE);
 	//int position = voltage * (int)(2.44 + 0.5); //Scritte pro millivolt
-	int position = (int) ((ADC_MAX_VALUE / 100.0 * inProzent)+0.5);
+	int position = (int) ((STEPPER_MAX_POSITION / 100.0 * inProzent)+0.5);
 #ifdef DEBUG
 	//sprintf(bufferT, "\r\nADV_Value: %d -> Go2Step: %d \r\n",voltage, position);
 	sprintf(bufferT, "\r\nNew Stepper Position: %d \r\n", position);
@@ -151,7 +155,6 @@ void Fassade::Window2Position(int inProzent){
 
 void Fassade::UpdateDisplayValues(){
 
-	int i;
 	int anzahl = TemperaturSensorenInstance->getAnzahlGefunderSensoren();
 	TemperaturSensorenInstance->startTempMeasurementAllSensors();
 	float sensoren[anzahl];
@@ -159,11 +162,17 @@ void Fassade::UpdateDisplayValues(){
 
 	DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay,DISPLAY_SOURCE_REMOUTE);
 
-	sprintf(bufferD, "Indoor : %3.2f",sensoren[TEMP_SENSOR_IN]);
+	sprintf(bufferD, "Indoor  : %3.2f",sensoren[TEMP_SENSOR_IN]);
 	DisplayInstance->SetCursorPosition(0,0, DISPLAY_SOURCE_REMOUTE);
 	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-	sprintf(bufferD, "Outdoor: %3.2f",sensoren[TEMP_SENSOR_OUT]);
+	sprintf(bufferD, "Outdoor : %3.2f",sensoren[TEMP_SENSOR_OUT]);
 	DisplayInstance->SetCursorPosition(1,0, DISPLAY_SOURCE_REMOUTE);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
+	sprintf(bufferD, "Sollwert: %3.2f",GetSolltemp() );
+	DisplayInstance->SetCursorPosition(2,0, DISPLAY_SOURCE_REMOUTE);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
+	sprintf(bufferD, "Fenster : %d", StepperInstance->GetPositionInProzent());
+	DisplayInstance->SetCursorPosition(3,0, DISPLAY_SOURCE_REMOUTE);
 	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
 
 
@@ -191,6 +200,14 @@ void Fassade::SendMassageToDisplay(char *massage){
 #ifdef TYPE_BOTH
 	DisplayInstance->SendString(massage, DISPLAY_SOURCE_LOCAL);
 #endif
+}
+
+void Fassade::SetSolltemp(float t){
+	solltemp = t;
+}
+
+float Fassade::GetSolltemp(void){
+	return solltemp;
 }
 
 

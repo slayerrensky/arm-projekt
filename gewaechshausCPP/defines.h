@@ -1,6 +1,5 @@
-//#define TYPE_BOTH
-#define TYPE_CORE
-//#define TYPE_REMOUTE
+#define TYPE_CORE 0
+#define TYPE_REMOUTE 1
 //#define TYPE_NETWORKMANAGER
 
 //#define DEBUG

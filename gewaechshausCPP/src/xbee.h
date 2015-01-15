@@ -22,11 +22,15 @@
 #define XBEE_COM_BUTTON_A (char)0x22
 #define XBEE_COM_BUTTON_B (char)0x23
 #define XBEE_COM_GETVALUE (char)0x30
+#define XBEE_COM_SET_SOLLWERT_VALUE (char)0x31
+#define XBEE_COM_INFO_SOLLWERT_VALUE (char)0x32
+#define XBEE_COM_INFO_DEFAULT_SCREEN (char)0x33
 #define XBEE_COM_WINDOW_POS (char)0x40
 #define XBEE_COM_CURRENT (char)0x42
 #define XBEE_COM_T1 (char)0x44
 #define XBEE_COM_T2 (char)0x45
 
+extern char bufferX[256];
 
 class Xbee {
 

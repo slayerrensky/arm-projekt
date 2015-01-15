@@ -165,6 +165,14 @@ void Stepper::InitTim2(int prescaler, int period)
 	TIM_Cmd(TIM2, ENABLE);
 }
 
+int Stepper::GetPosition(){
+	return StepperInstance->position;
+}
+
+int Stepper::GetPositionInProzent(){
+	return (int)(StepperInstance->position * 100.0 / STEPPER_MAX_POSITION);
+}
+
 /*
  *  Stepper Interrupt
  */

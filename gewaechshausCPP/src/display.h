@@ -42,6 +42,7 @@ protected:
 };
 
 extern Display *DisplayInstance;
+extern char bufferD[129];
 
 #define DISPLAY_ClearDisplay 0x01
 #define DISPLAY_MoveCursorRightOne 0x14

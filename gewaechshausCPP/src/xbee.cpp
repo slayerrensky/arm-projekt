@@ -15,9 +15,10 @@
 #include "fassade.h"
 #include "display.h"
 #include "terminal.h"
+#include "menu.h"
 
 Xbee *XbeeInstance;
-
+char bufferX[256];
 
 Xbee::Xbee(void){
 	Xbee(256, XBEE_TYPE_NONE);
@@ -349,7 +350,7 @@ void Xbee::ProzessCommando(){
  * Verarbeiten der Kommandos die vom Xbee kommen.
  */
 void Xbee::CommandoProzess(char *transmission){
-
+	int i=0;
 	int startbyte = 0;
 	while (transmission[startbyte] != 0x01)
 	{
@@ -404,9 +405,41 @@ void Xbee::CommandoProzess(char *transmission){
 		DisplayInstance->SendByte(transmission + dataStart, dataEnd - dataStart+1, DISPLAY_SOURCE_LOCAL);
 		TerminalInstance->SendViaDma(transmission + dataStart,dataEnd - dataStart+1);
 	}
-	else if (commando = 0x20)
+	else if (commando == XBEE_COM_SET_SOLLWERT_VALUE)
 	{
-
+		for (i=0;i<dataEnd - dataStart+1;i++)
+		{
+			bufferX[i] = *(transmission + dataStart + i);
+		}
+		bufferX[dataEnd - dataStart+2] = 0x00;
+		FassadeInstance->SetSolltemp(atoff(bufferX));
+	}
+	else if (commando == XBEE_COM_INFO_SOLLWERT_VALUE)
+	{
+		for (i=0;i<dataEnd - dataStart+1;i++)
+		{
+			bufferX[i] = *(transmission + dataStart + i);
+		}
+		bufferX[dataEnd - dataStart+2] = 0x00;
+		MenuInstance->SetSollwert(atoff(bufferX));
+	}
+	else if (commando == XBEE_COM_INFO_DEFAULT_SCREEN)
+	{
+		menuShow = false;
+		FassadeInstance->UpdateDisplayValues();
+	}
+	else if (commando == XBEE_COM_GETVALUE)
+	{
+		switch(*(transmission + dataStart ))
+		{
+			case XBEE_COM_INFO_SOLLWERT_VALUE:
+			{
+				sprintf(bufferX,"%f",FassadeInstance->GetSolltemp());
+					XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+							XBEE_COM_INFO_SOLLWERT_VALUE,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+			}
+			default:;
+		}
 	}
 
 }

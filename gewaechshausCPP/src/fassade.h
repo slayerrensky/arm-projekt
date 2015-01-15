@@ -6,9 +6,12 @@
 
 #include "stm32f4xx.h"
 
+
+
 class Fassade {
 
 public:
+	Fassade();
 	Fassade(int type);
 	void InitGewaechshaus(void);
 	void Window2Position(int inProzent);
@@ -16,7 +19,10 @@ public:
 	void SendMassageToDisplay(char* massage);
 	void TerminalDisplayTemp();
 	void UpdateDisplayValues();
+	void SetSolltemp(float t);
+	float GetSolltemp(void);
 	int type;
+
 };
 
 extern Fassade *FassadeInstance;
