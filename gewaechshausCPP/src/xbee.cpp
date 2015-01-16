@@ -403,7 +403,6 @@ void Xbee::CommandoProzess(char *transmission){
 	if (commando == 0x10)
 	{
 		DisplayInstance->SendByte(transmission + dataStart, dataEnd - dataStart+1, DISPLAY_SOURCE_LOCAL);
-		TerminalInstance->SendViaDma(transmission + dataStart,dataEnd - dataStart+1);
 	}
 	else if (commando == XBEE_COM_SET_SOLLWERT_VALUE)
 	{

@@ -17,7 +17,6 @@
 #include "static_commandos.h"
 #include "menu.h"
 
-
 extern "C" {
 #include "tm_stm32f4_onewire.h"
 #include "tm_stm32f4_ds18b20.h"
@@ -94,6 +93,7 @@ int main(void) {
 			}
 		}
 
+
 #ifdef TYPE_REMOUTE
 		if (sleep % 100 == 0)
 		{
@@ -129,6 +129,13 @@ int main(void) {
 				QuadratureEncoderInstance->resetButtonPressd();
 			}
 		}
+		if (sleep % 5000 == 0)
+		{
+			if (menuShow == false)
+			{
+				FassadeInstance->UpdateDisplayValues2();
+			}
+		}
 		if (menuShow == true)
 		{
 			if (sleepDisplay % 5000 == 4999)
@@ -144,9 +151,9 @@ int main(void) {
 		}
 #endif
 		led.On();
-		UB_Systick_Pause_ms(1);
+		//UB_Systick_Pause_ms(1);
 		led.Off();
-		UB_Systick_Pause_ms(1);
+		//UB_Systick_Pause_ms(1);
 		sleep++;
 
 	}
