@@ -29,7 +29,7 @@ public:
 	void Submit();
 	void DrawCursor();
 	void SetSollwert(float sollwert);
-	int menuShow = false;
+	//int menuShow = false;
 	int menu=0;
 	int menuBefore=0;
 	menu_str *currentMenu;

@@ -157,43 +157,50 @@ void Fassade::Window2Position(int inProzent){
 
 void Fassade::UpdateDisplayValues(){
 
+	DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay,DISPLAY_SOURCE_LOCAL);
+
+
+	sprintf(bufferD, "Outdoor : %3.2f",XbeeInstance->values.outdor);
+	DisplayInstance->SetCursorPosition(1,0, DISPLAY_SOURCE_LOCAL);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_LOCAL);
+	sprintf(bufferD, "Indoor  : %3.2f",XbeeInstance->values.indor);
+	DisplayInstance->SetCursorPosition(0,0, DISPLAY_SOURCE_LOCAL);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_LOCAL);
+	sprintf(bufferD, "Sollwert: %3.2f",XbeeInstance->values.sollwert);
+	DisplayInstance->SetCursorPosition(2,0, DISPLAY_SOURCE_LOCAL);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_LOCAL);
+	sprintf(bufferD, "Fenster : %d", XbeeInstance->values.windowP);
+	DisplayInstance->SetCursorPosition(3,0, DISPLAY_SOURCE_LOCAL);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_LOCAL);
+}
+
+void Fassade::UpdateDisplayValues2(){
+
+	DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay,DISPLAY_SOURCE_LOCAL);
+
+	sprintf(bufferD, "Current : %1.3f A",XbeeInstance->values.current);
+	DisplayInstance->SetCursorPosition(0,0, DISPLAY_SOURCE_LOCAL);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_LOCAL);
+	sprintf(bufferD, "Voltage : %1.3f V",XbeeInstance->values.voltage);
+	DisplayInstance->SetCursorPosition(1,0, DISPLAY_SOURCE_LOCAL);
+	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_LOCAL);
+
+}
+
+void Fassade::SendValuesToRemoteDisplay()
+{
 	int anzahl = TemperaturSensorenInstance->getAnzahlGefunderSensoren();
 	TemperaturSensorenInstance->startTempMeasurementAllSensors();
 	float sensoren[anzahl];
 	TemperaturSensorenInstance->getAlleTempWerte(sensoren);
 
-	DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay,DISPLAY_SOURCE_REMOUTE);
-
-	float current = AmpermeterInstance->getCurrent();
-
-	sprintf(bufferD, "Indoor  : %3.2f",sensoren[TEMP_SENSOR_IN]);
-	DisplayInstance->SetCursorPosition(0,0, DISPLAY_SOURCE_REMOUTE);
-	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-	sprintf(bufferD, "Outdoor : %3.2f",sensoren[TEMP_SENSOR_OUT]);
-	DisplayInstance->SetCursorPosition(1,0, DISPLAY_SOURCE_REMOUTE);
-	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-	sprintf(bufferD, "Sollwert: %3.2f",GetSolltemp() );
-	DisplayInstance->SetCursorPosition(2,0, DISPLAY_SOURCE_REMOUTE);
-	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-	sprintf(bufferD, "Fenster : %d", StepperInstance->GetPositionInProzent());
-	DisplayInstance->SetCursorPosition(3,0, DISPLAY_SOURCE_REMOUTE);
-	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-}
-
-void Fassade::UpdateDisplayValues2(){
-
-	DisplayInstance->SpecialCommand(DISPLAY_ClearDisplay,DISPLAY_SOURCE_REMOUTE);
-
-	float current = AmpermeterInstance->getCurrent();
-	float voltage = AnalogDigitalConverterInstance->getConvertedValueAsVoltage(ADC_CHANNEL_VOLTAGE);
-
-	sprintf(bufferD, "Fenster : %1.3f A",current);
-	DisplayInstance->SetCursorPosition(0,0, DISPLAY_SOURCE_REMOUTE);
-	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-	sprintf(bufferD, "Voltage : %1.3f V",voltage);
-	DisplayInstance->SetCursorPosition(1,0, DISPLAY_SOURCE_REMOUTE);
-	DisplayInstance->SendString(bufferD, DISPLAY_SOURCE_REMOUTE);
-
+	XbeeInstance->values.current =  AmpermeterInstance->getCurrent();
+	XbeeInstance->values.voltage =  AnalogDigitalConverterInstance->getConvertedValueAsVoltage(ADC_CHANNEL_VOLTAGE);
+	XbeeInstance->values.windowP =  StepperInstance->GetPositionInProzent();
+	XbeeInstance->values.sollwert = solltemp;
+	XbeeInstance->values.indor = sensoren[TEMP_SENSOR_IN];
+	XbeeInstance->values.outdor = sensoren[TEMP_SENSOR_OUT];
+	XbeeInstance->TransmittPValues();
 }
 
 

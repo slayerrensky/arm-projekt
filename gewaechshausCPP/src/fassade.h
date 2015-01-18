@@ -20,6 +20,7 @@ public:
 	void TerminalDisplayTemp();
 	void UpdateDisplayValues();
 	void UpdateDisplayValues2();
+	void SendValuesToRemoteDisplay();
 	void SetSolltemp(float t);
 	float GetSolltemp(void);
 	int type;

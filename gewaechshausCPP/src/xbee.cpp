@@ -305,7 +305,7 @@ int Xbee::IsCommandoAvalible(){
 	int i; //Forschleivenzählvariable
 	n = ReadBuffer(KommandoBuffer + currentKommandoChar);
 	currentKommandoChar += n;
-	for (i = 0; i < bufferSize;i++)
+	for (i = 0; i < currentKommandoChar;i++)
 	{
 		if (KommandoBuffer[i] == 0x04) // EOT (End of Transmission)
 		{	//Befehl vollständig
@@ -317,33 +317,40 @@ int Xbee::IsCommandoAvalible(){
 }
 
 void Xbee::ProzessCommando(){
-		int EOTByte = 0;
-		int SOHByte = 0;
-		int tl; //Transmission lenght
-		int i = 0;
-		for(i=0;i<KommandoTerminator;i++)
+	int EOTByte = 0;
+	int SOHByte = 0;
+	int tl; //Transmission lenght
+	int i = 0;
+	for(i=0;i<KommandoTerminator;i++)
+	{
+		if (KommandoBuffer[i] == 0x01)
 		{
-			if (KommandoBuffer[i] == 0x01)
-			{
-				SOHByte = i;
-				break;
-			}
-
-		}
-		if (KommandoBuffer[KommandoTerminator] == 0x04)
-		{
-			if( KommandoBuffer[KommandoTerminator + 1] == 0x04)
-				KommandoTerminator++;
+			SOHByte = i;
+			break;
 		}
 
-		tl = KommandoTerminator-SOHByte+1;
-		char* cmd = (char*) malloc(sizeof(char) * tl ); //Speicher resavieren für das aktuelle kommando
-		memcpy(cmd, KommandoBuffer,tl); // Transmission sichern
-		memcpy(KommandoBuffer, KommandoBuffer + KommandoTerminator + 1 ,bufferSize - tl); //Buffer nach vorne verschieben
-		currentKommandoChar -= tl; // Anfangszeiger setzen
-		CommandoProzess(cmd);
-		free(cmd);
-		KommandoTerminator = 0;
+	}
+	i = SOHByte+7;
+	for (;i<=KommandoTerminator;i++)
+	{
+		if (KommandoBuffer[i] == 0x04)
+		{
+			EOTByte = i;
+		}
+	}
+	if( KommandoBuffer[EOTByte + 1] == 0x04)
+	{
+		KommandoTerminator++;
+	}
+
+	tl = EOTByte-SOHByte+1;
+	char* cmd = (char*) malloc(sizeof(char) * tl ); //Speicher resavieren für das aktuelle kommando
+	memcpy(cmd, KommandoBuffer,tl); // Transmission sichern
+	memcpy(KommandoBuffer, KommandoBuffer + EOTByte + 1 ,bufferSize - tl); //Buffer nach vorne verschieben
+	currentKommandoChar -= tl; // Anfangszeiger setzen
+	CommandoProzess(cmd);
+	free(cmd);
+	KommandoTerminator = 0;
 }
 
 /*
@@ -413,14 +420,60 @@ void Xbee::CommandoProzess(char *transmission){
 		bufferX[dataEnd - dataStart+2] = 0x00;
 		FassadeInstance->SetSolltemp(atoff(bufferX));
 	}
-	else if (commando == XBEE_COM_INFO_SOLLWERT_VALUE)
+	else if (commando == XBEE_COM_VALUE_SOLLWERT)
 	{
 		for (i=0;i<dataEnd - dataStart+1;i++)
 		{
 			bufferX[i] = *(transmission + dataStart + i);
 		}
 		bufferX[dataEnd - dataStart+2] = 0x00;
-		MenuInstance->SetSollwert(atoff(bufferX));
+		XbeeInstance->values.sollwert = atoff(bufferX);
+		//MenuInstance->SetSollwert(atoff(bufferX));
+	}
+	else if (commando == XBEE_COM_VALUE_INDOOR)
+	{
+		for (i=0;i<dataEnd - dataStart+1;i++)
+		{
+			bufferX[i] = *(transmission + dataStart + i);
+		}
+		bufferX[dataEnd - dataStart+2] = 0x00;
+		XbeeInstance->values.indor = atoff(bufferX);
+	}
+	else if (commando == XBEE_COM_VALUE_OUTDOOR)
+	{
+		for (i=0;i<dataEnd - dataStart+1;i++)
+		{
+			bufferX[i] = *(transmission + dataStart + i);
+		}
+		bufferX[dataEnd - dataStart+2] = 0x00;
+		XbeeInstance->values.outdor = atoff(bufferX);
+	}
+	else if (commando == XBEE_COM_VALUE_CURRENT)
+	{
+		for (i=0;i<dataEnd - dataStart+1;i++)
+		{
+			bufferX[i] = *(transmission + dataStart + i);
+		}
+		bufferX[dataEnd - dataStart+2] = 0x00;
+		XbeeInstance->values.current = atoff(bufferX);
+	}
+	else if (commando == XBEE_COM_VALUE_VOLTAGE)
+	{
+		for (i=0;i<dataEnd - dataStart+1;i++)
+		{
+			bufferX[i] = *(transmission + dataStart + i);
+		}
+		bufferX[dataEnd - dataStart+2] = 0x00;
+		XbeeInstance->values.voltage = atoff(bufferX);
+	}
+	else if (commando == XBEE_COM_VALUE_WINDOW)
+	{
+		for (i=0;i<dataEnd - dataStart+1;i++)
+		{
+			bufferX[i] = *(transmission + dataStart + i);
+		}
+		bufferX[dataEnd - dataStart+2] = 0x00;
+		XbeeInstance->values.windowP = atoi(bufferX);
 	}
 	else if (commando == XBEE_COM_INFO_DEFAULT_SCREEN)
 	{
@@ -431,15 +484,43 @@ void Xbee::CommandoProzess(char *transmission){
 	{
 		switch(*(transmission + dataStart ))
 		{
-			case XBEE_COM_INFO_SOLLWERT_VALUE:
+			case XBEE_COM_VALUE_SOLLWERT:
 			{
 				sprintf(bufferX,"%f",FassadeInstance->GetSolltemp());
 					XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
-							XBEE_COM_INFO_SOLLWERT_VALUE,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+							XBEE_COM_VALUE_SOLLWERT,(char) 0x00,  bufferX ,(char)strlen(bufferX));
 			}
 			default:;
 		}
 	}
+
+}
+
+void Xbee::TransmittPValues()
+{
+	sprintf(bufferX,"%d",XbeeInstance->values.windowP);
+	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+			XBEE_COM_VALUE_WINDOW,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+
+	sprintf(bufferX,"%f",XbeeInstance->values.current);
+	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+			XBEE_COM_VALUE_CURRENT,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+
+	sprintf(bufferX,"%f",XbeeInstance->values.voltage);
+	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+			XBEE_COM_VALUE_VOLTAGE,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+
+	sprintf(bufferX,"%f",XbeeInstance->values.sollwert);
+	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+			XBEE_COM_VALUE_SOLLWERT,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+
+	sprintf(bufferX,"%f",XbeeInstance->values.indor);
+	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+			XBEE_COM_VALUE_INDOOR,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+
+	sprintf(bufferX,"%f",XbeeInstance->values.outdor);
+	XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+			XBEE_COM_VALUE_OUTDOOR,(char) 0x00,  bufferX ,(char)strlen(bufferX));
 
 }
 

@@ -23,14 +23,26 @@
 #define XBEE_COM_BUTTON_B (char)0x23
 #define XBEE_COM_GETVALUE (char)0x30
 #define XBEE_COM_SET_SOLLWERT_VALUE (char)0x31
-#define XBEE_COM_INFO_SOLLWERT_VALUE (char)0x32
-#define XBEE_COM_INFO_DEFAULT_SCREEN (char)0x33
-#define XBEE_COM_WINDOW_POS (char)0x40
-#define XBEE_COM_CURRENT (char)0x42
-#define XBEE_COM_T1 (char)0x44
-#define XBEE_COM_T2 (char)0x45
+#define XBEE_COM_VALUE_SOLLWERT (char)0x32
+#define XBEE_COM_VALUE_INDOOR (char)0x44
+#define XBEE_COM_VALUE_OUTDOOR (char)0x45
+#define XBEE_COM_VALUE_WINDOW (char)0x40
+#define XBEE_COM_VALUE_CURRENT (char)0x42
+#define XBEE_COM_VALUE_VOLTAGE (char)0x43
+
+#define XBEE_COM_INFO_DEFAULT_SCREEN (char)0x60
+
 
 extern char bufferX[256];
+
+struct PValues {
+	float indor;
+	float outdor;
+	float sollwert;
+	int windowP;
+	float current;
+	float voltage;
+};
 
 class Xbee {
 
@@ -52,10 +64,13 @@ public:
 	void SendMessage(char *massage);
 	int IsCommandoAvalible();
 	void ProzessCommando();
+	void TransmittPValues();
 	char tmpBuffer[KOMMANDO_BUFFER];
 	int xbeeType;
 	char writeBuffer[256];
 	int txin = 0;
+	PValues values = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+
 
 
 protected:
@@ -70,8 +85,8 @@ protected:
 
 	void CommandoProzess(char *commando);
 	char *KommandoBuffer;
-	int currentKommandoChar;
-	int KommandoTerminator;
+	unsigned int currentKommandoChar;
+	unsigned int KommandoTerminator;
 
 };
 

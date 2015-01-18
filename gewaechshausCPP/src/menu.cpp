@@ -6,6 +6,7 @@
 #include "string.h"
 #include "temp_sensors.h"
 #include "defines.h"
+#include "fassade.h"
 
 Menu *MenuInstance;
 
@@ -60,16 +61,16 @@ void Menu::MenuUP(void)
 
 void Menu::Cursor(int i)
 {
-	MenuInstance->cursor += (int)i/2;
+	MenuInstance->cursor += (int)i/4;
 
 
 	switch (MenuInstance->menu)
 	{
 		case MENU_SOLLWERT:
 		{
-			MenuInstance->sollwert += (0.5 * (int)i/2);
+			MenuInstance->sollwert += (0.25 * int(i/4));
 			DisplayInstance->SetCursorPosition(2,0,DISPLAY_SOURCE_LOCAL);
-			sprintf(bufferD," Soll: %2.2f",sollwert);
+			sprintf(bufferD," Soll: %2.2f",MenuInstance->sollwert);
 			DisplayInstance->SendString(bufferD,DISPLAY_SOURCE_LOCAL);
 		}
 		default:
@@ -118,7 +119,8 @@ void Menu::Submit()
 					{
 
 						sprintf(bufferX,"%f",sollwert);
-						XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+
+						XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_CORE,
 								XBEE_COM_SET_SOLLWERT_VALUE,(char) 0x00,  bufferX ,(char)strlen(bufferX));
 						DisplayMenu(MENU_MAIN);
 
@@ -152,17 +154,20 @@ void Menu::DisplayMenu(int menu)
 		}
 		case MENU_SENSOREN:
 		{
-			sprintf(bufferX, "%c", XBEE_COM_INFO_DEFAULT_SCREEN);
-			XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
-					XBEE_COM_INFO_DEFAULT_SCREEN,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+			menuShow = false;
+			FassadeInstance->UpdateDisplayValues();
+			//sprintf(bufferX, "%c", XBEE_COM_INFO_DEFAULT_SCREEN);
+			//XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
+					//XBEE_COM_INFO_DEFAULT_SCREEN,(char) 0x00,  bufferX ,(char)strlen(bufferX));
 			break;
 		}
 		case MENU_SOLLWERT:
 		{
 			PrintMenu(&MenuSollwert);
-			sprintf(bufferX, "%c", XBEE_COM_INFO_SOLLWERT_VALUE);
-			XbeeInstance->SendTransmission(XBEE_PROTOKOLL_VERSION, XBEE_TYPE_REMOUTE,
-					XBEE_COM_GETVALUE,(char) 0x00,  bufferX ,(char)strlen(bufferX));
+			MenuInstance->sollwert = XbeeInstance->values.sollwert;
+			DisplayInstance->SetCursorPosition(2,0,DISPLAY_SOURCE_LOCAL);
+			sprintf(bufferD," Soll: %2.2f",MenuInstance->sollwert);
+			DisplayInstance->SendString(bufferD,DISPLAY_SOURCE_LOCAL);
 			break;
 		}
 		case MENU_SUBMIT:
