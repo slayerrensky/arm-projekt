@@ -274,25 +274,36 @@ void Xbee::SendTransmission( char version, char receiver, char commando, char pa
 {
 	int i;
 	char crc = 0x00;
+	//bufferX[0] = 0x01;
 	PutChar((uint16_t) 0x01);
+	//bufferX[1] = version;
 	PutChar((uint16_t) version);
 	crc += version;
 	char lenght = 5 + datalength;
 	PutChar((uint16_t) lenght); //Längenbyte Version bis CRC
+	//bufferX[2] = lenght;
 	crc += lenght;
 	PutChar((uint16_t) receiver);
+	//bufferX[3] = receiver;
 	crc += receiver;
 	PutChar((uint16_t) commando);
+	//bufferX[4] = commando;
 	crc += commando;
 	PutChar((uint16_t) packetnumber);
+	//bufferX[5] = packetnumber;
 	crc += packetnumber;
 	for (i=0;i<datalength;i++)
 	{
 		PutChar((uint16_t) *(daten + i));
+		//bufferX[i+6] = *(daten + i);
 		crc += *(daten + i) ;
 	}
 	PutChar((uint16_t) crc); //Längenbyte Version bis CRC
+	//bufferX[i+6+0] = crc;
 	PutChar((uint16_t) 0x04);
+	//bufferX[i+6+1] = 0x04;
+	//bufferX[i+6+1] = 0x00;
+	//XbeeInstance->SendMessage(bufferX);
 }
 
 void Xbee::SendMessage(char *massage){
