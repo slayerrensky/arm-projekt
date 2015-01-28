@@ -103,24 +103,24 @@
     <File name="cmsis_lib/source/stm32f4xx_usart.c" path="cmsis_lib/source/stm32f4xx_usart.c" type="1"/>
     <File name="cmsis_boot" path="" type="2"/>
     <File name="cmsis_lib/include/stm32f4xx_dac.h" path="cmsis_lib/include/stm32f4xx_dac.h" type="1"/>
-    <File name="STM32F4-Discovery/pdm_filter.h" path="STM32F4-Discovery/pdm_filter.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_syscfg.h" path="cmsis_lib/include/stm32f4xx_syscfg.h" type="1"/>
+    <File name="STM32F4-Discovery/pdm_filter.h" path="STM32F4-Discovery/pdm_filter.h" type="1"/>
     <File name="src" path="" type="2"/>
     <File name="cmsis_lib/include/stm32f4xx_usart.h" path="cmsis_lib/include/stm32f4xx_usart.h" type="1"/>
     <File name="STM32F4-Discovery/stm32f4_discovery.h" path="STM32F4-Discovery/stm32f4_discovery.h" type="1"/>
     <File name="src/temp_sensors.h" path="src/temp_sensors.h" type="1"/>
+    <File name="cmsis_boot/stm32f4xx.h" path="cmsis_boot/stm32f4xx.h" type="1"/>
     <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
-    <File name="cmsis_boot/stm32f4xx.h" path="cmsis_boot/stm32f4xx.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_spi.c" path="cmsis_lib/source/stm32f4xx_spi.c" type="1"/>
     <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
     <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
     <File name="src/led.h" path="src/led.h" type="1"/>
+    <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
     <File name="src/ampermeter.cpp" path="src/ampermeter.cpp" type="1"/>
     <File name="src/stepper.cpp" path="src/stepper.cpp" type="1"/>
-    <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
-    <File name="cmsis_lib/source/stm32f4xx_adc.c" path="cmsis_lib/source/stm32f4xx_adc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
+    <File name="cmsis_lib/source/stm32f4xx_adc.c" path="cmsis_lib/source/stm32f4xx_adc.c" type="1"/>
     <File name="src/ampermeter.h" path="src/ampermeter.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_i2c.c" path="cmsis_lib/source/stm32f4xx_i2c.c" type="1"/>
     <File name="src/terminal.cpp" path="src/terminal.cpp" type="1"/>
@@ -128,12 +128,12 @@
     <File name="src/stepper.h" path="src/stepper.h" type="1"/>
     <File name="lib/tm_stm32f4_onewire.c" path="src/lib/tm_stm32f4_onewire.c" type="1"/>
     <File name="STM32F4-Discovery/stm32f4_discovery_lis302dl.h" path="STM32F4-Discovery/stm32f4_discovery_lis302dl.h" type="1"/>
-    <File name="cmsis_boot/stm32f4xx_conf.h" path="cmsis_boot/stm32f4xx_conf.h" type="1"/>
     <File name="lib/tm_stm32f4_ds18b20.c" path="src/lib/tm_stm32f4_ds18b20.c" type="1"/>
-    <File name="cmsis_boot/system_stm32f4xx.h" path="cmsis_boot/system_stm32f4xx.h" type="1"/>
+    <File name="cmsis_boot/stm32f4xx_conf.h" path="cmsis_boot/stm32f4xx_conf.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_dac.c" path="cmsis_lib/source/stm32f4xx_dac.c" type="1"/>
-    <File name="src/rtc.h" path="src/rtc.h" type="1"/>
+    <File name="cmsis_boot/system_stm32f4xx.h" path="cmsis_boot/system_stm32f4xx.h" type="1"/>
     <File name="src/fassade.cpp" path="src/fassade.cpp" type="1"/>
+    <File name="src/rtc.h" path="src/rtc.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_rtc.c" path="cmsis_lib/source/stm32f4xx_rtc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_rcc.h" path="cmsis_lib/include/stm32f4xx_rcc.h" type="1"/>
     <File name="src/xbee.cpp" path="src/xbee.cpp" type="1"/>
@@ -145,10 +145,10 @@
     <File name="src/temp_sensors.cpp" path="src/temp_sensors.cpp" type="1"/>
     <File name="lib/tm_stm32f4_onewire.h" path="src/lib/tm_stm32f4_onewire.h" type="1"/>
     <File name="src/terminal.h" path="src/terminal.h" type="1"/>
-    <File name="STM32F4-Discovery/stm32f4_discovery_lis302dl.c" path="STM32F4-Discovery/stm32f4_discovery_lis302dl.c" type="1"/>
     <File name="cmsis_boot/startup/startup_stm32f4xx.c" path="cmsis_boot/startup/startup_stm32f4xx.c" type="1"/>
-    <File name="cmsis_lib/source/stm32f4xx_rcc.c" path="cmsis_lib/source/stm32f4xx_rcc.c" type="1"/>
+    <File name="STM32F4-Discovery/stm32f4_discovery_lis302dl.c" path="STM32F4-Discovery/stm32f4_discovery_lis302dl.c" type="1"/>
     <File name="src/rotary.h" path="src/rotary.h" type="1"/>
+    <File name="cmsis_lib/source/stm32f4xx_rcc.c" path="cmsis_lib/source/stm32f4xx_rcc.c" type="1"/>
     <File name="src/display.cpp" path="src/display.cpp" type="1"/>
     <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="STM32F4-Discovery/stm32f4_discovery_audio_codec.c" path="STM32F4-Discovery/stm32f4_discovery_audio_codec.c" type="1"/>

@@ -67,6 +67,7 @@ public:
 	void TransmittPValues();
 	char tmpBuffer[KOMMANDO_BUFFER];
 	int xbeeType;
+	char dmaBuffer[256];
 	char writeBuffer[256];
 	int txin = 0;
 	PValues values = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};

@@ -149,8 +149,8 @@ void Terminal::usart3InitDMA()
 
 	/* Enable the USART3 RX DMA Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = DMA1_Stream3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 }
@@ -412,6 +412,7 @@ void Terminal::EnableSingelton(void)
 /////////////////////////////////////////
 // Begin Interrupt Funktionen
 //////////////////////////////////////////
+
 
 /*
  * DMA1- Interrupt

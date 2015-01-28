@@ -127,7 +127,7 @@ void Xbee::InitDMA()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
-	//DMA_DeInit(DMA1_Stream5);
+	//DMA_DeInit(DMA1_Stream6);
 	DMA_InitStruct.DMA_Channel = DMA_Channel_4;
 	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART2->DR);
 	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral;
@@ -145,16 +145,16 @@ void Xbee::InitDMA()
 	USART_DMACmd(USART2,USART_DMAReq_Tx,ENABLE);
 
 	/* Enable DMA Stream Transfer Complete interrupt */
-	DMA_ITConfig(DMA1_Stream5, DMA_IT_TC, ENABLE);
+	DMA_ITConfig(DMA1_Stream6, DMA_IT_TC, ENABLE);
 	NVIC_InitTypeDef NVIC_InitStructure;
 
 	/* Configure the Priority Group to 2 bits */
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
 	/* Enable the USART2 RX DMA Interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = DMA1_Stream5_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannel = DMA1_Stream6_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 }
@@ -170,25 +170,25 @@ void Xbee::SendViaDma(char *startBuf, int sizeofBytes)
 	}
 	else
 	{
-		int a = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_TCIF5) == RESET;
+		int a = DMA_GetFlagStatus(DMA1_Stream6, DMA_FLAG_TCIF6) == RESET;
 		while (a)
 		{
-			a = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_TCIF5) == RESET;
+			a = DMA_GetFlagStatus(DMA1_Stream6, DMA_FLAG_TCIF6) == RESET;
 		}
-		memcpy(XbeeInstance->writeBuffer, startBuf, sizeofBytes);
+		memcpy(XbeeInstance->dmaBuffer, startBuf, sizeofBytes);
 	}
 
-	DMA_DeInit(DMA1_Stream5);
+	DMA_DeInit(DMA1_Stream6);
 	USART_ClearFlag(USART2, USART_FLAG_TC);
 
-	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)startBuf;
+	DMA_InitStruct.DMA_Memory0BaseAddr = (uint32_t)XbeeInstance->dmaBuffer;
 	DMA_InitStruct.DMA_BufferSize = sizeofBytes;
 
-	DMA_Init(DMA1_Stream5, &DMA_InitStruct);
+	DMA_Init(DMA1_Stream6, &DMA_InitStruct);
 
 	USART_DMACmd(USART2,USART_DMAReq_Tx,ENABLE);
 
-	DMA_Cmd(DMA1_Stream5, ENABLE);
+	DMA_Cmd(DMA1_Stream6, ENABLE);
 
 }
 
@@ -274,36 +274,26 @@ void Xbee::SendTransmission( char version, char receiver, char commando, char pa
 {
 	int i;
 	char crc = 0x00;
-	//bufferX[0] = 0x01;
-	PutChar((uint16_t) 0x01);
-	//bufferX[1] = version;
-	PutChar((uint16_t) version);
+	XbeeInstance->writeBuffer[0] = 0x01;
+	XbeeInstance->writeBuffer[1] = version;
 	crc += version;
 	char lenght = 5 + datalength;
-	PutChar((uint16_t) lenght); //Längenbyte Version bis CRC
-	//bufferX[2] = lenght;
+	XbeeInstance->writeBuffer[2] = lenght; //Längenbyte Version bis CRC
 	crc += lenght;
-	PutChar((uint16_t) receiver);
-	//bufferX[3] = receiver;
+	XbeeInstance->writeBuffer[3] = receiver;
 	crc += receiver;
-	PutChar((uint16_t) commando);
-	//bufferX[4] = commando;
+	XbeeInstance->writeBuffer[4] = commando;
 	crc += commando;
-	PutChar((uint16_t) packetnumber);
-	//bufferX[5] = packetnumber;
+	XbeeInstance->writeBuffer[5] = packetnumber;
 	crc += packetnumber;
 	for (i=0;i<datalength;i++)
 	{
-		PutChar((uint16_t) *(daten + i));
-		//bufferX[i+6] = *(daten + i);
+		XbeeInstance->writeBuffer[i+6] = *(daten + i);
 		crc += *(daten + i) ;
 	}
-	PutChar((uint16_t) crc); //Längenbyte Version bis CRC
-	//bufferX[i+6+0] = crc;
-	PutChar((uint16_t) 0x04);
-	//bufferX[i+6+1] = 0x04;
-	//bufferX[i+6+1] = 0x00;
-	//XbeeInstance->SendMessage(bufferX);
+	XbeeInstance->writeBuffer[i+6+0] = crc;
+	XbeeInstance->writeBuffer[i+6+1] = 0x04;
+	SendViaDma(XbeeInstance->writeBuffer, i+6+2);
 }
 
 void Xbee::SendMessage(char *massage){
@@ -550,13 +540,13 @@ void Xbee::EnableSingelton(void)
 /*
  * DMA1- Interrupt
  */
-extern "C" { void DMA1_Stream5_IRQHandler(void)
+extern "C" { void DMA1_Stream6_IRQHandler(void)
 {
   /* Test on DMA Stream Transfer Complete interrupt */
-  if (DMA_GetITStatus(DMA1_Stream5, DMA_IT_TCIF5))
+  if (DMA_GetITStatus(DMA1_Stream6, DMA_IT_TCIF6))
   {
     /* Clear DMA Stream Transfer Complete interrupt pending bit */
-    DMA_ClearITPendingBit(DMA1_Stream5, DMA_IT_TCIF5);
+    DMA_ClearITPendingBit(DMA1_Stream6, DMA_IT_TCIF6);
   }
 }}
 
