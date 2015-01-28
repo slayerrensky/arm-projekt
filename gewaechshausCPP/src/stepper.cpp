@@ -184,13 +184,12 @@ extern "C" void TIM2_IRQHandler()
     	 {
     	 	 case BESCHL:
     	 	 {
-    	 		 timerValue = timerValue - (int)(((2.0 * timerValue)+rest)/(8 * (StepperInstance->currentStep +1) + 1));
+    	 		 timerValue = timerValue - (int)(((2.0 * timerValue)+rest)/(8 * (StepperInstance->currentStep + 1) + 1));
     	 		 rest = ((2 * (long)timerValue)+rest)%(4 * StepperInstance->currentStep + 1);
     	 		 if((StepperInstance->stepperEnd - StepperInstance->currentStep) <= BREMS_START) {
     	 		     runValue = BREMS;
     	 		 }
-    	 		 // Chech if we hitted max speed.
-    	 		 else if(timerValue <= MIN_DELAY) {
+    	 		 else if(timerValue <= MIN_DELAY) { // Maximale Geschwindigkeit erreicht
     	 			 timerValue = MIN_DELAY;
     	 			 rest = 0;
     	 			 runValue = RUN;
@@ -199,7 +198,7 @@ extern "C" void TIM2_IRQHandler()
     	 		 break;
     	 	 }
     	 	 case RUN:
-    	 	 {
+    	 	 {    
     	 		 if((StepperInstance->stepperEnd - StepperInstance->currentStep) <= BREMS_START) {
     	 			 timerValueDown=START_DELAY;
     	 			 runValue = BREMS;
@@ -216,17 +215,19 @@ extern "C" void TIM2_IRQHandler()
 
     	 if (StepperInstance->currentStep < StepperInstance->stepperEnd)
          {
-        	 TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-        	 StepperInstance->RunStep();
+			// Schritt weiter laufen
+        	StepperInstance->RunStep();
          }
          else
          {
-        	 TIM_ITConfig(TIM2, TIM_IT_Update, DISABLE);
-        	 TIM_Cmd(TIM2, DISABLE);
-        	 StepperInstance->Leerlauf();
-        	 runValue = BESCHL;
-        	 rest=0;
+			// Leerlauf einleiten
+        	TIM_ITConfig(TIM2, TIM_IT_Update, DISABLE);
+        	TIM_Cmd(TIM2, DISABLE);
+        	StepperInstance->Leerlauf();
+        	runValue = BESCHL;
+        	rest=0;
          }
+		 TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
      }
  }
 

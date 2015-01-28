@@ -123,27 +123,28 @@ void Terminal::usart3InitDMA()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
-	//DMA_DeInit(DMA1_Stream3);
 	DMA_InitStruct.DMA_Channel = DMA_Channel_4;
-	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART3->DR);
 	DMA_InitStruct.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
-	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
 	DMA_InitStruct.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal; //normal
-	DMA_InitStruct.DMA_Priority = DMA_Priority_High;
-	DMA_InitStruct.DMA_FIFOMode = DMA_FIFOMode_Disable; //DMA_FIFOMode_Disable;
-	DMA_InitStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull; //DMA_FIFOThreshold_HalfFull;
+	DMA_InitStruct.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStruct.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+
+	DMA_InitStruct.DMA_PeripheralBaseAddr = (uint32_t)&(USART3->DR);
+	DMA_InitStruct.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStruct.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStruct.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+
+	DMA_InitStruct.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStruct.DMA_Priority = DMA_Priority_High;
+	DMA_InitStruct.DMA_FIFOMode = DMA_FIFOMode_Disable;
+	DMA_InitStruct.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
 
 	USART_DMACmd(USART3,USART_DMAReq_Tx,ENABLE);
 
 	/* Enable DMA Stream Transfer Complete interrupt */
 	DMA_ITConfig(DMA1_Stream3, DMA_IT_TC, ENABLE);
-	NVIC_InitTypeDef NVIC_InitStructure;
 
+	NVIC_InitTypeDef NVIC_InitStructure;
 	/* Configure the Priority Group to 2 bits */
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
@@ -154,6 +155,7 @@ void Terminal::usart3InitDMA()
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 }
+
 /*
  * DMA konfigurieren mit Startadresse der Daten und länge des Strings
  * DMA sendet dann die Daten via Uart
@@ -171,8 +173,9 @@ void Terminal::SendViaDma(char *startBuf, int sizeofBytes)
 		{
 			a = DMA_GetFlagStatus(DMA1_Stream3, DMA_FLAG_TCIF3) == RESET;
 		}
-		memcpy(writeBuffer, startBuf, sizeofBytes);
+
 	}
+	memcpy(writeBuffer, startBuf, sizeofBytes);
 
 	DMA_DeInit(DMA1_Stream3);
 	USART_ClearFlag(USART3, USART_FLAG_TC);

@@ -268,7 +268,7 @@ void Xbee::PutChar(uint16_t char2send)
 }
 
 /*
- * Einen kompletten String senden
+ * Senden eines Packets über DMA/Usart an das Xbee Modul
  */
 void Xbee::SendTransmission( char version, char receiver, char commando, char packetnumber, char *daten , char datalength )
 {
